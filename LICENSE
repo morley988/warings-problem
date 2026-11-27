@@ -1,0 +1,13 @@
+Copyright 2026 Morley Davidson.
+
+The author's manuscripts, including their LaTeX sources and PDFs, historical
+drafts, and original expository text are licensed under Creative Commons
+Attribution 4.0 International (CC BY 4.0). See LICENSES/CC-BY-4.0.txt.
+
+Original software, including Lean formalizations, Python programs and their
+accompanying numerical certificate data, is licensed under the Apache License,
+Version 2.0. See LICENSES/Apache-2.0.txt.
+
+Third-party material retains its own license and notices. In particular, see
+lean/NOTICE.txt, lean/LICENSE-Mathlib-Apache-2.0.txt, and the MIT No Attribution
+license and provenance in lean/Waring/External/GafniTao/.
