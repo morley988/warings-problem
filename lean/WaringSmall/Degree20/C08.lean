@@ -1,0 +1,75 @@
+import WaringSmall.Degree20.C07
+
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+namespace WaringSmall.Degree20
+theorem c720 : conduct 20 ⟨581,100⟩ ⟨529,112500⟩ ⟨8473,900000⟩ = true  := by decide +kernel
+theorem c721 : conduct 20 ⟨1163,200⟩ ⟨9833,2100000⟩ ⟨19687,2100000⟩ = true  := by decide +kernel
+theorem c722 : conduct 20 ⟨233,40⟩ ⟨29249,6300000⟩ ⟨58561,6300000⟩ = true  := by decide +kernel
+theorem c723 : conduct 20 ⟨583,100⟩ ⟨809,175000⟩ ⟨6479,700000⟩ = true  := by decide +kernel
+theorem c724 : conduct 20 ⟨146,25⟩ ⟨14437,3150000⟩ ⟨57811,6300000⟩ = true  := by decide +kernel
+theorem c725 : conduct 20 ⟨1169,200⟩ ⟨1369,300000⟩ ⟨2741,300000⟩ = true  := by decide +kernel
+theorem c726 : conduct 20 ⟨1171,200⟩ ⟨28499,6300000⟩ ⟨57061,6300000⟩ = true  := by decide +kernel
+theorem c727 : conduct 20 ⟨293,50⟩ ⟨4729,1050000⟩ ⟨18937,2100000⟩ = true  := by decide +kernel
+theorem c728 : conduct 20 ⟨587,100⟩ ⟨7031,1575000⟩ ⟨56311,6300000⟩ = true  := by decide +kernel
+theorem c729 : conduct 20 ⟨47,8⟩ ⟨3111,700000⟩ ⟨6229,700000⟩ = true  := by decide +kernel
+theorem c730 : conduct 20 ⟨1177,200⟩ ⟨27749,6300000⟩ ⟨55561,6300000⟩ = true  := by decide +kernel
+theorem c731 : conduct 20 ⟨589,100⟩ ⟨1151,262500⟩ ⟨18437,2100000⟩ = true  := by decide +kernel
+theorem c732 : conduct 20 ⟨1179,200⟩ ⟨27499,6300000⟩ ⟨55061,6300000⟩ = true  := by decide +kernel
+theorem c733 : conduct 20 ⟨1181,200⟩ ⟨9083,2100000⟩ ⟨18187,2100000⟩ = true  := by decide +kernel
+theorem c734 : conduct 20 ⟨591,100⟩ ⟨6781,1575000⟩ ⟨54311,6300000⟩ = true  := by decide +kernel
+theorem c735 : conduct 20 ⟨148,25⟩ ⟨1493,350000⟩ ⟨5979,700000⟩ = true  := by decide +kernel
+theorem c736 : conduct 20 ⟨237,40⟩ ⟨26749,6300000⟩ ⟨53561,6300000⟩ = true  := by decide +kernel
+theorem c737 : conduct 20 ⟨593,100⟩ ⟨832,196875⟩ ⟨53311,6300000⟩ = true  := by decide +kernel
+theorem c738 : conduct 20 ⟨1187,200⟩ ⟨8833,2100000⟩ ⟨17687,2100000⟩ = true  := by decide +kernel
+theorem c739 : conduct 20 ⟨1189,200⟩ ⟨26249,6300000⟩ ⟨52561,6300000⟩ = true  := by decide +kernel
+theorem c740 : conduct 20 ⟨119,20⟩ ⟨311,75000⟩ ⟨2491,300000⟩ = true  := by decide +kernel
+theorem c741 : conduct 20 ⟨1191,200⟩ ⟨25999,6300000⟩ ⟨52061,6300000⟩ = true  := by decide +kernel
+theorem c742 : conduct 20 ⟨1193,200⟩ ⟨2861,700000⟩ ⟨5729,700000⟩ = true  := by decide +kernel
+theorem c743 : conduct 20 ⟨597,100⟩ ⟨3203,787500⟩ ⟨51311,6300000⟩ = true  := by decide +kernel
+theorem c744 : conduct 20 ⟨239,40⟩ ⟨25499,6300000⟩ ⟨51061,6300000⟩ = true  := by decide +kernel
+theorem c745 : conduct 20 ⟨299,50⟩ ⟨4229,1050000⟩ ⟨16937,2100000⟩ = true  := by decide +kernel
+theorem c746 : conduct 20 ⟨599,100⟩ ⟨6281,1575000⟩ ⟨50311,6300000⟩ = true  := by decide +kernel
+theorem c747 : conduct 20 ⟨1199,200⟩ ⟨8333,2100000⟩ ⟨16687,2100000⟩ = true  := by decide +kernel
+theorem c748 : conduct 20 ⟨6,1⟩ ⟨12437,3150000⟩ ⟨49811,6300000⟩ = true  := by decide +kernel
+theorem c749 : conduct 20 ⟨1201,200⟩ ⟨24749,6300000⟩ ⟨49561,6300000⟩ = true  := by decide +kernel
+theorem c750 : conduct 20 ⟨1203,200⟩ ⟨24499,6300000⟩ ⟨49061,6300000⟩ = true  := by decide +kernel
+theorem c751 : conduct 20 ⟨301,50⟩ ⟨24623,6350000⟩ ⟨98619,12700000⟩ = true  := by decide +kernel
+theorem c752 : conduct 20 ⟨241,40⟩ ⟨49121,12700000⟩ ⟨98369,12700000⟩ = true  := by decide +kernel
+theorem c753 : conduct 20 ⟨1207,200⟩ ⟨48871,12700000⟩ ⟨97869,12700000⟩ = true  := by decide +kernel
+theorem c754 : conduct 20 ⟨151,25⟩ ⟨24373,6350000⟩ ⟨97619,12700000⟩ = true  := by decide +kernel
+theorem c755 : conduct 20 ⟨121,20⟩ ⟨3031,793750⟩ ⟨97119,12700000⟩ = true  := by decide +kernel
+theorem c756 : conduct 20 ⟨1211,200⟩ ⟨48371,12700000⟩ ⟨96869,12700000⟩ = true  := by decide +kernel
+theorem c757 : conduct 20 ⟨1213,200⟩ ⟨48121,12700000⟩ ⟨96369,12700000⟩ = true  := by decide +kernel
+theorem c758 : conduct 20 ⟨607,100⟩ ⟨11999,3175000⟩ ⟨96119,12700000⟩ = true  := by decide +kernel
+theorem c759 : conduct 20 ⟨152,25⟩ ⟨23873,6350000⟩ ⟨95619,12700000⟩ = true  := by decide +kernel
+theorem c760 : conduct 20 ⟨609,100⟩ ⟨5937,1587500⟩ ⟨95119,12700000⟩ = true  := by decide +kernel
+theorem c761 : conduct 20 ⟨61,10⟩ ⟨23623,6350000⟩ ⟨94619,12700000⟩ = true  := by decide +kernel
+theorem c762 : conduct 20 ⟨611,100⟩ ⟨11749,3175000⟩ ⟨94119,12700000⟩ = true  := by decide +kernel
+theorem c763 : conduct 20 ⟨1223,200⟩ ⟨46871,12700000⟩ ⟨93869,12700000⟩ = true  := by decide +kernel
+theorem c764 : conduct 20 ⟨49,8⟩ ⟨46621,12700000⟩ ⟨93369,12700000⟩ = true  := by decide +kernel
+theorem c765 : conduct 20 ⟨1227,200⟩ ⟨46371,12700000⟩ ⟨92869,12700000⟩ = true  := by decide +kernel
+theorem c766 : conduct 20 ⟨1229,200⟩ ⟨46121,12700000⟩ ⟨92369,12700000⟩ = true  := by decide +kernel
+theorem c767 : conduct 20 ⟨1231,200⟩ ⟨45871,12700000⟩ ⟨91869,12700000⟩ = true  := by decide +kernel
+theorem c768 : conduct 20 ⟨617,100⟩ ⟨5687,1587500⟩ ⟨91119,12700000⟩ = true  := by decide +kernel
+theorem c769 : conduct 20 ⟨309,50⟩ ⟨22623,6350000⟩ ⟨90619,12700000⟩ = true  := by decide +kernel
+theorem c770 : conduct 20 ⟨619,100⟩ ⟨11249,3175000⟩ ⟨90119,12700000⟩ = true  := by decide +kernel
+theorem c771 : conduct 20 ⟨31,5⟩ ⟨22373,6350000⟩ ⟨89619,12700000⟩ = true  := by decide +kernel
+theorem c772 : conduct 20 ⟨621,100⟩ ⟨2781,793750⟩ ⟨89119,12700000⟩ = true  := by decide +kernel
+theorem c773 : conduct 20 ⟨311,50⟩ ⟨22123,6350000⟩ ⟨88619,12700000⟩ = true  := by decide +kernel
+theorem c774 : conduct 20 ⟨1247,200⟩ ⟨43871,12700000⟩ ⟨87869,12700000⟩ = true  := by decide +kernel
+theorem c775 : conduct 20 ⟨1249,200⟩ ⟨43621,12700000⟩ ⟨87369,12700000⟩ = true  := by decide +kernel
+theorem c776 : conduct 20 ⟨1251,200⟩ ⟨43371,12700000⟩ ⟨86869,12700000⟩ = true  := by decide +kernel
+theorem c777 : conduct 20 ⟨1253,200⟩ ⟨43121,12700000⟩ ⟨86369,12700000⟩ = true  := by decide +kernel
+theorem c778 : conduct 20 ⟨157,25⟩ ⟨21373,6350000⟩ ⟨85619,12700000⟩ = true  := by decide +kernel
+theorem c779 : conduct 20 ⟨629,100⟩ ⟨1328,396875⟩ ⟨85119,12700000⟩ = true  := by decide +kernel
+theorem c780 : conduct 20 ⟨63,10⟩ ⟨21123,6350000⟩ ⟨84619,12700000⟩ = true  := by decide +kernel
+theorem c781 : conduct 20 ⟨1263,200⟩ ⟨41871,12700000⟩ ⟨83869,12700000⟩ = true  := by decide +kernel
+theorem c782 : conduct 20 ⟨253,40⟩ ⟨41621,12700000⟩ ⟨83369,12700000⟩ = true  := by decide +kernel
+theorem c783 : conduct 20 ⟨1267,200⟩ ⟨41371,12700000⟩ ⟨82869,12700000⟩ = true  := by decide +kernel
+theorem c784 : conduct 20 ⟨127,20⟩ ⟨10249,3175000⟩ ⟨82119,12700000⟩ = true  := by decide +kernel
+theorem c785 : conduct 20 ⟨159,25⟩ ⟨20373,6350000⟩ ⟨81619,12700000⟩ = true  := by decide +kernel
+theorem c786 : conduct 20 ⟨637,100⟩ ⟨2531,793750⟩ ⟨81119,12700000⟩ = true  := by decide +kernel
+theorem c787 : conduct 20 ⟨1277,200⟩ ⟨40121,12700000⟩ ⟨80369,12700000⟩ = true  := by decide +kernel
+theorem c788 : conduct 20 ⟨1279,200⟩ ⟨39871,12700000⟩ ⟨79869,12700000⟩ = true  := by decide +kernel
+end WaringSmall.Degree20

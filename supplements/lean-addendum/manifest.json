@@ -1,0 +1,9 @@
+{
+  "base_archive_sha256": "1c1d4e3de404656939296e45ec5704031e89cb3ac8c07c79a08e09c60c65e4b0",
+  "verified_modules": [
+    "WaringFieldSmall.All"
+  ],
+  "added_or_changed_source_sha256": {
+    "WaringFieldSmall/All.lean": "d16721af0060f45f318a1e06d860eb21fca6f043d9302f04589efb6f3cca9222"
+  }
+}

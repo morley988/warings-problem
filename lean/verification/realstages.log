@@ -1,0 +1,1 @@
+'WaringDualEnvelope.extended_real_conductors' depends on axioms: [propext, Classical.choice, Quot.sound]

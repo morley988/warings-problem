@@ -1,0 +1,1 @@
+import Waring.SeedCompletionAlternate8Part05

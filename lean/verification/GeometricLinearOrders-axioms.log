@@ -1,0 +1,1 @@
+'WaringLinear.geometric_linear_orders' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,1 @@
+'WaringLinear.max_width_from_marked_moment' depends on axioms: [propext, Classical.choice, Quot.sound]

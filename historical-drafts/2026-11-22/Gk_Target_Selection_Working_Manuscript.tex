@@ -1,0 +1,2551 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=0.82in,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{array,booktabs,longtable,graphicx}
+\usepackage{xcolor,microtype,fancyhdr,enumitem,needspace}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue!45!black,
+  citecolor=blue!45!black,urlcolor=blue!45!black]{hyperref}
+\hypersetup{pdftitle={Targeting improvements in G(k)},
+  pdfauthor={Waring investigation -- working manuscript}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlength{\emergencystretch}{2em}
+\setlist{itemsep=0.2em,topsep=0.35em}
+\renewcommand{\arraystretch}{1.13}
+\numberwithin{equation}{section}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Targeting improvements in $G(k)$}
+\fancyhead[R]{\small Working manuscript}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\begin{document}
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{0.6in}
+{\large\color{blue!45!black}WARING INVESTIGATION\par}
+\vspace{0.3in}
+{\huge\bfseries Targeting improvements in $G(k)$\par}
+\vspace{0.22in}
+{\Large A two-hour screen and finite certificates\par}
+\vspace{0.18in}
+{\large 22 November 2026\par}
+\vspace{0.6in}
+\fcolorbox{blue!35!black}{blue!3}{\parbox{0.91\textwidth}{
+\vspace{0.12in}
+\textbf{The leading targets are $k=8$ and $k=9$.}\par
+The follow-up calculations yield proposed working proofs of
+\[
+                     G(8)\le38,\qquad G(9)\le46.
+\]
+The exact moment recipes and the complete representation arguments are
+included. The explicit primary-source comparison bounds located are
+$39$ and $47$, respectively.
+\vspace{0.12in}
+}}
+\par
+\vspace{0.45in}
+The screen accounts for the numerical optimization already present in the
+literature, measures the distance to strict integer thresholds, and compares
+the transfer of the earlier small-degree gains. It also repairs 44 entries
+of the earlier large-degree numerical table using published inequalities
+alone.
+\par
+\vfill
+\textbf{Status.} This is a research working manuscript with exact finite
+certificates and independent internal source and analytic checks. It is
+prepared for further mathematical review; the literature search does not
+establish a priority claim. Classical unconditional $G(k)$ is used throughout.
+\end{titlepage}
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+% Source section: report/overview.tex
+\section{Outcome and research priorities}
+\label{sec:outcome}
+
+The strongest targets for transferring the recent small-degree improvements
+are the pair $k=8,9$.  Testing that shortlist produced finite exact moment
+certificates and complete proposed representation arguments for
+\[
+                         \boxed{G(8)\le38,\qquad G(9)\le46.}
+\]
+The explicit primary-source comparison bounds located in the literature
+search are $G(8)\le39$ and $G(9)\le47$ \cite{W16}.  The proposed results
+are recorded here as a working manuscript: the analytic arguments, source
+hypotheses, and finite arithmetic have been reviewed within this
+investigation, and the complete recipes are supplied for independent review.
+The literature search does not establish priority.
+
+\begin{center}
+\small
+\begin{tabular}{lrr}
+\toprule
+ & Eighth powers & Ninth powers\\
+\midrule
+Explicit published comparison & $39$ & $47$\\
+Proposed bound & $38$ & $46$\\
+Ordinary / smooth variables & $8+30$ & $11+35$\\
+Fixed policies per round & $4$ & $4$\\
+Finite rounds & $12$ & $6$\\
+Total moment updates & $48$ & $24$\\
+Conservative minor-arc saving & $7/100000$ & $1/2000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The ninth-power argument is the better starting point for a focused
+manuscript review. It needs only sampled quadratic second moments, even
+degree-eighteen coefficient moments, and the refined coefficient sampling
+estimate proved in Section~\ref{sec:proof}. The eighth-power argument has
+a smaller final margin and additionally uses the distribution of quadratic
+rational heights and an auxiliary second moment. Its tightest parameter
+condition has positive margin $4.5\cdot10^{-7}$; this is sufficient for
+the finite small-smoothness convention, but must be retained explicitly.
+
+\subsection{The decisive inequalities}
+
+Throughout, $\Delta_v^{(k)}$ denotes a selected admissible upper excess,
+not the unknown optimal exponent. It means
+\[
+ \int_0^1|g_k(\alpha;P,R)|^v\,d\alpha
+          \ll P^{v-k+\Delta_v^{(k)}+\varepsilon},
+\]
+where $g_k$ is the complete smooth Weyl sum and the smoothness parameter is
+sufficiently small. The readable sufficient pairs established by the
+finite calculations are
+\begin{align*}
+ k=8:&\quad \Delta_{32}^{(8)}\le0.1789,
+                  &\Delta_{34}^{(8)}\le0.11721,\\
+ k=9:&\quad \Delta_{38}^{(9)}\le0.1851,
+                  &\Delta_{40}^{(9)}\le0.1355.
+\end{align*}
+They satisfy, respectively,
+\[
+ \Delta_{32}^{(8)}+7\Delta_{34}^{(8)}<1,
+ \qquad
+ 5\Delta_{38}^{(9)}+74\Delta_{40}^{(9)}<11.
+\]
+These strict inequalities are paired with the ordinary minor-arc endpoints
+of \cite[Lemma~3.1]{W16}. The major arcs are handled separately; a minor-arc
+inequality alone is not treated as a proof of a bound for $G(k)$.
+
+\subsection{What changed in the target-selection decision}
+
+The earlier authors had already optimized their methods numerically.
+That concern was correct, and it shaped the comparison. We first
+distinguished explicit literature bounds from incomplete numerical
+specializations of the published inequalities. Doing so corrected 44
+distinct entries of the earlier $21\le k\le100$ table, all by one integer,
+using published rules alone. Several apparently tiny large-degree gaps
+therefore ceased to be reasons to prioritize those degrees.
+
+For degrees $5$--$20$, the screen compared the actual strict threshold with
+several local gain profiles measured in the earlier degree-$5$, degree-$6$,
+and degree-$7$ calculations. It accounted for the loss through the ordinary
+and efficient differencing steps. These models consistently selected $8$
+and $9$ as a leading pair. Their relative order depended on the choice of
+calibration coordinate; the computation was not interpreted as a success
+probability. The finite follow-up then supplied stronger evidence than the
+initial extrapolation.
+
+Degree $13$ remains interesting because of its small raw threshold gap.
+The direct transfer model makes it substantially harder than $8$ or $9$,
+and iterative feedback is a limitation of that model. Limited six-round
+floating probes at both $10$ and $13$ improved their target residuals
+without crossing zero. The extra quadratic-height resources gave no
+additional gain at the selected degree-$13$ sizes. These observations
+are not impossibility results. A further investigation of either degree
+would benefit from examining a wider set of paths and lower-order inputs,
+informed by the feedback analysis below.
+
+A matched continuation tested the most immediate omitted path changes:
+terminal zero decrements and deeper repeated terminals. It found a small
+additional degree-ten gain and no degree-thirteen gain beyond shared
+feedback. Even the optimistic terminal diagnostic remained above zero in
+both enlarged retained families. These bounded follow-ups preserve the
+priority of the degree-eight/nine pair.
+
+\subsection{Why numerical reoptimization alone is not the explanation}
+
+For the chosen ninth-power policies, we repeated the same six finite rounds
+with specific analytic inputs replaced by valid alternatives. The statistic
+below is $5\Delta_{38}+74\Delta_{40}-11$; it must be negative.
+
+\begin{center}
+\small
+\begin{tabular}{lr}
+\toprule
+Inputs used with the same four fixed policies & Final statistic\\
+\midrule
+Restricted height means and refined coefficient sampling & $-0.049522969165$\\
+Global smooth mean in place of each restricted height mean & $+0.444585706459$\\
+Cube alternative in place of refined coefficient sampling & $+0.463140600000$\\
+Both substitutions & $+0.463140600000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This is a controlled check of the chosen finite recipe. It shows that the
+crossing in that recipe depends on the height-sensitive analytic inputs.
+It does not show that every other parameter search with the alternative
+inputs would fail. The feature requiring review is the adapted coefficient
+estimate and its combination with published restricted-height means inside
+the finite moment recurrence. The restricted-mean theorem itself is a
+published input, not a novelty claim of this investigation.
+
+\subsection{Reading this report}
+
+Sections~\ref{sec:cross-k-screen} and~\ref{sec:literature-baseline} explain
+the screen and its corrected baseline. Section~\ref{sec:proof} gives the
+ninth-power argument. Section~\ref{sec:g8-input-audit} supplies the
+eighth-power additions and its distinct major-arc pruning. The parameter
+appendices print the finite recipes, and the accompanying Python/JSON
+files reproduce the arithmetic with rational numbers. The complete
+research archive also retains the exploratory data and the separate source
+and numerical audits.
+
+\par\bigskip\Needspace{10\baselineskip}
+
+% Source section: thresholds/cross_k_synthesis.tex
+\section{Selecting degrees by the distance to a strict improvement}
+\label{sec:cross-k-screen}
+
+The numerical screen favours the pair $k=8,9$ for transferring the recent
+coefficient and rational-height estimates. Degree $13$ has an especially
+small raw threshold gap, but the same calculation predicts substantially
+greater attenuation of a new terminal saving there. The order of $8$ and $9$
+within the leading pair is sensitive to the extrapolation model; their
+advantage over the other small degrees is much more stable. The subsequent
+finite calculations for both degrees cross their targets. This section
+explains how those candidates were selected; their proofs and precise status
+are treated separately below.
+
+\subsection{Published optimisation and the comparison baseline}
+
+The earlier tables already incorporate substantial numerical optimisation.
+Vaughan--Wooley explicitly describe computer optimisation and iterative
+refinement in \cite[Section~8]{VW00}; their Tables in Sections~9--22 supply
+the degree-$7$ through degree-$20$ moment inputs. Wooley's later bounds for
+intermediate powers optimise a mixture of ordinary and smooth sums
+\cite[Table~2 and Section~3]{W16}. Br\"udern--Wooley optimise a different
+annular expression for degrees $14$--$20$ \cite[Section~8]{BW23}. Consequently,
+the question is whether an additional analytic input can cross an integer
+threshold after reoptimisation.
+
+For each full moment order $v$, let $\Delta_v$ denote a selected admissible
+upper excess for the degree $k$ under discussion, so that
+\[
+ \int_0^1|g_k(\alpha;P,R)|^v\,d\alpha
+       \ll P^{v-k+\Delta_v+\epsilon}.
+\]
+It is an upper value supplied by an available estimate, not the unknown
+optimal excess. Equalities used to name table entries have this convention.
+The baseline below uses the published tables, together with the previously
+certified improvements for degrees $5,6,7$ and the degree-$14$ coefficient
+curve produced during the preceding investigation. It does not incorporate
+the newly selected degree-$8$ and degree-$9$ candidates. Published decimal inputs are treated
+as the printed upper bounds, and all threshold arithmetic is rational.
+
+\subsection{Two complementary threshold tests}
+
+For $N$ variables, allocate an integer $a$ to ordinary Weyl sums and $N-a$
+to smooth sums. Set
+\[
+ K=k(k+1),\qquad \omega=\frac aK,\qquad
+ v=\frac{N-a}{1-\omega}.
+\]
+The ordinary minor-arc estimate in \cite[Lemma~3.1]{W16} gives the excess
+\[
+ E_k(N,a)=(1-\omega)\Delta_v-\omega.               \tag{S1}
+\]
+The test requires $E_k(N,a)<0$. Smooth real moments are obtained from the
+lower convex envelope of the available moment bounds, and the search ranges
+over every integer ordinary allocation. The associated major-arc pruning
+conditions are checked separately. In particular, when $a\ge k+2$, the
+ordinary major-arc bound alone suffices after bounding the smooth factors
+trivially. For smaller $a$, the ordinary/smooth H\"older pruning criterion
+or the applicable smooth major-arc estimate is retained as follows.
+
+The small-ordinary-count gate requires a strong mean only on the major arcs,
+not an epsilon-free full-circle smooth moment. Put
+$p=k+2$, $t_0=\max\{7,\lfloor k/2\rfloor\}$, and
+$U=(N-a)/(1-a/p)$ for $0<a<p$. In
+\cite[Theorem~1.3]{BW24} we may take $\omega=\omega'=\Omega=1$:
+indeed $t_0\ge7$ and $k\ge5$ give
+\[
+ 1<\frac{2t_0+4}{t_0+10},\qquad
+ 1<\frac{2k}{k+4},\qquad 1<k/2.
+\]
+Taking that theorem's cutoff $Q=1$, and treating its remaining innermost
+arcs trivially, gives the restricted strong mean
+\[
+ \int_{\mathfrak M(P)}|g(\alpha)|^U\,d\alpha
+       \ll P^{U-k}\qquad(U>2t_0+4).
+\]
+Combining it with \cite[(4.1)]{W16} by H\"older yields
+\[
+ \int_{\mathfrak M\setminus\mathfrak N}|f|^a|g|^{N-a}
+ \ll P^{N-k}W^{(\varepsilon-1/k)a/p}=o(P^{N-k}).
+\]
+Here the ordinary major arcs lie in the standard union
+$\mathfrak M(P)$, and $W=\log\log P$. Every first zero-excess order
+$v_0$ in the degree-$5$--$20$ input tables is at least $2t_0+4$, so the
+implemented stricter test $U>v_0$ is conservative. In particular, the
+degree-five value $U=19.6>18$ and degree-seven value
+$U=32.625>18$ are justified without removing an epsilon loss from their
+full-circle zero-excess moments. The direct smooth-major fallback follows
+from the same theorem with $Q=W$, since the logarithmic core contains the
+standard union $\mathfrak M(W)$.
+
+The second test is the Br\"udern--Wooley quantity
+\[
+ \tau(k)=\max_{w\in\mathbb N}\frac{k-2\Delta_{2w}}{4w^2},
+ \qquad G_0(k)=\min_{v\ge2}\left(v+\frac{\Delta_v}{\tau(k)}\right).
+                                                               \tag{S2}
+\]
+Here the maximisation for $\tau$ is over \emph{even integer} moments;
+real interpolation is allowed for $v$. Under the standard major-arc and
+local-solubility conditions, $G_0(k)<N$ is sufficient for $G(k)\le N$
+\cite[Theorem~6.2]{BW23}. Those additional variable-count conditions are
+well below all the targets in this table.
+
+As a sensitivity measure, suppose hypothetically that the relevant tail
+excesses are replaced by $(1-\rho)\Delta_v$, with the low moments defining
+$\tau$ held fixed. The required value of $\rho$ is minimised again over
+the ordinary allocation or the annular moment. This is a numerical measure
+of the target, not an assertion that such a uniform improvement is available.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{rrrrlr}
+\hline
+$k$ & Published $U$ & Target $U-1$ & Continuous boundary & Better test
+    & Required $\rho$ (\%)\\
+\hline
+5  &17 &16 &16.99937 &ordinary &47.0375\\
+6  &24 &23 &23.49889 &ordinary &20.0818\\
+7  &31 &30 &30.39565 &ordinary &13.0999\\
+8  &39 &38 &38.35774 &ordinary &7.1264\\
+9  &47 &46 &46.23881 &ordinary &4.0403\\
+10 &55 &54 &54.40901 &ordinary &5.5743\\
+11 &63 &62 &62.81783 &ordinary &9.8330\\
+12 &72 &71 &71.45942 &ordinary &4.7980\\
+13 &81 &80 &80.25510 &ordinary &2.3031\\
+14 &89 &88 &88.48172 &annular &3.8594\\
+15 &97 &96 &96.45173 &annular &3.1258\\
+16 &105&104&104.42744&annular &2.9627\\
+17 &113&112&112.47480&annular &2.8820\\
+18 &121&120&120.54599&annular &3.2998\\
+19 &129&128&128.69117&annular &3.6978\\
+20 &137&136&136.84395&annular &4.4786\\
+\hline
+\end{tabular}
+\caption{The degree-$5$--$20$ screen before inserting the new degree-$8$ and
+degree-$9$ candidates. For the ordinary test, the continuous boundary optimises the total
+variable count with integer ordinary count; for the annular test it is $G_0$.
+The sensitivity column is separately reoptimised, so its best allocation need
+not equal the allocation defining the continuous boundary. All inequalities
+at a successful integer target must be strict.}
+\label{tab:cross-k-baselines}
+\end{table}
+
+The degree-$14$ row includes a small existing-input correction. The earlier
+degree-$14$ curve lowers $\Delta_{26}$ from $4.0399382$ to
+$4.038694654926$, giving
+\[
+ \tau(14)=\frac{1480652672537}{169000000000000},\qquad
+ G_0(14)=88.48172292042932\ldots.
+\]
+The unrefined table instead gives $88.48696658968404\ldots$; neither
+crosses $88$. We also tested all H\"older interpolations of the ordinary
+endpoint with the lower ordinary moments supplied by Hua's lemma and the
+replacement in \cite[Theorem~10]{Bou16}. None of the 60,114 exact candidate
+vertices improves (S1) at these one-step targets.
+
+\subsection{What the achieved improvements support}
+
+Calibration uses pure smooth moments of the same degree. The later
+two-frequency linear--quintic moments and unproved auxiliary targets are
+excluded. The following examples show why a single percentage is unsuitable.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{rrrrr}
+\hline
+$k$ & Full moment $v$ & Published $\Delta_v$ & Achieved $\Delta_v$
+ & Relative decrease (\%)\\
+\hline
+5&14&0.272728900&0.270071744055&0.9743\\
+5&16&0.077362700&0.074048069211&4.2845\\
+6&20&0.203005500&0.195441875472&3.7258\\
+6&22&0.086041200&0.079950274887&7.0791\\
+7&22&0.424297300&0.423201151219&0.2583\\
+7&24&0.293220800&0.283697712880&3.2478\\
+7&26&0.192537400&0.176197101178&8.4868\\
+7&28&0.113929700&0.093564057962&17.8756\\
+7&30&0.052884800&0.015452339536&70.7811\\
+\hline
+\end{tabular}
+\caption{Achieved pure-moment calibration data from the preceding finite
+certificates. The last row includes endgame recycling and is not used as an
+independent terminal-gain benchmark in the principal transfer model.}
+\label{tab:achieved-calibration}
+\end{table}
+
+The $41.53\%$ reduction previously quoted for the seventh-power endgame
+compared two different best ordinary allocations. It is neither a universal
+moment improvement nor a transferable theorem. Instead, the screen matches
+the local gain profile against either the old excess $\Delta_v$ or the
+position $v/v_0$, where $v_0$ is the first available optimal even moment.
+A separate $v/k$ alignment is included to expose sensitivity to that choice.
+
+For a fixed efficient-differencing path, the ordinary Weyl factor contributes
+$2^{-(k-j-2)}$ and the $j-1$ backward Cauchy steps contribute
+$2^{-(j-1)}$. Their product is $2^{-(k-3)}$. Relative to degree $7$, a
+first-step terminal gain thus has the factor $2^{7-k}$, before any
+additional interpolation loss. Iterative feedback can amplify the eventual
+moment improvement, so this factor is a sensitivity model, not a universal
+upper bound on what the method can achieve.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{rrrrr}
+\hline
+$k$ & Match $\Delta$, no damping & Match $\Delta$, damped
+ & Match $v/v_0$, damped & Match $v/k$, damped\\
+\hline
+8  &0.6226&1.2452&1.2585&1.3210\\
+9  &0.3123&1.2494&1.2629&2.2401\\
+10 &0.4516&3.6130&4.0076&10.4345\\
+12 &0.2999&9.5984&9.6873&149.1114\\
+13 &0.1379&8.8254&9.0662&461.5283\\
+14 &0.2159&27.6358&26.9163&1252.7776\\
+\hline
+\end{tabular}
+\caption{Required multiples of the achieved degree-$7$ direct gain profile
+at moments $22$--$28$, excluding recycled moments $30,32$. A multiple below
+one means that the corresponding hypothetical profile crosses the target.
+These numbers describe assumptions, not probabilities. For the larger
+degrees the active $v/k$ coordinate lies beyond the measured calibration
+range, so that column is evidence of extrapolation weakness rather than a
+reliable quantitative prediction.}
+\label{tab:transfer-sensitivity}
+\end{table}
+
+Repeating the damped comparison with the achieved degree-$5$ and degree-$6$
+profiles again selects degrees $8$ and $9$ first, although their absolute
+predictions are less optimistic. Under excess matching, the two required
+multipliers are approximately $(30.69,30.39)$ for degree-$5$ calibration
+and $(6.92,6.86)$ for degree-$6$ calibration; their attenuation factors are
+normalised to their respective calibration degrees. Thus the leading pair
+is robust, while its internal ordering and the predicted gain size are not.
+
+\subsection{Concrete targets and the finite follow-up}
+
+The most useful sufficient inequalities are small enough to state directly:
+\begin{align*}
+ G(8)\le38 &: \quad \Delta_{32}+7\Delta_{34}<1,
+                  &&\text{eight ordinary, thirty smooth};\\
+ G(8)\le38 &: \quad 4\Delta_{30}+57\Delta_{32}<11,
+                  &&\text{eleven ordinary, twenty-seven smooth};\\
+ G(9)\le46 &: \quad 5\Delta_{38}+74\Delta_{40}<11,
+                  &&\text{eleven ordinary, thirty-five smooth};\\
+ G(13)\le80 &: \quad154\Delta_{68}+9\Delta_{70}<19,
+                  &&\text{nineteen ordinary, sixty-one smooth}.
+\end{align*}
+For example, keeping the neighbouring published moment fixed, the first
+degree-$8$ condition needs $\Delta_{34}<0.115840557142857\ldots$ instead
+of $0.1294925$. The degree-$9$ condition needs
+$\Delta_{40}<0.135798243243243\ldots$ instead of $0.1420569$.
+The degree-$13$ condition needs
+$\Delta_{68}<0.117469146103896\ldots$ instead of $0.1203776$.
+The last raw gap is smaller, but its direct terminal-gain attenuation is
+sixteen times greater than at degree $9$.
+
+The selected degree-$9$ follow-up is now much more concrete than an
+extrapolation. The canonical calculation uses four fixed policies, six finite
+rounds and 24 moment updates, with only quadratic second moments, basic
+coefficient moments and the refined reciprocal estimate. Its exact outputs
+include
+\[
+ \Delta_{38}=\frac{185097318519}{10^{12}},\qquad
+ \Delta_{40}=\frac{1693410547}{12500000000},
+\]
+and therefore
+\[
+ 5\Delta_{38}+74\Delta_{40}-11
+       =-\frac{9904593833}{200000000000}<0.
+\]
+The simpler rounded pair $(0.1851,0.1355)$ yields minor-arc saving
+$19/36000>1/2000$. The certificate, source audits and complete classical
+representation argument are the basis for the proposed $G(9)\le46$
+bound; a negative floating optimisation alone would not establish it.
+
+Degree $8$ required a second, broader numerical pass. Its canonical
+construction now uses four fixed policies, twelve rounds and 48 updates.
+Besides the preceding coefficient inputs, it uses the short quadratic-height
+distribution estimate and one auxiliary $F_6$ second moment. The exact outputs
+\[
+ \Delta_{32}=\frac{178844726003}{10^{12}},\qquad
+ \Delta_{34}=\frac{117131705619}{10^{12}}
+\]
+give
+\[
+ \Delta_{32}+7\Delta_{34}-1
+       =-\frac{154166833}{125000000000}<0.
+\]
+The rounded pair $(0.1789,0.11721)$ supplies minor saving $7/100000$.
+Major pruning follows already from the strong smooth $42$nd moment recorded
+in \cite[Table~2 and (4.2)]{W16}, using ordinary moment $12$ and smooth
+moment $90$. The eleven-ordinary alternative remains positive; the selected
+eight-ordinary allocation is material. The source and finite arithmetic
+audits for these additional inputs are given separately.
+
+A limited six-round degree-$10$ floating comparison gives
+$\Delta_{44}\approx0.18963221323273$ and
+$\Delta_{46}\approx0.14697054764181$. Its sufficient criterion
+$4\Delta_{44}+44\Delta_{46}-7$ decreases from $0.4132352$ to
+$0.22523294917056$, with matched earlier-resource control
+$0.2275307765956$, and remains positive. This pilot is included only as a
+comparison of numerical progress, not as a new admissible-moment certificate
+or evidence that no stronger degree-$10$ policy exists.
+
+A targeted degree-$13$ probe updates full orders $62$--$70$ for six
+floating rounds. It uses a degree-$26$ coefficient curve generated by the
+published recurrence and all nine degree-$26$ auxiliary seeds in
+\cite[Section~23]{VW00}, with coefficient
+orders through $100$. The selected profiles use orders only through $68$.
+The result is
+\[
+ \Delta_{68}\approx0.119715969771185,\qquad
+ \Delta_{70}\approx0.100437062515795.
+\]
+Its statistic $154\Delta_{68}+9\Delta_{70}-19$ decreases from
+$0.4479019$ to $0.340192907405$, removing about $24.05\%$ of the
+initial deficit without crossing zero. Both matched resource families
+give the same result. At their selected depth-nine sizes, the quadratic
+product exponent exceeds $2.5$, so the newer quadratic-height estimate
+coincides with the older one. There is also a structural explanation:
+since $\phi_i\le1/k$,
+\[
+ h=k-2-kT\ge k-j-2.
+\]
+Thus at every depth $j\le k-4$ one has $h\ge2$ and
+$\ell\le(h+2)/2\le h$. Throughout this height range the newer fourth-moment
+resource $\min\{2,\max(\ell,2\ell-h)\}$ equals the older
+$\min\{2,\ell,h\}$. A gain from this quadratic-height distribution input
+therefore requires one of the two deepest depths, $j\ge k-3$.
+The selected degree-thirteen depth is $j=9=k-4$.
+Grouped coefficient sampling is a separate input, but these selected
+coefficient resources are already
+limited by their Fourier-support cap, and grouped sampling does not
+remove that cap. This explains the lack of an extra gain at those fixed
+sizes. It is not an obstruction for every possible parameter choice.
+
+The degree-$10$ and degree-$13$ pilots are limited comparisons with
+different retained pools and budgets; the latter disables auxiliary
+interpolation. They reinforce the need to distinguish a raw threshold
+gap from actual improvement through a selected proof. They do not settle
+a universal ranking between these two fallback targets.
+
+The reproducible small-degree data are in
+\path{small_degree_thresholds_exact.json},
+\path{calibration_ensemble.json}, and
+\path{perturbation_scenarios_exact.json}. Their generating scripts keep
+the published baseline, achieved inputs, and hypothetical transfer models
+separate. The broader degree-$21$--$100$ screen is discussed in the following
+section.
+
+% Source section: thresholds/feedback_sensitivity.tex
+\subsection{What finite moment feedback can change}
+\label{sec:feedback-sensitivity}
+
+The direct factor $2^{7-k}$ is a first-step comparison, not a prediction for
+an already iterated moment table. To check whether iteration automatically
+removes that attenuation, consider the unrounded analytic map for a finite
+family of fixed rational size parameters,
+height recipes and paths, and hold its degree-$2k$ coefficient moments fixed.
+Write $q_i=1-T_i$ for a policy's smooth scale exponents. As a function of the
+degree-$k$ full moment table, its auxiliary terminal is monotone and has
+supremum-norm Lipschitz constant at most $q_j$. Indeed, the minor terminal's
+coefficient of a smooth full exponent is $2c\ell/k\le cq_j\le q_j$,
+where $0\le c\le1$ is the optional outer interpolation weight. The major
+terminal has coefficient at most $2/k\le q_j$ because $kq_j/2>1$.
+
+At a backward counted step, the Lipschitz constant is bounded by
+\[
+ \frac{q_i}{2}+\frac12\max(q_{i+1},L_{i+1})\le q_i.
+\]
+The first differencing step has the same bound $q_1=1-\phi_1$.
+Taking minima over fixed policies, or taking the lower H\"older convex
+envelope, preserves monotonicity and the corresponding Lipschitz bound.
+With untouched orders anchored at their seed values, the complete fixed
+family therefore has contraction factor at most
+\[
+ \rho=1-\min_{\rm policies}\phi_1<1.
+\]
+Here the appropriate map is the H\"older envelope of the minimum of the
+published seeds and all fixed policy outputs. The implementation's operation
+of retaining the previous bound is equivalent to that anchored map along
+its monotone iteration from the seeds; a literal unrestricted map
+$x\mapsto\min(x,T(x))$ would only have the immediate Lipschitz bound one.
+
+The upward rounding in the actual finite certificate is treated separately:
+the ceiling map on a decimal lattice is discontinuous and is not itself
+claimed to be contractive. Each output differs from the unrounded map by
+less than $10^{-12}$. The ordinary perturbation recurrence therefore bounds
+the accumulated discrepancy after any finite number of these fixed-policy
+steps by $10^{-12}/\min\phi_1$. This rounding qualification has no effect on
+the validity of the upward-rounded moment certificates.
+
+Consequently a uniform direct perturbation of size $\delta$ in the policy
+outputs can change the associated fixed-family fixed point by at most
+\[
+ \frac{\delta}{\min\phi_1}.
+\]
+In particular, a change of at most $\delta_\sigma$ in the normalized saving for the
+completed quadratic product, before taking the ordinary-differencing root, contributes at most
+$2^{-(k-3)}\delta_\sigma/\min\phi_1$ after this fixed-family feedback.
+If $\phi_1$ remains comparable to $1/k$, this allowance grows only linearly
+with $k$ relative to the exponentially attenuated direct input. There is no
+universal $O(k)$ assertion for policies permitting arbitrarily small
+$\phi_1$, and the argument does not cover a simultaneous change of the
+coefficient-degree moment table or a different analytic architecture.
+
+For the actual frozen four-policy maps, exact two-sided rational differences
+at scales $10^{-16}$ and $10^{-18}$, evaluated at the last finite certificate
+iterate, give identical local Jacobians. A separate exact branch audit
+confirms this stronger interpretation: it propagates affine gradients through
+every changing H\"older-hull comparison, positive part and maximum. All
+nonidentical branch comparisons have strictly positive rational slack;
+zero-slack ties have identical affine gradients. The same formulas hold in
+open supremum-norm boxes of radius at least $7.5\times10^{-7}$ for degree
+eight and $2.0\times10^{-5}$ for degree nine, with the other input exponents
+and the coefficient table held fixed. These Jacobians therefore describe
+the active affine branches in a verified neighborhood of that state.
+They are not a claim that the same branches
+remain active throughout a future iteration. Their
+spectral radii are $0.44206521$ for degree eight and $0.44745875$ for degree
+nine. The local response norms $\|(I-J)^{-1}\|_\infty$ are approximately
+$3.88182$ and $3.51233$, respectively. These are formal responses with those
+local branches fixed, not global bounds on future amplification. The separate
+global fixed-family bounds just proved are
+$8.63039$ and $9.51633$. The final finite gains in the four target moments
+are between $1.79$ and $3.72$ times the first-round gains for degree eight,
+and between $1.80$ and $3.00$ times those gains for degree nine. These are
+sensitivity measurements of the existing certificates, not further exponent
+optimizations or an extra premise of the representation proofs.
+
+Thus feedback is material and must be allowed for in target selection, but
+it does not automatically erase the direct attenuation within these fixed
+families. The earlier degree-seven calibration already includes its own
+finite feedback, so applying another full amplification factor to that
+profile would double-count it; a comparison would need the ratio of feedback
+effects across degrees. This supports the prominence of degrees eight and
+nine without excluding degree thirteen. In particular, the screen does not
+settle a universal third-place ranking between degrees ten and thirteen.
+
+\par\bigskip\Needspace{10\baselineskip}
+
+% Source section: thresholds/ideal_terminal_headroom.tex
+\subsection{An optimistic terminal test for degrees ten and thirteen}
+\label{sec:ideal-terminal-headroom}
+
+The two positive pilot deficits leave a more specific question than a
+comparison of gain percentages: do the retained paths still have enough
+terminal room if their coefficient estimates were ideal? We tested only the
+previously retained pools: 37 paths updating full orders $38,40,\ldots,50$
+for degree ten, and 23 paths updating orders $62,64,\ldots,70$ for degree
+thirteen. No paths were added. These pools use only decrements one and two;
+they omit the zero-decrement paths that mattered in the degree-eight result.
+Neither retained pool contains an auxiliary outer interpolation.
+
+There is an exact optimistic bound for the resource system. For an even
+coefficient order $p$, the diagonal lower bound gives
+$\mu_p^{(2k)}\ge p/2$, hence
+$\Delta_p^{(2k)}\ge2k-p/2$. Each refined, cube or grouped coefficient
+resource has its support cap
+\[
+ b_{i,p}\le(2k-\Delta_p^{(2k)})\phi_i\le p\phi_i/2;
+\]
+the basic order-two resource satisfies the same inequality. The quadratic
+resources satisfy $z_p\le p/2$. Keeping the individual factor-load
+constraints but discarding the total H\"older-mass constraint therefore gives
+\[
+ S\le\frac12+\frac12\sum_i\phi_i=\frac{1+T}{2}<1.
+\]
+At the top height $\ell=k(1-T)/2$, substitution of this optimistic saving
+gives the relaxed minor-terminal exponent
+\[
+ \log_P A+\mu_{2r_j}^{(k)}(1-T)
+       -2^{-(k-j-2)}\frac{1+T}{2}.
+\]
+The usual auxiliary major terminal, first diagonal and all counted backward
+steps are retained. The oracle minimizes their maximum over the size
+parameters for each fixed path. It drops additional coefficient restrictions,
+so its output is an optimistic numerical envelope, not an admissible moment
+estimate.
+
+For each degree we iterated the same anchored map in two directions. The
+upper run starts at the published table. The lower run replaces only the
+updated coordinates by the necessary lower growth limits
+$\max\{v/2,v-k\}$. All other seed coordinates remain fixed at their
+published values, while H\"older convexification remains available at every
+query. At each step the updated coordinates are clipped between those lower
+limits and their published seed values. For any fixed size parameters the
+oracle is monotone in every input exponent; taking a minimum over the same
+feasible size domain and paths preserves monotonicity, as does the H\"older
+envelope. Consequently this anchored construction has an increasing lower
+iteration and a decreasing upper iteration. Using a routine that merely
+retains the preceding upper bound would incorrectly freeze the lower run;
+the diagnostic reconstructs the anchored map afresh instead.
+
+The observed criterion intervals are as follows. A negative value is needed
+to cross the corresponding record threshold.
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+$k$ & iteration & lower criterion & upper criterion\\
+\midrule
+10&1&$-6.978445711$&$0.346594686$\\
+10&10&$-0.335332055$&$0.188149251$\\
+10&20&$0.184631245$&$0.186332161$\\
+10&40&$0.186329223384$&$0.186329224995$\\
+13&1&$-18.239797088$&$0.416364755$\\
+13&10&$-0.838338615$&$0.325702234$\\
+13&20&$0.320330805$&$0.324410464$\\
+13&38&$0.324407851717$&$0.324407875402$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The degree-ten criterion is $4\Delta_{44}+44\Delta_{46}-7$; the
+degree-thirteen criterion is $154\Delta_{68}+9\Delta_{70}-19$.
+The final whole-curve widths are below $6.1\times10^{-10}$, and the
+observed lower/upper monotonicity and ordering violations are zero.
+The corresponding remaining normalized minor deficits are approximately
+$0.0033878041$ and $0.0017824609$.
+
+These are floating LP diagnostics, not exact dual certificates or a
+numerical impossibility theorem. Within the retained families, even the
+idealized resource budget leaves both monitored criteria positive.
+The result points to a concrete requirement for the next investigation:
+expand the path family, enlarge the lower-order moment feedback system, or
+change the analytic endgame or another part of the proof architecture.
+Improving coefficient norms alone at these retained paths and anchored
+other moments has very limited room. This does not exclude degrees ten or
+thirteen, and does not settle their ranking under such changes.
+
+\par\bigskip\Needspace{10\baselineskip}
+
+% Source section: report/extended_screen.tex
+\subsection{Matched checks of zero decrements and deeper terminals}
+\label{sec:zero-extension}
+
+The degree-eight success makes omitted zero decrements a concrete limitation
+of the first degree-ten and degree-thirteen path pools. We therefore made a
+bounded follow-up in both degrees. Each control and enlarged family started
+from the same corresponding six-round floating curve and ran six additional
+rounds with the same analytic resources. The permitted path edits were only
+to replace the final decrement by zero and/or append one or two copies of
+the terminal half-order, subject to $j\le k-2$. Earlier path positions were
+unchanged.
+
+Both comparisons used four height intervals, at most four alternating LP
+steps per seed, $H_*\ge P$, and nonincreasing $\phi_i$. The last condition
+is a search restriction, not a requirement of the underlying differencing
+theorem. At degree ten the original engine's auxiliary options remained
+available at the deepest new paths, but none survived the initial optimistic
+screen. At degree thirteen auxiliary interpolation remained disabled.
+Consequently these are matched comparisons within each degree, with the
+stated difference of search scope between degrees.
+
+For degree ten, 752 structural and auxiliary variants were examined and
+five competitive additions were retained, enlarging the pool from 37 to 42
+paths. For degree thirteen, 77 new variants were examined and 35 were
+retained, enlarging the pool from 23 to 58. The final results are:
+\begin{center}
+\small
+\begin{tabular}{rrrr}
+\toprule
+$k$ & common starting criterion & original-pool continuation
+    & enlarged-pool continuation\\
+\midrule
+10 & $0.225232949170$ & $0.212661362045$ & $0.207688713163$\\
+13 & $0.340192907405$ & $0.330078310753$ & $0.330078310753$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The criteria are $4\Delta_{44}+44\Delta_{46}-7$ and
+$154\Delta_{68}+9\Delta_{70}-19$, respectively. They must be negative;
+their normalizing denominators are 55 and 182, so comparisons of raw
+criterion sizes should be made within a row.
+
+Four new terminal-zero paths won in the degree-ten calculation. The
+extension-specific criterion gain was $0.004972648881$, about $2.34\%$ of
+the matched control's remaining deficit. At degree thirteen every update
+in the enlarged arm agreed with the control, and all winners remained at
+depth nine. The final candidate values were
+\[
+\begin{array}{c|cc}
+k&\text{first target excess}&\text{second target excess}\\\hline
+10&\Delta_{44}\approx0.189451458901246&
+   \Delta_{46}\approx0.146588247217238\\
+13&\Delta_{68}\approx0.119655729340607&
+   \Delta_{70}\approx0.100343999144414.
+\end{array}
+\]
+A final-state rescan of the same finite variant sets found no initially
+omitted variant becoming competitive under the optimistic oracle. This
+addresses the possibility that continued feedback invalidated the initial
+pruning of the added paths. It does not examine different early zero
+placements or a larger path-generation rule.
+
+We also repeated the two-sided ideal-terminal diagnostic on the enlarged
+retained pools, with the same published/floor starts and anchored other
+moments. Both arms now imposed the common $H_*\ge P$ and nonincreasing-size
+restrictions. These restrictions left the original-pool numerical endpoints
+unchanged. The enlarged-pool endpoints were
+\begin{align*}
+k=10:&\quad [0.182106476908956,\ 0.182106478520893],\\
+k=13:&\quad [0.324407851717098,\ 0.324407875401860].
+\end{align*}
+They remain positive after 40 and 38 iterations, respectively. The added
+degree-ten paths have a small amount of additional ideal terminal room;
+the degree-thirteen ideal endpoint is unchanged. In these enlarged families,
+the optimistic terminal allowance still does not make either monitored
+criterion negative. The all-allocation check below uses the actual pilot
+curves, not these idealized curves.
+
+Every calculation in this subsection is a floating diagnostic. Neither the
+fitted moments nor the ideal-budget brackets enter the proposed degree-eight
+or degree-nine proofs. The evidence strengthens the choice of that leading
+pair while leaving other zero placements, auxiliary interpolations,
+lower-order feedback and different analytic architectures open.
+
+\paragraph{Reoptimizing the final variable split.}
+The preceding paired tables deliberately compare fixed criteria. After the
+probes, we reevaluated every integer ordinary/smooth allocation, the pure
+endpoints, the audited lower-ordinary-moment interpolations, and the annular
+test on the resulting curves. The degree-ten winner changes to thirteen
+ordinary and forty-one smooth variables. Its sufficient condition is
+\[
+                   73\Delta_{46}+24\Delta_{48}<13.
+\]
+On the enlarged floating profile, rounded upward to twelve decimals for this
+reevaluation, the excess is
+\[
+ \frac{73\Delta_{46}+24\Delta_{48}-13}{110}
+       \approx0.003525903204527>0.
+\]
+Degree thirteen retains the nineteen-ordinary allocation, with excess
+approximately $0.001813617092412>0$. No alternative tested endgame crosses
+either target. An optional deterministic published tail extension leaves
+the winning allocations and all crossing decisions unchanged; none of the
+reported conclusions depends on that extension.
+
+The same evaluation checks the immediately lower integers for the exact
+canonical curves. At $N=37$ in degree eight the best tested ordinary split
+has six ordinary variables and positive excess
+$0.029180148516083\ldots$; at $N=45$ in degree nine it has nine ordinary
+variables and positive excess $0.021925559384$. The frozen moments thus
+yield the stated one-integer improvements within these endgame families,
+with no hidden second reduction. These comparisons do not assert optimality
+among all possible representation arguments. The complete rational
+reevaluation is in \path{postprobe_endgame_check.json}; rational evaluation
+of the degree-ten/thirteen floating inputs does not certify those inputs.
+
+\par\bigskip\Needspace{10\baselineskip}
+
+% Source section: literature/literature_baseline_section.tex
+\section{Published benchmarks, numerical optimization, and baseline repair}
+\label{sec:literature-baseline}
+
+Throughout this section, $G(k)$ denotes the classical, unconditional Waring
+number over the rational integers: every sufficiently large natural number
+must be representable as a sum of at most $G(k)$ positive integral $k$th
+powers. This is distinct from the asymptotic-formula threshold
+$\widetilde G(k)$, almost-all results, mixed-power problems, and number-field
+analogues. In particular, the exact equality $G(4)=16$ precludes a reduction
+to fifteen fourth powers; a later primary treatment of this sharp result
+is \cite{DKW05}.
+
+\subsection{The explicit published comparison bounds}
+
+The explicit finite-degree upper bounds used for comparison are as follows.
+They are taken from the main results of \cite{VW94,VW95,W16,BW23}.
+
+\begin{center}
+\begin{tabular}{rrl@{\qquad}rrl}
+\hline
+$k$ & bound for $G(k)$ & source & $k$ & bound for $G(k)$ & source\\
+\hline
+5 & 17 & \cite{VW95} & 13 & 81 & \cite{W16}\\
+6 & 24 & \cite{VW94} & 14 & 89 & \cite{BW23}\\
+7 & 31 & \cite{W16} & 15 & 97 & \cite{BW23}\\
+8 & 39 & \cite{W16} & 16 & 105 & \cite{BW23}\\
+9 & 47 & \cite{W16} & 17 & 113 & \cite{BW23}\\
+10 & 55 & \cite{W16} & 18 & 121 & \cite{BW23}\\
+11 & 63 & \cite{W16} & 19 & 129 & \cite{BW23}\\
+12 & 72 & \cite{W16} & 20 & 137 & \cite{BW23}\\
+\hline
+\end{tabular}
+\end{center}
+
+For general degrees, \cite[Theorem~1.1]{BW23} supplies the convenient
+displayed estimate
+\[
+ G(k)\le \left\lceil k(\log k+4.20032)\right\rceil.
+\]
+The finite-degree consequences of its proof can be stronger than this
+rounded formula. Accordingly, three levels are recorded separately in the
+data: an explicitly printed bound; our earlier numerical specialization of
+published inequalities; and the improved numerical specialization obtained
+in the present audit. A reduction relative to the second level does not,
+by itself, establish a literature-priority claim.
+
+\subsection{What the earlier papers had already optimized}
+
+The suggestion that the previous authors had already optimized their
+choices is supported directly by the sources. Vaughan and Wooley describe
+computer optimization of their iterative processes in \cite[\S8]{VW00}.
+The tables report permissible exponents together with the processes and
+parameters producing them. Wooley's discussion before
+\cite[Lemma~1]{W00QD} also addresses the difficulty of choosing fractional
+moment parameters and the role of extensive computation. The optimization
+of the annular quantities appears explicitly in \cite[\S\S7--8]{BW23}.
+
+There is a useful qualification. The auxiliary larger-degree tables in
+\cite[\S23]{VW00} were deliberately left less sharp than possible because
+approximate inputs sufficed for the paper's principal tables. These cover
+the seventeen degrees
+\[
+22,24,26,28,30,32,34,36,38,40,56,60,64,68,72,76,80.
+\]
+All 243 printed auxiliary rows were transcribed and checked. Injecting
+every row into the earlier recurrence, rather than just the final row of
+each table, left its final integer bounds unchanged. Additional published
+processes nevertheless change the baseline substantially.
+
+\subsection{The exact threshold and the numerical audit}
+
+Write $\Delta_v$ for a permissible smooth excess, so that the full
+$v$th moment is bounded by $P^{v-k+\Delta_v+\varepsilon}$. The quantities in
+\cite[(5.1), (6.11), Theorem~6.2]{BW23} are
+\[
+ \tau(k)=\max_{w\in\mathbb N}
+       \frac{k-2\Delta_{2w}}{4w^2},
+ \qquad
+ G_0(k)=\min_{v\ge2}\left(v+\frac{\Delta_v}{\tau(k)}\right).
+\]
+The resulting integer bound is
+\[
+ G(k)\le\max\{\lfloor G_0(k)\rfloor+1,L(k)\},
+ \qquad
+ L(k)=\begin{cases}4k,&k\text{ is a power of two},\\2k+3,&\text{otherwise}.
+ \end{cases}
+\]
+Thus an existing bound $B$ decreases by one when the strict inequality
+$G_0(k)<B-1$ and the local gate are both satisfied. The relevant gap is
+$G_0(k)-(B-1)$. The maximum defining $\tau(k)$ uses even integer moments:
+the source's Lemma~5.1 does not authorize an arbitrary real moment in that
+maximum. Real orders remain available for the residual moment $v$.
+
+We rebuilt the larger-degree baseline from the fourth-moment estimate,
+the published auxiliary seeds with a conservative $10^{-6}$ increment,
+and the recurrence displayed in \cite[proof of Theorem~2.1, (2.3)]{W93}.
+The fractional-moment rule \cite[Lemma~1]{W00QD} and the auxiliary-moment
+schemes \cite[Theorem~3.4 and \S4]{VW00} were then applied finitely many
+times. Floating computations selected parameter policies; a separate
+replay derived every adopted moment afresh with exact rational arithmetic
+and rounded upper exponents upward to a $10^{-12}$ lattice.
+
+The result is \emph{44 distinct corrected degrees} in $21\le k\le100$,
+each improving the earlier session's integer bound by exactly one.
+There are 38 corrections from the quasidiagonal closure and six additional,
+disjoint corrections from the coupled auxiliary-moment closure. This count
+is a count of degrees, rather than iterations, updates, or repeated
+improvements of the same degree. Representative exact witnesses are:
+
+\begin{center}
+\begin{tabular}{rrrr}
+\hline
+$k$ & earlier bound & corrected bound & certified upper value of $G_0(k)$\\
+\hline
+21 & 147 & 146 & 145.923280248744\\
+22 & 155 & 154 & 153.948991980478\\
+34 & 257 & 256 & 255.969323186303\\
+53 & 427 & 426 & 425.989994622735\\
+58 & 473 & 472 & 471.999831515935\\
+72 & 604 & 603 & 602.996606947951\\
+74 & 623 & 622 & 621.983958260818\\
+87 & 748 & 747 & 746.494797042825\\
+\hline
+\end{tabular}
+\end{center}
+
+The complete list of corrections and all eighty original/corrected rows
+are in the accompanying CSV files. Each row names the exact certificate
+and the published rule family. These are finite numerical consequences of
+existing theory; no global optimum of all published processes is asserted.
+
+This repair materially affects candidate selection. For example, after the
+first quasidiagonal pass, degree 72 had $G_0(72)=603.00621064\ldots$, only
+$0.00621\ldots$ above the threshold for replacing 604 by 603. Applying the
+additional published schemes already crosses that threshold. The gap to
+the next lower integer is then approximately $0.99661$. The analogous
+effect occurs at degrees 22,34,53,58,74. Fractional closeness before this
+audit is therefore insufficient evidence that a new analytic input is
+likely to lower a properly updated bound.
+
+For the smaller-degree comparison, the ordinary endpoint in
+\cite[Lemma~3.1]{W16} has moment order $K=k(k+1)$ and saving one.
+The lower ordinary moments of \cite[Theorem~10]{Bou16}, together with
+Hua moments and interpolation with that endpoint, were checked separately.
+The finite exact audit examined 60,114 candidate vertices for degrees 5--20
+and did not improve the chosen endpoint at the one-variable target. This
+is a check of these particular published alternatives, rather than a
+claim that every possible ordinary input has been optimized.
+
+\subsection{The scope of the priority and transcription checks}
+
+The record search was carried out on 22 November 2026. It included
+targeted searches for $G(8)\le38$, $G(9)\le46$, the corresponding numbers
+of eighth and ninth powers, and 2025--2026 developments, as well as the
+current author-maintained publication index. No primary source asserting
+either improved integer was located. The best explicit primary-source
+benchmarks located remain $G(8)\le39$ and $G(9)\le47$ from \cite{W16}.
+Search absence does not establish priority and cannot exclude an
+unindexed paper or an unpublished computation.
+
+The embedded source tables for the two pilots were independently checked
+against \cite{VW00}. For the eighth-power pilot, all eighteen degree 8
+rows and twenty-eight degree 16 rows match \S\S10 and 18; the latter run
+through full moment order 60. For the ninth-power pilot, all twenty
+degree 9 rows and twenty-nine degree 18 rows match \S\S11 and 20; the latter
+run through full order 62. The final-table pointwise exponents and the
+starting orders of the $D_s$ process also match. These checks establish
+accurate transcription of the published inputs. The analytic deductions
+using them require the separate proof audit presented elsewhere in this
+report.
+
+\par\bigskip\Needspace{10\baselineskip}
+
+% Source section: literature/next_threshold_ranking_21_100.tex
+\subsection{The next integer thresholds after published-rule closure}
+An earlier version of the corrected integer-bound table deliberately retained
+older exact witnesses on unchanged-integer rows.  Ranking those witnesses
+missed substantial published-rule gains, for example at degrees $25$, $31$,
+$62$, $78$, and $95$.  The delivered table has now been synchronized with
+the strongest available exact witnesses, choosing the smaller exact $H$
+whenever two certificates have the same integer bound.
+We therefore compared all saved quasidiagonal and coupled A/B runs, including
+the unchanged-integer degree-$23$ coupled run, against the corrected target
+$B_k-1$.  No new parameter search was performed.  The ten closest saved rows
+were then replayed with exact rational arithmetic on their frozen policies.
+Their ranks agree with the floating screen:
+\begin{center}
+\begin{tabular}{rrrrrrr}
+$k$ & $B_k$ & next target & $H$ & $H-(B_k-1)$ & $u$ & $v$\\
+\hline
+38 & 292 & 291 & 291.055417950 & 0.055417950 & 74 & 254 \\
+78 & 661 & 660 & 660.087065591 & 0.087065591 & 154 & 582 \\
+95 & 825 & 824 & 824.096996413 & 0.096996413 & 188 & 730 \\
+31 & 231 & 230 & 230.129285912 & 0.129285912 & 60 & 200 \\
+25 & 180 & 179 & 179.136637734 & 0.136637734 & 48 & 156 \\
+62 & 510 & 509 & 509.147555008 & 0.147555008 & 122 & 448 \\
+70 & 585 & 584 & 584.157836494 & 0.157836494 & 138 & 516 \\
+80 & 680 & 679 & 679.158583779 & 0.158583779 & 158 & 600 \\
+88 & 757 & 756 & 756.160944774 & 0.160944774 & 174 & 670 \\
+99 & 864 & 863 & 863.162255693 & 0.162255693 & 196 & 766 \\
+\end{tabular}
+\end{center}
+Displayed decimals are rounded approximations; the companion JSON contains
+the exact fractions for $H$, the gap, and both moment inputs in the witness
+\[
+ \tau=\frac{k-2\Delta_u}{u^2},\qquad H=v+\frac{\Delta_v}{\tau}.
+\]
+Every displayed target passes the applicable local-solubility gate, and every
+$u$ is an even integer.  Thus the remaining obstacle in this specific
+published-rule endgame is the strict inequality $H<B_k-1$, not a hidden
+local gate.  The smallest gap among all saved post-closure runs is about
+$0.055417947$ at $k=38$; none is below $0.05$.  This is a statement about
+the finite computations inspected, not a lower bound for the optimal $G_0$
+or an assertion that further published-rule optimization cannot cross a
+threshold.  The coupled run at $k=23$ was also replayed exactly for 60 rounds,
+with zero invalid policies.  It certifies the stronger gap
+$0.224776286$, improving the earlier quasidiagonal gap $0.434792864$
+at the same integer bound, but remains outside this top ten.
+
+For comparison only, the labeled one-step attenuation factor $2^{7-k}$
+is already $2^{-18}$ at the smallest degree in this list, $k=25$, and is
+$2^{-31}$ at the closest-threshold degree, $k=38$.  These factors are not
+probabilities or impossibility bounds, and do not model every possible
+feedback or change of proof architecture.  Under that stated extrapolation,
+the fractional threshold gaps alone do not justify moving these degrees
+ahead of the much lower-degree targets supported by direct computations.
+
+\par\bigskip\Needspace{10\baselineskip}
+
+% Source section: report/proof_core.tex
+\section{A finite working proof for ninth powers}
+\label{sec:proof}
+
+The screening led to a concrete candidate that is stronger than a heuristic
+projection.  This section records the analytic argument used with the exact
+parameter file.  The proposed conclusion is
+\[
+                         G(9)\le 46.
+\]
+The published comparison bound is $G(9)\le47$ \cite{W16}.  The present
+argument and its finite arithmetic have been checked within this investigation;
+this document is a working manuscript, and the literature search does not
+establish a claim of priority for its constituent estimates.
+
+\subsection{Notation and the two moments that suffice}
+
+Write $e(z)=\exp(2\pi iz)$, and put
+\[
+ \mathcal A(X,R)=\{n\in\mathbb N:n\le X,\ p\text{ prime},\ p\mid n
+                                      \Longrightarrow p\le R\},\qquad
+ g_k(\alpha;X,R)=\sum_{x\in\mathcal A(X,R)}e(\alpha x^k).
+\]
+For a full moment order $v$, the notation $\Delta_v^{(k)}$ means an
+admissible excess in
+\begin{equation}
+ \int_0^1|g_k(\alpha;X,R)|^v\,d\alpha
+       \ll X^{v-k+\Delta_v^{(k)}+\varepsilon}.
+ \label{eq:admissible}
+\end{equation}
+The assertion is uniform for a sufficiently small smoothness parameter,
+depending on the finitely many orders and estimates being used.  We use
+$\mu_v^{(k)}=v-k+\Delta_v^{(k)}$ for the full exponent.  This differs from
+the half-order notation $\lambda_s$ in \cite{VW00}: $\mu_{2s}=\lambda_s$.
+
+The final chosen certificate uses only sampled quadratic \emph{second}
+moments.  It yields the rational permissible upper values
+\begin{align}
+ \Delta_{38}^{(9)}&=0.185097318519, &
+ \Delta_{40}^{(9)}&=0.135472843760. \label{eq:chosen-pair}
+\end{align}
+Equality in this display specifies the admissible upper values supplied by
+the computation, not the unknown optimal exponents.  In particular, the
+slightly larger, convenient bounds
+\begin{equation}
+ \Delta_{38}^{(9)}\le\frac{1851}{10000},\qquad
+ \Delta_{40}^{(9)}\le\frac{271}{2000}
+ \label{eq:coarse-pair}
+\end{equation}
+are sufficient.  No conjectural moment estimate, limiting iteration, or
+nonintegral coefficient moment is a premise of the certificate.
+
+\subsection{Efficient differences and their quadratic factorisation}
+
+We use the Cartesian sums and modified differences of \cite[Section 2]{VW00}.
+For a fixed $j\in\{5,6\}$, choose $0<\phi_i<1/9$ and set
+\[
+ M_i=P^{\phi_i},\quad H_i\asymp PM_i^{-9},\quad
+ T_i=\sum_{a\le i}\phi_a,\quad Q_i\asymp P^{1-T_i}.
+\]
+Fixed constants depending on the degree and fixed powers of $R$ are included
+in $P^\varepsilon$ losses.  Write $T=T_j$, $Q=Q_j$,
+$\widetilde H_j=\prod_{i\le j}H_i$,
+$\widetilde M_j=\prod_{i\le j}M_i$, and $A=P\widetilde H_j\widetilde M_j$.
+The coefficient variables run through the actual smooth blocks
+$\mathcal C_i=\mathcal A(P,R)\cap(M_i,M_iR]$.
+
+Let $F_j(\alpha)$ be the auxiliary sum of \cite[(2.1)]{VW00}.  Its
+centred difference polynomial has, with $d=9-j$,
+\[
+ \Psi_j(z)=2^j9!\prod_i h_i
+ \left\{\frac{z^d}{d!}+\frac{z^{d-2}}{6(d-2)!}
+                       \sum_i h_i^2m_i^{18}
+             +\text{terms of degree at most }d-4\right\}.
+\]
+Apply $r=d-2=7-j$ ordinary forward differences, with positive shifts
+$u_1,\ldots,u_r$.  If $\xi=2z+\sum_lu_l$ and
+$\Gamma=\prod_i h_i\prod_lu_l$, the resulting polynomial is exactly
+\begin{equation}
+ \frac{2^j9!}{24}\Gamma
+       \left(3\xi^2+\sum_lu_l^2+4\sum_i h_i^2m_i^{18}\right).
+ \label{eq:quadratic-factorisation}
+\end{equation}
+This is a difference of a cubic when $j=6$, and a second difference of a
+quartic when $j=5$.  Terms of lower $z$ degree disappear.  Thus each
+$m_i$ occurs in a separate degree-eighteen coefficient sum.
+
+It is essential to perform these ordinary differences before separating
+the coefficient factors.  Cauchy's inequality over the existing parameter
+tuple gives the unseparated Weyl bound
+\begin{equation}
+ |F_j|^{2^r}\ll P^{2^r-1}B^{2^r}
+       +P^{2^r-r-1}B^{2^r-1}|\mathcal G_r|,
+ \qquad B=\widetilde H_j\widetilde M_j.
+ \label{eq:unseparated}
+\end{equation}
+For completeness, if $\mathcal G_u$ contains $u$ ordinary shifts, Cauchy
+over their tuple and the original $(\mathbf h,\mathbf m)$ gives
+$|\mathcal G_u|^2\ll P^{2u+1}B^2+P^uB|\mathcal G_{u+1}|$.
+Induction gives \eqref{eq:unseparated}.  It introduces no independent
+copies of the original $m_i$ tuple.  The source instance
+\cite[(12.17)]{VW95} illustrates this distinction.
+
+The centered polynomial is the definition of $\Psi_j$; it is not a change
+of variable in the defining sum.  In \cite[(2.1)]{VW00} the original range
+$1\le z\le P_j$ is Cartesian and independent of both $\mathbf h$ and
+$\mathbf m$.  After the ordinary differences the remaining range is
+$1\le z\le P_j-\sum_lu_l$, as in the proof of \cite[Lemma 3.1]{VW00}.
+Thus the interval for $\xi=2z+\sum_lu_l$ and its residue class
+$\xi\equiv\sum_lu_l\pmod2$ depend only on the ordinary shifts, and are
+independent of every coefficient variable $m_i$.  This independence
+preserves the coefficient cancellation in the next display.
+
+Fourier completion of this interval and residue class costs $O(\log P)$.
+For a fixed real linear modulation $t$, it reduces the bound for
+$\mathcal G_r$ to
+\begin{equation}
+ \sum_{\mathbf h,\mathbf u}
+      |Z_t(c_0\Gamma\alpha)|
+      \prod_{i=1}^j|L_i(c_i\Gamma h_i^2\alpha)|,
+ \label{eq:completed-product}
+\end{equation}
+where $c_i$ are fixed nonzero integers,
+\[
+ Z_t(\beta)=\sum_{|z|\le CP}e(\beta z^2+tz),\qquad
+ L_i(\beta)=\sum_{m\in\mathcal C_i}e(\beta m^{18}).
+\]
+The completion kernel has a common integrable majorant, independent of
+the shift-dependent interval.  All estimates below are uniform in $t$,
+so the common completion is legitimate.
+
+Define
+\[
+ H_*\asymp P^{7-j}\widetilde H_j=P^{7-9T},\qquad
+ V=P^2H_*\asymp Q^9.
+\]
+Every product of the fixed number of positive integer shifts has divisor
+multiplicity $P^\varepsilon$.  Products may therefore be enlarged to the
+full interval of length $H_*$ in nonnegative moment bounds.
+
+\subsection{Intrinsic rational height and the quadratic second moment}
+
+Put
+\[
+ \mathcal H_Q(\alpha)=\min_{\substack{q\ge1,\ a\in\mathbb Z\\(a,q)=1}}
+                     \max(q,Q^9|q\alpha-a|).
+\]
+Its sublevel sets are precisely the standard major-arc unions, up to
+fixed endpoint constants.  Dirichlet approximation gives
+$\mathcal H_Q(\alpha)\ll Q^{9/2}$.  On the original auxiliary minor
+arcs of \cite[Definition 4.9]{VW95},
+$\mathcal H_Q(\alpha)\gg P^{1-O(\eta)}$ when $R=P^\eta$.
+Indeed, a standard major-arc union of cutoff $cPR^{-C}$ lies inside the
+original auxiliary major arcs.  Equality of the two arc systems is not
+required.
+
+We decompose the minor arcs into dyadic height shells
+$\mathcal H_Q(\alpha)\asymp P^\ell$.  For exponent bookkeeping the
+range is
+\begin{equation}
+                    1\le\ell\le \frac92(1-T).
+ \label{eq:height-range}
+\end{equation}
+The actual lower endpoint differs by $O(\eta)$, which is absorbed in the
+admissibility convention after the finite parameters are fixed.
+
+For the four chosen policies, the exponents of $H_*$ are
+\[
+ 2.00000221,\quad 1.88634850,\quad 1.84146280,\quad 2.44508497.
+\]
+In particular $H_*>P$.  Expansion of the quadratic second moment and the
+divisor bound for $z^2-w^2$ give, uniformly in $t$,
+\[
+ \sum_{h\le H_*}|Z_t(c\alpha h)|^2
+ \ll P^\varepsilon\left\{PH_*+
+       \sum_{n\le C'P^2}\min(H_*,\|c\alpha n\|^{-1})\right\}.
+\]
+The extra zero differences $z=-w$ when the completed interval includes
+negative integers are included in the $PH_*$ term. With a Dirichlet
+approximant at conductor $V$, and $L=q+V|qc\alpha-a|$, the
+reciprocal-sum estimate and transference in
+\cite[Lemma 4.4, proof following (4.13)]{VW95} bound this by
+\[
+ P^\varepsilon\{PH_*+V/L+H_*+P^2+L\}\ll P^{1+\varepsilon}H_*.
+\]
+Here $L\gg P^{1-O(\eta)}$, $L\ll\sqrt V$, and $H_*\ge P$.
+This proves the normalized quadratic saving $z_2=1$ needed by the
+certificate, with no fourth-moment or small-$H_*$ extension.
+
+\subsection{The refined coefficient sampling estimate}
+
+We give the key deduction explicitly.  For coefficients supported in
+$1\le n\le N$, let
+\[
+ E(\alpha)=\sum_{h\le H}\sum_{z\le J}
+              \left|\sum_{n\le N}c(n)e(\alpha h^3zn)\right|^2,
+ \qquad V_0=H^3JN.
+\]
+Choose a sufficiently small constant multiple of
+\begin{equation}
+               Y\le\min\{N,J,(JNH^{-3})^{1/2}\}.
+ \label{eq:Y-range}
+\end{equation}
+The large-sieve estimate of \cite[Lemma 4.4]{VW95}, followed by the
+initial steps of its Lemma 4.5, gives
+\begin{equation}
+ E(\alpha)\ll P^\varepsilon JN
+       \left(\frac H Y+\sum_{h\text{ exceptional}}
+                       \frac1{s+JN|\alpha h^3s-c|}\right)
+                       \sum_n|c(n)|^2.
+ \label{eq:exceptional}
+\end{equation}
+For each $h$, choose a reduced approximant $c/s$ with
+$s\le JN/Y$ and $|\alpha h^3s-c|\le Y/(JN)$.
+The exceptional condition is
+$s+JN|\alpha h^3s-c|<Y/2$; the remaining reciprocal terms sum to
+$O(H/Y)$.  The other large-sieve terms are also absorbed there by
+\eqref{eq:Y-range}.
+
+Choose independently a common reduced approximant $a/t$ with
+$t\le\sqrt{V_0}$ and $|t\alpha-a|\le V_0^{-1/2}$.  For an
+exceptional $h$,
+\[
+ |ah^3s-ct|
+ <\frac{H^3Y}{2\sqrt{V_0}}+
+      \frac{\sqrt{V_0}Y}{2JN}<1.
+\]
+The last inequality follows by taking the fixed constant in
+\eqref{eq:Y-range} small enough.  Hence $ah^3s=ct$, so $s\mid t$
+and $t_0=t/s$ divides $h^3$.  Let $b$ be the least positive integer
+such that $t_0\mid b^3$.  Then $b\mid h$ and $t_0\le b^3$.
+Writing $\beta=\alpha-a/t$, the contribution of this divisor class is
+at most
+\[
+ \frac{t_0}{t}\sum_{n\le H/b}
+                    (1+JN b^3n^3|\beta|)^{-1}.
+\]
+Nonempty classes have $b\le H$.  Trivial summation gives $H^3/t$;
+comparison with $\sum_{n\ge1}n^{-3}$ gives
+$O((tJN|\beta|)^{-1})$ when $\beta\ne0$.  Combining the bounds,
+and treating $\beta=0$ by the first one, gives
+\[
+              \ll \frac{H^3}{t+V_0|t\alpha-a|}.
+\]
+There are at most $P^\varepsilon$ divisor classes.  Thus, with
+$L=t+V_0|t\alpha-a|$,
+\begin{equation}
+ E(\alpha)\ll P^\varepsilon JHN
+                  (Y^{-1}+H^2/L)\sum_n|c(n)|^2.
+ \label{eq:refined-sampling}
+\end{equation}
+This deduction stops before the last step of the published proof that
+identifies this internal rational approximant with an externally prescribed
+one.  Its additional external matching conditions are consequently not
+hypotheses of \eqref{eq:refined-sampling}.
+The displayed conclusion of \cite[Lemma~4.5]{VW95} has the alternative
+normalized term $L^{-1/3}$. The discrete class estimate above gives
+$H^2/L$, which is smaller when $L>H^3$. This is an adaptation of that
+published argument, and no priority claim is made for the variant.
+
+Apply this estimate to the $p/2$ power of $L_i$, with $p$ a positive even
+integer.  Grouping all shifts other than $h_i$ yields
+\[
+ J_i\asymp P^{7-j}\prod_{l\ne i}H_l,
+ \quad J_iH_i^3M_i^{18}\asymp Q^9,
+ \quad \log_PJ_i=6-9T+9\phi_i.
+\]
+The Fourier support is $N\asymp_p(M_iR)^{18}$.  Positivity of the
+integer-power orthogonality count and the published degree-eighteen
+moment give
+\[
+ \sum_n|c(n)|^2\ll P^\varepsilon M_i^{p-18+\Delta_p^{(18)}}.
+\]
+Each internal rational height in \eqref{eq:refined-sampling} is at
+least a fixed multiple of the intrinsic height, with harmless powers
+of $R$.  Fixed nonzero multipliers of $\alpha$ affect only constants:
+reducing $a/(ct)$ gives $\mathcal H_Q(\alpha)\ll_c
+t+Q^9|ct\alpha-a|$.  On the shell in \eqref{eq:height-range}, the
+normalized coefficient saving is therefore
+\begin{equation}
+ b_{i,p}(\ell)=
+ \min\left\{18\phi_i,6-9T+9\phi_i,
+      \frac{3-9T+54\phi_i}{2},\ell-2+18\phi_i\right\}
+           -\Delta_p^{(18)}\phi_i.
+ \label{eq:b-refined}
+\end{equation}
+All preliminary size expressions in the selected policies are strictly
+positive; the least exponent allowed for $Y$ is greater than $0.76$.
+
+The published basic second-moment coefficient estimate is also used.
+By \cite[Corollary 4.2.1 and Lemma 4.3]{VW95}, its normalized saving is
+\begin{equation}
+ b_{i,2}^{\rm basic}=
+ \begin{cases}
+ \phi_i,&j=5,\\[2pt]
+ \min\{\phi_i,3-9T+36\phi_i,(1-T)/4,
+                    (9(1-T)-35\phi_i)/6\},&j=6.
+ \end{cases}
+ \label{eq:b-basic}
+\end{equation}
+For the cited matching conditions take the Dirichlet cutoff
+$X\asymp(Q^9/P)R^{9(9-j)}$. This retains the error cutoff in the
+original auxiliary-arc definition. On the auxiliary minor arcs the
+denominator exceeds the corresponding lower cutoff. The saving $b$ in
+\eqref{eq:b-basic} is at most $\phi_i<1/9$, and the exact checks include
+every additional size cap. In particular $9b<1$ has strict positive
+margin, absorbing the displayed positive power of $R$ in the upper
+matching condition $X\le Q^9P^{-9b}$ after smoothness is chosen small
+enough. The smallest such exponent margin among the chosen resources is
+$0.02982196$.
+
+\subsection{H\"older allocation and the two auxiliary terminals}
+
+On each of four fixed normalized height intervals choose a quadratic
+second-moment weight $w_0\ge0$ and coefficient weights $w_{i,p}\ge0$,
+where a coefficient resource may be either
+\eqref{eq:b-refined} or \eqref{eq:b-basic}.  The certificate checks
+\[
+ 2w_0\le1,\qquad \sum_p p w_{i,p}\le1\quad(i\le j),
+ \qquad w_0+\sum_{i,p}w_{i,p}\le1.
+\]
+Unused factor loads are estimated trivially, and unused H\"older mass
+is filled by the constant function one.  Consequently the saving in
+\eqref{eq:completed-product} is
+\[
+                 S(\ell)=w_0+\sum_{i,p}w_{i,p}b_{i,p}(\ell).
+\]
+Insertion into \eqref{eq:unseparated} gives
+\begin{equation}
+ |F_j(\alpha)|\ll A P^{\varepsilon-
+                         2^{j-7}\min(1,S(\ell))}.
+ \label{eq:F-minor}
+\end{equation}
+The cap at one retains the ordinary-differencing diagonal contribution.
+
+Br\"udern--Wooley's restricted major-arc mean estimate
+\cite[Theorem 4.2]{BW23} states, for admissible $\Delta_v^{(9)}$ and
+$1\le Z\le Q^{9/2}$,
+\begin{equation}
+ \int_{\mathcal H_Q(\alpha)\le Z}|g_9(\alpha;Q,R)|^v\,d\alpha
+          \ll Q^{v-9+\varepsilon}Z^{2\Delta_v^{(9)}/9}.
+ \label{eq:restricted-mean}
+\end{equation}
+At a fixed-factor endpoint the full mean supplies the same exponent.
+The predecessor \cite[Lemma~2.3]{BW22PN} already supplies this restricted
+mean in the moment range used by the present recipes. The estimate is a
+published input; here it is applied inside the efficient-differencing
+auxiliary recurrence.
+Multiplying \eqref{eq:F-minor} by this shell mean gives the auxiliary
+minor terminal, for remaining smooth order $v=2r_j$,
+\begin{equation}
+ A Q^{v-9}P^{\varepsilon+
+  \max_\ell\{(2\Delta_v^{(9)}/9)\ell
+                        -2^{j-7}\min(1,S(\ell))\}}.
+ \label{eq:minor-terminal}
+\end{equation}
+Every coefficient saving is a minimum of affine functions of $\ell$,
+hence concave.  For fixed nonnegative weights,
+$\min(1,S(\ell))$ is concave.  The exponent in
+\eqref{eq:minor-terminal} is convex on each assigned interval, so its
+maximum is attained at an endpoint.  This justifies the finite endpoint
+checks over the entire continuum of heights.
+
+For the auxiliary major arcs, \cite[Lemmas 4.7--4.8, (4.25)--(4.26)]{VW95}
+give the pointwise majorant
+\[
+ |F_j^*(\alpha)|\ll P^\varepsilon A
+      \{q(1+Q^9|\alpha-a/q|)\}^{-1/(9-j)}.
+\]
+One can see the necessary divisor averaging directly by grouping
+$\prod_i h_i$ and summing $b^{-1+1/(9-j)}$ over $b\mid q$.
+Integrating its dyadic rational-height shells with
+\eqref{eq:restricted-mean} gives the major terminal
+\begin{equation}
+ A Q^{v-9}P^{\varepsilon+
+             \max(0,2\Delta_v^{(9)}/9-1/(9-j))}.
+ \label{eq:major-terminal}
+\end{equation}
+The approximation error in Lemma 4.7 is at most
+$A P^{-1/(9-j)+\varepsilon}$ because $q\le P$.
+Its integral is also bounded by \eqref{eq:major-terminal}; the
+approximation error is not discarded.  The required range $P\le Q^{9/2}$
+holds with substantial strict slack for every policy.
+
+\subsection{The finite counted recurrence}
+
+All remaining smooth half-orders are integers.  Let
+$r_1=s-1,r_2,\ldots,r_j$ denote a fixed path.  In exponent notation put
+$q_i=1-T_i$ and $h_i=i-9T_i$.  Start $C$ at the maximum of the
+major terminal exponent \eqref{eq:major-terminal} and all minor
+endpoint exponents \eqref{eq:minor-terminal}.  For $i=j-1,\ldots,1$,
+put $r=r_i$, $u=r_{i+1}$ and update
+\begin{align}
+ D_i&=1+h_i+T_{i+1}+\mu_{2u}^{(9)}q_{i+1},\\
+ B_i&=\frac12\{\mu_{2(2r-u)}^{(9)}q_i+h_i+T_i
+                                      +(2u-1)\phi_{i+1}\},\\
+ C&\longleftarrow B_i+\frac12\max(D_i,C).
+ \label{eq:counted-backward}
+\end{align}
+These are \cite[Lemma 2.2, including its corrected indices]{VW00}.
+The condition $0<2r-u<2r$ is checked at every stage.  The first step
+\cite[Lemma 2.1]{VW00} then supplies
+\begin{equation}
+ \mu_{2s}^{\rm new}=(2s-3)\phi_1+
+  \max\{1+\phi_1+\mu_{2s-2}^{(9)}(1-\phi_1),C\}.
+ \label{eq:first-step}
+\end{equation}
+The initial ordinary-square mixed mean dominates the pure even smooth
+moment by inclusion of its nonnegative orthogonality count.  No
+pointwise comparison between the ordinary and smooth sums is used.
+
+The four paths are
+\[
+\begin{array}{ccl}
+s&2s& (r_1,\ldots,r_j)\\\hline
+17&34&(16,15,14,13,12,11)\\
+18&36&(17,16,15,14,13,12)\\
+19&38&(18,17,16,15,14,13)\\
+20&40&(19,18,17,16,15).
+\end{array}
+\]
+Their sizes and all interval weights are printed in the certificate
+appendix and embedded in the standalone JSON parameter file.
+We apply all four policies six times, always reading only exponents
+available at the start of a round.  This is a finite induction with
+24 updates.  Every output is rounded \emph{upward} to twelve decimal
+places; H\"older convexification uses only already admissible values.
+The seed moments are the published degree-nine and degree-eighteen
+tables, checked digit for digit against \cite[Sections 11 and 20]{VW00}.
+Only even coefficient orders up to 62 are used.  A single sufficiently
+small $\eta$ accommodates every estimate and all endpoint perturbations.
+
+The exact replay produces \eqref{eq:chosen-pair} and
+\begin{equation}
+ 5\Delta_{38}^{(9)}+74\Delta_{40}^{(9)}-11
+             =-\frac{9904593833}{200000000000}<0.
+ \label{eq:exact-criterion}
+\end{equation}
+The numerical part is independently reproducible with the Python standard
+library, without a numerical optimizer or the earlier workspaces.
+
+\subsection{The classical representation argument}
+
+Let $f(\alpha)=\sum_{x\le P}e(\alpha x^9)$ and
+$g(\alpha)=g_9(\alpha;P,R)$.  Use the ordinary major/minor dissection
+of \cite[Section 2]{W16}.  Its Lemma 3.1 includes the endpoint
+$90=9(9+1)$ and gives
+\[
+                    \int_{\mathfrak m}|f|^{90}\ll P^{80+\varepsilon}.
+\]
+H\"older with weights $(11,5,74)/90$ on the moments
+$(|f|^{90},|g|^{38},|g|^{40})$ is applicable because the weights sum
+to one and $38(5/90)+40(74/90)=35$.  Thus
+\[
+ \int_{\mathfrak m}|f|^{11}|g|^{35}
+ \ll P^{37+(5\Delta_{38}^{(9)}+74\Delta_{40}^{(9)}-11)/90+\varepsilon}
+ \ll P^{37-19/36000+\varepsilon},
+\]
+where the final bound uses only \eqref{eq:coarse-pair}.
+The saving $19/36000$ is greater than $1/2000$.
+
+For $W=\log\log P$, let $\mathfrak N$ be the logarithmic major arcs
+of \cite[Section 4]{W16}.  Its equation (4.1) includes $s=k+2=11$.
+Consequently
+\[
+ \int_{\mathfrak M\setminus\mathfrak N}|f|^{11}|g|^{35}
+ \le P^{35}\int_{\mathfrak M\setminus\mathfrak N}|f|^{11}
+ \ll P^{37}W^{\varepsilon-1/9}=o(P^{37}).
+\]
+This step requires no additional optimal smooth moment.  The narrow
+major-arc approximations in the same source give a positive main term
+for $f^{11}g^{35}$.  The singular series is uniformly positive in the
+cited sufficient range, since $46>4\cdot9$.  The singular integral
+has its usual positive gamma-factor value.  Therefore the number of
+representations of every sufficiently large integer as eleven ordinary
+and thirty-five smooth ninth powers is positive.  This completes the
+proposed proof of $G(9)\le46$ from the finite admissible-moment certificate.
+
+\par\bigskip\Needspace{10\baselineskip}
+
+% Source section: thresholds/g8_auxiliary_and_quadratic_audit.tex
+\section{A finite working proof for eighth powers}
+\label{sec:g8-input-audit}
+
+The degree-eight calculation uses the coefficient argument of
+Section~\ref{sec:proof} with degree $16$ in place of degree $18$.
+Use the same Cartesian auxiliary sums, with $k=8$ and
+$j\in\{4,5,6\}$, and apply $6-j$ ordinary differences to reach the
+quadratic polynomial. Its exact factorisation is
+\[
+ \frac{2^j8!}{24}\Gamma
+       \left(3\xi^2+\sum_lu_l^2+4\sum_i h_i^2m_i^{16}\right).
+\]
+The case $j=6$ needs no ordinary difference. The pointwise cap by one is
+still a valid weakening in that case. The independence of the completed
+quadratic interval from the $m_i$ is unchanged. The counted recurrence
+\eqref{eq:counted-backward}--\eqref{eq:first-step} applies with every
+degree-$9$ exponent and scale replaced by its degree-$8$ counterpart.
+The terminal exponent is modified only when the auxiliary interpolation
+below is used.
+
+The four output orders and paths are
+\[
+\begin{array}{cl}
+2s&(r_1,\ldots,r_j)\\\hline
+28&(13,12,11,10,9,8)\\
+30&(14,13,12,11,11)\\
+32&(15,14,13,12,11)\\
+34&(16,15,14,14).
+\end{array}
+\]
+An inner zero decrement is permitted by the source condition
+$0<2r_i-r_{i+1}<2r_i$; no strict decrease of the path is required.
+The complete sizes and recipes are printed in
+Appendix~\ref{app:g8-parameters}. Twelve beginning-of-round updates of
+all four policies give a finite induction with 48 steps. Its final
+admissible excesses include
+\[
+ \Delta_{32}^{(8)}=0.178844726003,\qquad
+ \Delta_{34}^{(8)}=0.117131705619.
+\]
+As throughout, these equalities name permissible upper values rather than
+unknown optimal exponents.
+
+Two further analytic ingredients are
+needed: a sampled quadratic fourth moment and a second moment of the
+quadratic efficient-differencing auxiliary sum. This section supplies their
+derivations and checks the ranges used by the canonical certificate
+\texttt{g8\_exact\_certificate.json}. The arithmetic recurrence itself is
+verified separately.
+
+\subsection{Quadratic sums with arbitrary linear modulation}
+
+For a conductor $V\ge1$, define the intrinsic maximum height
+\[
+ \mathcal H_V(\alpha)=
+ \min_{(a,q)=1,\ q\ge1}\max\{q,V|q\alpha-a|\}.
+\]
+This is comparable, within a factor two, with the corresponding minimum of
+$q+V|q\alpha-a|$. Dirichlet's theorem gives
+$\mathcal H_V(\alpha)\ll\sqrt V$. A minimising maximum-height
+approximant can be chosen with denominator-error product at most one, so the
+arbitrary-approximant reciprocal-sum bound used in the proof of
+\cite[Lemma~4.4]{VW95} applies. Equivalently, one may first use a Dirichlet
+approximant and the explicit transference argument following (4.13) there.
+Fixed nonzero integer multipliers of $\alpha$ change these heights only by
+fixed factors, by reducing or lifting the corresponding rational fraction.
+
+Let
+\[
+ Z_t(\beta)=\sum_{z\in I}e(c\beta z^2+tz),
+\]
+where $I$ is an integer interval of length $O(P)$ contained in
+$[-CP,CP]$, $c\ne0$ is a fixed integer, and $t$ is any real number.
+One ordinary difference removes the linear phase up to a factor of modulus
+one. The standard reciprocal-sum estimate and its transference therefore give,
+uniformly in $t$,
+\[
+ |Z_t(\beta)|^2\ll P^\epsilon
+       \left(P+\frac{P^2}{B}+B\right),\qquad
+ B=\mathcal H_{P^2}(\beta).
+\]
+Since $B\ll P$, this implies
+\[
+ |Z_t(\beta)|^4\ll P^\epsilon
+                   \left(P^2+\frac{P^4}{B^2}\right).       \tag{Q1}
+\]
+In particular, no approximation of a quadratic Gauss sum that is uniform in
+a growing leading coefficient is being assumed. The argument remains valid
+when the real number $t$ depends on the sampled integer below.
+
+\subsection{Distribution of short heights of multiples}
+
+Put $V=HP^2$, $L=\mathcal H_V(\alpha)$ and, for $1\le Y\ll P$, let
+\[
+ N(Y)=\#\{1\le h\le H:
+                 \mathcal H_{P^2}(h\alpha)\le Y\}.
+\]
+A witness to membership has $q\le Y$ and
+$\|hq\alpha\|\le Y/P^2$. Grouping $n=hq$ costs a divisor factor
+$P^\epsilon$, since all parameters have fixed polynomial size in $P$.
+Set $A=HY$ and $J=P^2/Y$, so that $AJ=V$ independently of $Y$.
+The indicator of $\|n\alpha\|\le1/J$ is at most
+$J^{-1}\min\{J,\|n\alpha\|^{-1}\}$. Applying the reciprocal-sum
+estimate with the same conductor-$V$ approximant for every $Y$ gives
+\[
+ N(Y)\ll P^\epsilon
+       \left(\frac{HY^2}{P^2}+\frac{HY}{L}+1+\frac{LY}{P^2}\right).
+                                                               \tag{Q2}
+\]
+Here the fractions in (Q2) are unaffected by replacing intrinsic maximum
+height by sum-height, since those heights are comparable by fixed constants.
+
+The short approximation lifts to the possibly unreduced fraction $a/(hq)$.
+Reducing the fraction can only decrease both its denominator and error.
+Consequently $L\ll HY$, so $N(Y)=0$ unless $Y\gg L/H$.
+On the nonempty range the term $1$ in (Q2) is absorbed by $HY/L$.
+Also $L^2\ll HP^2$ absorbs $LY/P^2$ into that same term. Thus
+\[
+ N(Y)\ll P^\epsilon\left(\frac{HY^2}{P^2}+\frac{HY}{L}\right).
+                                                               \tag{Q3}
+\]
+Dyadic summation beginning at $Y\asymp\max\{1,L/H\}$ yields
+\[
+ \sum_{h\le H}\mathcal H_{P^2}(h\alpha)^{-2}
+ \ll P^\epsilon\left(\frac H{P^2}+
+                  \min\left\{\frac HL,\frac{H^2}{L^2}\right\}\right).
+                                                               \tag{Q4}
+\]
+Combining (Q1) and (Q4), uniformly in arbitrary real modulations $t_h$, gives
+\[
+ \sum_{h\le H}|Z_{t_h}(h\alpha)|^4
+ \ll P^\epsilon\left(HP^2+
+             P^4\min\left\{\frac HL,\frac{H^2}{L^2}\right\}\right).
+                                                               \tag{Q5}
+\]
+This proves the required fourth-moment estimate.
+
+In the efficient-differencing application the sampled integer is a product
+of finitely many positive shifts. Grouping their product costs another
+divisor factor. Its range has
+\[
+ H_*=P^{k-j-2}\prod_{i=1}^jH_i=P^{k-2-kT},
+ \qquad H_*P^2\asymp Q^k.
+\]
+Thus, if $H_*=P^h$ and $L\asymp P^\ell$, normalization by $H_*P^4$
+gives the saving
+\[
+ z_4(\ell)=\min\{2,\max(\ell,2\ell-h)\}.            \tag{Q6}
+\]
+The selected policies do not insert this nonconcave expression into an
+endpoint-only test. Instead they use the globally valid weaker resource
+\[
+ z_4^{\rm refined}(\ell)=\min\{2,2\ell-h\},           \tag{Q7}
+\]
+and occasionally the still weaker old resource
+$\min\{2,\ell,h\}$. Both are bounded above by (Q6) and both are concave
+as minima of affine functions. Their fourth-moment loads are included in the
+same quadratic-factor H\"older constraint. Every frozen recipe is therefore
+controlled on its whole height interval by the certified endpoint values.
+
+The quadratic second-moment resource is also valid uniformly in modulation.
+For the four actual policies, the values of $h=6-8T$ are
+\[
+ 1.69428296,\quad1.83213176,\quad1.78352592,\quad2.39658688.
+\]
+They are all greater than one. Expansion of the second moment, the divisor
+bound for differences of squares, and the reciprocal-sum estimate give
+\[
+ \sum_{h\le H_*}|Z_t(h\alpha)|^2
+ \ll P^\epsilon\{PH_*+V/L+H_*+P^2+L\}
+ \ll P^{\epsilon+O(\eta)}PH_*
+\]
+on the auxiliary minor region. The last step uses $L\gg P^{1-O(\eta)}$,
+$L\ll\sqrt V$ and $H_*>P$. The normalized saving is one.
+This second-moment expansion is uniform for a common real modulation $t$,
+as supplied by completion of the quadratic interval. The fourth-moment
+estimate (Q5) permits the stronger arbitrary-$t_h$ statement, which is not
+needed for that completion.
+
+\subsection{The auxiliary second moment at depth six}
+
+For degree eight and $j=6$, the central polynomial has degree two.
+Let $N_i$ count solutions of
+\[
+ \sum_{l=1}^i h_l^2(m_l^{16}-n_l^{16})=0
+\]
+in the coefficient ranges, and put
+$D_i=H_iM_i$ and $U_i=H_iM_i^2$, suppressing powers of $R$ only as
+the usual $P^\epsilon$ losses. For a fixed nonzero integer $b$, the equation
+\[
+ h^2(m^{16}-n^{16})=b
+\]
+has $O(P^\epsilon)$ solutions: choose $h^2\mid b$, choose the nonzero
+divisor $m-n$ of $b/h^2$, and then use the strict monotonicity of the
+remaining positive-variable difference polynomial. Splitting off $m_i=n_i$
+therefore gives the one-block recurrence
+\[
+ N_i\ll P^\epsilon
+       \left(D_iN_{i-1}+\prod_{l<i}U_l\right),\qquad
+ N_1\ll P^\epsilon D_1.                                  \tag{A1}
+\]
+This is the elementary divisor argument in \cite[Lemma~3.8]{VW95}.
+The off-diagonal term in (A1) is at most the desired diagonal product when
+\[
+ \prod_{l<i}M_l\le H_iM_i,
+ \quad\text{equivalently}\quad T_i+(k-2)\phi_i\le1.       \tag{A2}
+\]
+It follows by finite induction that $N_6\ll P^\epsilon\prod D_i$.
+
+Lemma~3.3 of \cite{VW95} explicitly includes the case $k-j=2$ and gives
+\[
+ \int_0^1|F_6(\alpha)|^2\,d\alpha
+       \ll P^{1+\epsilon}N_6
+       \ll P^{1+\epsilon}\prod_{i=1}^6H_iM_i.             \tag{A3}
+\]
+There is no odd-degree hypothesis in this quadratic case. In the canonical
+full-order-$28$ policy, the exact margins in (A2), for $i=2,\ldots,6$, are
+\[
+ 0.10069819,\quad0.02990766,\quad0.00000045,
+       \quad0.03242985,\quad0.26812241.
+\]
+The smallest is positive but small; the smoothness parameter is chosen
+sufficiently small after these fixed rational parameters. The resulting
+exponent in (A3) is
+\[
+ 1+\sum_i(1-7\phi_i)=3.23249759.
+\]
+
+The inner smooth order in this policy is $16$. With
+\[
+ a=\frac15,\qquad c=\frac45,\qquad\gamma=\frac35,
+\]
+one has $a+c=1$, $\gamma+2a=1$ and $20c=16$. Hence on each height shell
+\[
+ \int |F_6||g_Q|^{16}
+ \le(\sup|F_6|)^\gamma
+        \left(\int_0^1|F_6|^2\right)^a
+        \left(\int_{\rm shell}|g_Q|^{20}\right)^c.         \tag{A4}
+\]
+The smooth factor in (A4) is estimated by \cite[Theorem~4.2]{BW23}; the
+other factors use the pointwise terminal and (A3). This justifies exactly
+the additional interpolation in the order-$28$ policy.
+
+The auxiliary major contribution is retained separately with the original
+smooth order $16$. Its published excess $1.8428621$ is smaller than
+$k/(2(k-j))=2$, so the derived height-pruning bound has the optimal main
+scale. Although \cite[Lemma~4.10]{VW95} restricts $j\le k-3$, that lemma is
+not invoked here: Lemma~4.7 covers $j=k-2$, Lemma~4.8 covers quadratic
+complete sums, and their pointwise averaged bound combined with
+\cite[Theorem~4.2]{BW23} supplies the stated major estimate.
+
+\subsection{Exact source-range checks for the remaining resources}
+
+For degree-eight coefficient block $i$, put
+\[
+ \log_PJ_i=5-8T+8\phi_i,\quad
+ \log_PH_i=1-8\phi_i,\quad\log_PN_i=16\phi_i.
+\]
+The conductor identity is $J_iH_i^3N_i\asymp Q^8$. The degree-sixteen
+published moments in \cite[Section~18]{VW00} give the coefficient norm.
+The refined and cube reciprocal resources follow, respectively, from
+$H_i^3/L$ and $H_iL^{-1/3}$ in the divisor decomposition of
+\cite[Lemma~4.5]{VW95}, with
+\[
+ Y\le\min\{N_i,J_i,(J_iN_iH_i^{-3})^{1/2}\}.
+\]
+Their normalized savings are the minima of the corresponding four affine
+caps minus $\Delta^{(16)}_p\phi_i$. The code independently recomputes
+these as physical exponent differences rather than importing the optimizer.
+
+For the canonical twelve-round certificate, all 3600 coefficient-resource
+endpoint occurrences pass. The minimum $Y$ exponent is $0.6936722$ and the
+minimum $\phi_i$ is $0.03227716$. Every selected coefficient order is even
+and covered by the published rows or the elementary low-order bounds below.
+In addition to its printed rows starting
+at full order six, the calculation uses the elementary full-order-four
+exponent $2$; it follows by factoring $x^{16}-y^{16}$ and the divisor bound,
+or from Hua's lemma. The order-zero and order-two exponents are $0$ and $1$.
+The first coefficient moments retain the full
+Lemma~4.3 minimum at depths five and six; the simpler Corollary~4.2.1
+applies only at depth four. All H\"older masses and factor loads are
+checked exactly. The audit also verifies all 96 occurrences of (Q7), all
+48 occurrences of its older weaker form, and the 744 quadratic second-moment
+occurrences. The finite epsilon/smoothness convention is chosen after the
+fixed policies, preserving each displayed size condition.
+
+This smoothness choice is a finite one. Each previously admissible moment is
+uniform for $R\le X^{\eta_0}$ with a sufficiently small positive $\eta_0$.
+When $X$ is replaced by a scale $Q_i$ or $M_iR$, its exponent relative to
+$P$ is bounded away from zero in these fixed policies. Shrinking the common
+$\eta$ therefore makes all seed and newly derived moment estimates valid
+at every scale used in the forty-eight updates. The finitely many additional
+powers of $R$ are absorbed by taking $\eta$ small relative to the required
+$\epsilon$ and to the strict parameter margins, including $9/20000000$ in
+(A2). The proof uses no limit of infinitely many iterations and does not
+require an $\eta$ uniform over such a limit.
+
+\subsection{The thirty-eight-variable endgame}
+
+Assume the audited finite construction supplies admissible excesses satisfying
+\[
+ \Delta_{32}\le0.1789,\qquad\Delta_{34}\le0.11721.
+\]
+Take eight ordinary and thirty smooth variables. H\"older weights
+$(1,1,7)/9$ on the moments $(|f|^{72},|g|^{32},|g|^{34})$ give
+$f^8g^{30}$. The ordinary minor mean from \cite[Lemma~3.1]{W16} has exponent
+$72-8-1=63$. Therefore the excess relative to $P^{30}$ is
+\[
+ \frac{\Delta_{32}+7\Delta_{34}-1}{9}
+       \le-\frac7{100000}<0.                              \tag{E1}
+\]
+
+For major pruning no new smooth-major-arc result is needed. Table~2 of
+\cite{W16} has $r=21$ for $k=8$, and its equation~(4.2) gives the strong
+optimal mean
+\[
+ \int_0^1|g|^{42}\ll P^{34}
+\]
+without a $P^\epsilon$ loss. Consequently
+$\int_0^1|g|^{90}\le P^{48}\int_0^1|g|^{42}\ll P^{82}$.
+Using equation~(4.1) of \cite{W16} at ordinary moment $12$ and H\"older
+weights $2/3,1/3$ yields
+\[
+ \int_{\mathfrak M\setminus\mathfrak N}|f|^8|g|^{30}
+ \ll (P^4W^{\epsilon-1/8})^{2/3}(P^{82})^{1/3}
+ \ll P^{30}W^{\epsilon-1/12}=o(P^{30}),
+\]
+where $W=\log\log P$. The source table and the absence of a power loss
+in its strong $42$nd moment were checked in the original PDF.
+The narrow-core approximation and the standard positive singular series
+complete the usual representation argument, since $38\ge4k=32$.
+Thus an admissible pair as in (E1) implies $G(8)\le38$.
+
+The canonical arithmetic pair is
+\[
+ \Delta_{32}=\frac{178844726003}{10^{12}},\qquad
+ \Delta_{34}=\frac{117131705619}{10^{12}},
+\]
+whose exact criterion and minor saving are
+\[
+ -\frac{154166833}{125000000000},\qquad
+ \frac{154166833}{1125000000000},
+\]
+respectively. These figures are stronger than (E1).
+The alternative eleven-ordinary allocation requires
+$4\Delta_{30}+57\Delta_{32}<11$ and remains positive for this pair of
+canonical profiles, so the eight-ordinary allocation is essential to the
+present candidate.
+
+\par\bigskip\Needspace{10\baselineskip}
+
+% Source section: report/reproduction.tex
+\section{Reproduction and the scope of the checks}
+\label{sec:reproduction}
+
+The two main certificates are independent of all earlier workspaces. Each
+needs just its checker and its parameter JSON, together with Python~3's
+standard library. Use the commands below with assertions enabled, as in a
+normal Python invocation. The parameter files contain the published input
+tables, fixed rational sizes, integer moment paths, and height-interval
+H\"older weights. The checkers derive all output exponents afresh; they do
+not accept optimized output exponents as premises.
+
+\subsection{Ninth powers}
+\begin{verbatim}
+python exact_height_replay.py --fixed \
+  --source k9_z2_only_fixed_parameters.json \
+  --rounds 6 --out k9_z2_only_exact_certificate.json
+\end{verbatim}
+The final criterion is
+\[
+                   -9904593833/200000000000.
+\]
+The precise admissible excesses are $0.185097318519$ and $0.135472843760$.
+
+\subsection{Eighth powers}
+\begin{verbatim}
+python g8_standalone_replay.py \
+  --source g8_fixed_parameters.json \
+  --rounds 12 --out g8_exact_certificate.json
+\end{verbatim}
+The final criterion is
+\[
+                    -154166833/125000000000.
+\]
+The precise admissible excesses are $0.178844726003$ and $0.117131705619$.
+
+Both two-file runs were repeated in empty directories. Independent root
+replays reproduced the full canonical output files byte for byte. The
+physical-scale audits separately rebuilt the coefficient caps and checked
+each frozen occurrence against the theorem hypotheses. These are distinct
+from rerunning the optimizer.
+
+A further implementation imports none of the canonical replay code.
+It computes absolute sampled-moment exponents, forms the H\"older and
+ordinary-Weyl products directly, and uses exhaustive two-point chords for
+interpolation. It reproduced all 72 raw updates, all 960 height endpoints,
+every backward recurrence stage, and both final criteria exactly. Its
+standard-library source is \path{independent_physical_verifier.py}; the
+complete comparison ledger is included in the package.
+
+\subsection{What is certified, and what remains a matter of proof review}
+
+Every adopted exponent is rounded upward to a twelve-decimal rational
+lattice. Each round reads only the moment bounds available at its start.
+The lower convex envelope supplies H\"older interpolation. All selected
+coefficient moment orders are positive even integers drawn from the printed
+tables or the stated elementary low-order bounds. Every height interval is covered, and endpoint
+testing is justified by concavity of each selected saving and convexity of
+the resulting exponent. In particular, the nonconcave envelope of the two
+quadratic fourth-moment savings is never silently used in an endpoint test.
+
+The two proof chains use finitely many estimates. One sufficiently small
+positive smoothness exponent can therefore be chosen after all rational
+parameters and all positive margins have been fixed. The source convention
+allows the final $P^\varepsilon$ loss to be arbitrarily small. Choosing it
+smaller than the displayed minor-arc savings preserves the strict bounds.
+
+An arithmetic certificate verifies a finite numerical consequence of its
+analytic rules. It cannot, by itself, establish those rules. The proofs
+and source checks in this manuscript address that separate requirement;
+an external mathematical review remains appropriate before describing
+these working results as established new literature records. No claim of
+priority for an individual auxiliary estimate is made.
+
+\subsection{Other reproducible outputs}
+
+The accompanying small-degree screen records exact thresholds, ordinary
+allocations, annular witnesses, and calibration scenarios. Its prior
+degree-$5$, degree-$6$, and degree-$14$ inputs are included locally, with
+source hashes, so the screen no longer depends on earlier workspace paths.
+The corrected $21$--$100$ table gives the old and current numerical
+specializations and names the proof family supporting each correction.
+Its 44 improving rows have separate exact certificates.
+
+The exploratory degree-$10$ and degree-$13$ pilots and the fixed-policy substitution check
+are retained as diagnostics. Their roles are limited: the pilots are
+floating comparisons, and the substitution check fixes parameters rather than
+reoptimizing the control cases. Neither is used as a premise of the two
+proposed representation bounds.
+
+The ideal-terminal diagnostic additionally records the two-sided floating
+iterations in the retained degree-$10$ and degree-$13$ families, including
+their narrow zero-decrement extensions. The next-threshold large-degree
+shortlist also has fresh exact replays of its saved policies. The
+fixed-policy feedback discussion has a different status: its contraction
+bound is proved analytically, and its local affine branches are checked
+with exact rational arithmetic in \path{feedback_branch_audit.py}. These
+sensitivity statements concern the stated fixed families and do not bound
+all possible methods for any degree.
+
+\par\bigskip\Needspace{10\baselineskip}
+
+\clearpage\appendix
+
+% Source appendix: transfer/appendix_g9_parameters.tex
+\section{Complete finite certificate for G(9)}
+\label{app:g9-parameters}
+This appendix prints the complete fixed recipe corresponding to the file
+\par
+\path{k9_z2_only_fixed_parameters.json}.
+It uses four policies, 6 finite rounds, and 24 counted updates.
+\subsection{Published input exponents}
+The following decimals are the exact published upper exponents used as seeds.
+The first column of each block is the half-order $s$; the listed value is
+$\mu_{2s}^{(d)}$ in $\int_0^1|g_d|^{2s}\ll P^{\mu_{2s}^{(d)}+\varepsilon}$.
+All three low-order values and all interpolation operations are independent
+of the numerical selection runs: the additional seeds are
+$\mu_0^{(d)}=0$, $\mu_2^{(d)}=1$, and $\mu_4^{(d)}=2$.
+Only H\"older interpolation between known permissible exponents is used.
+\begin{center}
+\small
+\begin{tabular}{rr@{\hspace{2.2cm}}rr}
+\toprule
+$s$ & $\mu_{2s}^{(9)}$ & $s$ & $\mu_{2s}^{(18)}$\\
+\midrule
+3 & 3.0358052 & 3 & 3.0050870\\
+4 & 4.1822894 & 4 & 4.0484489\\
+5 & 5.4197057 & 5 & 5.1469671\\
+6 & 6.7383084 & 6 & 6.2893077\\
+7 & 8.1356346 & 7 & 7.4676627\\
+8 & 9.6039271 & 8 & 8.6816032\\
+9 & 11.1425026 & 9 & 9.9332381\\
+10 & 12.7463430 & 10 & 11.2185989\\
+11 & 14.4105835 & 11 & 12.5388988\\
+12 & 16.1292111 & 12 & 13.8936352\\
+13 & 17.8959526 & 13 & 15.2823305\\
+14 & 19.7055987 & 14 & 16.7049932\\
+15 & 21.5507274 & 15 & 18.1609021\\
+16 & 23.4269614 & 16 & 19.6497248\\
+17 & 25.3292029 & 17 & 21.1706906\\
+18 & 27.2520471 & 18 & 22.7231221\\
+19 & 29.1901860 & 19 & 24.3060925\\
+20 & 31.1420569 & 20 & 25.9186447\\
+21 & 33.1033373 & 21 & 27.5596769\\
+22 & 35.0727119 & 22 & 29.2280189\\
+ &  & 23 & 30.9224199\\
+ &  & 24 & 32.6415685\\
+ &  & 25 & 34.3841221\\
+ &  & 26 & 36.1487034\\
+ &  & 27 & 37.9339369\\
+ &  & 28 & 39.7384452\\
+ &  & 29 & 41.5608774\\
+ &  & 30 & 43.3999089\\
+ &  & 31 & 45.2542644\\
+\bottomrule
+\end{tabular}
+\end{center}
+Source: Vaughan--Wooley, \emph{Further improvements in Waring's problem, IV}, Sections 11 and 20~\cite{VW00}.
+The stored pointwise metadata are $\sigma_{9}=0.012183$ and $\sigma_{18}=0.005095$; these two values are not queried by the frozen recipes, whose moment orders remain inside the printed tables.
+\subsection{The four exact policies}
+The path is $(r_1,\ldots,r_j)$ in the counted recurrence.
+Each size exponent below has eight decimal places and is exact.
+Put $T=\sum_i\phi_i$, $h=k-2-kT$, and $\ell_{\max}=k(1-T)/2$.
+A normalized interval $[a,b]$ in the weight tables means
+$1+a(\ell_{\max}-1)\le\ell\le1+b(\ell_{\max}-1)$.
+\paragraph{Full order $34$.}
+$j=6$, $(r_1,\ldots,r_j)=(16,15,14,13,12,11)$.
+\[ (\phi_1,\ldots,\phi_j)=\bigl(0.10508250,\ 0.10289747,\ 0.09976839,\ 0.09517079,\ 0.08734286,\ 0.06529330\bigr). \]
+$T=0.55555531$, $h=2.00000221$.
+The terminal uses the direct remaining smooth moment; there is no auxiliary interpolation.
+\paragraph{Full order $36$.}
+$j=6$, $(r_1,\ldots,r_j)=(17,16,15,14,13,12)$.
+\[ (\phi_1,\ldots,\phi_j)=\bigl(0.10612499,\ 0.10413773,\ 0.10119188,\ 0.09645505,\ 0.08825004,\ 0.07202381\bigr). \]
+$T=0.56818350$, $h=1.88634850$.
+The terminal uses the direct remaining smooth moment; there is no auxiliary interpolation.
+\paragraph{Full order $38$.}
+$j=6$, $(r_1,\ldots,r_j)=(18,17,16,15,14,13)$.
+\[ (\phi_1,\ldots,\phi_j)=\bigl(0.10702571,\ 0.10513564,\ 0.10230226,\ 0.09758589,\ 0.08900681,\ 0.07211449\bigr). \]
+$T=0.57317080$, $h=1.84146280$.
+The terminal uses the direct remaining smooth moment; there is no auxiliary interpolation.
+\paragraph{Full order $40$.}
+$j=5$, $(r_1,\ldots,r_j)=(19,18,17,16,15)$.
+\[ (\phi_1,\ldots,\phi_j)=\bigl(0.10779756,\ 0.10604903,\ 0.10331138,\ 0.09871146,\ 0.09023224\bigr). \]
+$T=0.50610167$, $h=2.44508497$.
+The terminal uses the direct remaining smooth moment; there is no auxiliary interpolation.
+\subsection{Complete rational H\"older allocations}
+An entry $R_p[n]$ means the refined coefficient resource of full order $p$
+with weight $n/10^6$.  The entry $B[n]$ is the published basic second-moment
+resource with the same weight.  The column $L_i$ identifies the coefficient factor
+(so its index is one greater than the zero-based JSON index).
+$Z_2[n]$ denotes the sampled quadratic second-moment resource.
+When two entries occur in one cell, both allocations are used and their
+weights are added.  An empty cell has weight zero.  All weights are nonnegative.
+The replay checks total H\"older mass at most one and total moment load at most one
+for each factor.  These printed integer numerators, together with the preceding
+exact size exponents, give the complete policy; no optimizer output is needed.
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\footnotesize
+\setlength{\tabcolsep}{3.3pt}
+\renewcommand{\arraystretch}{1.22}
+\textbf{Full order $34$: fixed weights}\par\smallskip
+\begin{tabular}{cccccccc}
+\toprule
+$[a,b]$ & $Z$ & $L_1$ & $L_2$ & $L_3$ & $L_4$ & $L_5$ & $L_6$\\
+\midrule
+$[0,\frac{1}{4}]$ & $Z_2[499995]$ & $R_{44}[22727]$ & $R_{44}[22727]$ & $R_{46}[21738]$ & \shortstack[c]{$B[391976]$\\$R_{46}[4696]$} & $R_{50}[19999]$ & $R_{62}[16128]$\\
+$[\frac{1}{4},\frac{1}{2}]$ & $Z_2[499995]$ & $R_{36}[27777]$ & $R_{36}[27777]$ & $R_{36}[27777]$ & \shortstack[c]{$B[362697]$\\$R_{38}[7226]$} & $R_{40}[24999]$ & $R_{46}[21738]$\\
+$[\frac{1}{2},\frac{3}{4}]$ & $Z_2[499995]$ & $R_{26}[38461]$ & $R_{26}[38461]$ & $R_{26}[38461]$ & $R_{26}[38461]$ & $R_{28}[35713]$ & \shortstack[c]{$B[300958]$\\$R_{42}[9477]$}\\
+$[\frac{3}{4},1]$ & $Z_2[499995]$ & $R_{14}[71427]$ & $R_{16}[62499]$ & $R_{18}[55554]$ & $R_{20}[49999]$ & $R_{26}[38461]$ & \shortstack[c]{$B[208154]$\\$R_{42}[13897]$}\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{center}
+\medskip
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\footnotesize
+\setlength{\tabcolsep}{3.3pt}
+\renewcommand{\arraystretch}{1.22}
+\textbf{Full order $36$: fixed weights}\par\smallskip
+\begin{tabular}{cccccccc}
+\toprule
+$[a,b]$ & $Z$ & $L_1$ & $L_2$ & $L_3$ & $L_4$ & $L_5$ & $L_6$\\
+\midrule
+$[0,\frac{1}{4}]$ & $Z_2[499995]$ & $R_{44}[22727]$ & $R_{44}[22727]$ & $R_{46}[21738]$ & $R_{46}[21738]$ & \shortstack[c]{$B[389397]$\\$R_{50}[4423]$} & $R_{58}[17241]$\\
+$[\frac{1}{4},\frac{1}{2}]$ & $Z_2[499995]$ & $R_{36}[27777]$ & $R_{36}[27777]$ & $R_{36}[27777]$ & $R_{38}[26315]$ & \shortstack[c]{$B[361692]$\\$R_{40}[6915]$} & $R_{46}[21738]$\\
+$[\frac{1}{2},\frac{3}{4}]$ & $Z_2[499995]$ & $R_{26}[38461]$ & $R_{28}[35713]$ & $R_{28}[35713]$ & $R_{28}[35713]$ & $R_{30}[33332]$ & \shortstack[c]{$B[311118]$\\$R_{38}[9940]$}\\
+$[\frac{3}{4},1]$ & $Z_2[499995]$ & $R_{18}[55554]$ & $R_{18}[55554]$ & $R_{20}[49999]$ & $R_{24}[41666]$ & $R_{28}[35713]$ & \shortstack[c]{$B[248255]$\\$R_{38}[13249]$}\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{center}
+\medskip
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\footnotesize
+\setlength{\tabcolsep}{3.3pt}
+\renewcommand{\arraystretch}{1.22}
+\textbf{Full order $38$: fixed weights}\par\smallskip
+\begin{tabular}{cccccccc}
+\toprule
+$[a,b]$ & $Z$ & $L_1$ & $L_2$ & $L_3$ & $L_4$ & $L_5$ & $L_6$\\
+\midrule
+$[0,\frac{1}{4}]$ & $Z_2[499995]$ & $R_{44}[22727]$ & $R_{44}[22727]$ & $R_{46}[21738]$ & $R_{46}[21738]$ & \shortstack[c]{$B[389397]$\\$R_{50}[4423]$} & $R_{58}[17241]$\\
+$[\frac{1}{4},\frac{1}{2}]$ & $Z_2[499995]$ & $R_{36}[27777]$ & $R_{36}[27777]$ & $R_{38}[26315]$ & $R_{38}[26315]$ & \shortstack[c]{$B[363231]$\\$R_{40}[6838]$} & $R_{46}[21738]$\\
+$[\frac{1}{2},\frac{3}{4}]$ & $Z_2[499995]$ & $R_{28}[35713]$ & $R_{28}[35713]$ & $R_{28}[35713]$ & $R_{28}[35713]$ & $R_{30}[33332]$ & \shortstack[c]{$B[314533]$\\$R_{40}[9273]$}\\
+$[\frac{3}{4},1]$ & $Z_2[499995]$ & $R_{18}[55554]$ & $R_{20}[49999]$ & $R_{22}[45454]$ & $R_{24}[41666]$ & $R_{28}[35713]$ & \shortstack[c]{$B[259585]$\\$R_{40}[12020]$}\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{center}
+\medskip
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\footnotesize
+\setlength{\tabcolsep}{3.3pt}
+\renewcommand{\arraystretch}{1.22}
+\textbf{Full order $40$: fixed weights}\par\smallskip
+\begin{tabular}{ccccccc}
+\toprule
+$[a,b]$ & $Z$ & $L_1$ & $L_2$ & $L_3$ & $L_4$ & $L_5$\\
+\midrule
+$[0,\frac{1}{4}]$ & $Z_2[499995]$ & \shortstack[c]{$B[403306]$\\$R_{42}[4604]$} & $R_{42}[23809]$ & $R_{42}[23809]$ & $R_{44}[22727]$ & $R_{46}[21738]$\\
+$[\frac{1}{4},\frac{1}{2}]$ & $Z_2[499995]$ & \shortstack[c]{$B[365805]$\\$R_{30}[8945]$} & $R_{30}[33332]$ & $R_{32}[31249]$ & $R_{32}[31249]$ & $R_{34}[29411]$\\
+$[\frac{1}{2},\frac{3}{4}]$ & $Z_2[499995]$ & \shortstack[c]{$B[187498]$\\$R_{14}[44642]$} & $R_{14}[71427]$ & $R_{14}[71427]$ & $R_{16}[62499]$ & $R_{16}[62499]$\\
+$[\frac{3}{4},1]$ & $Z_2[499995]$ & $R_{10}[99999]$ & $R_{10}[99999]$ & $R_{10}[99999]$ & $R_{10}[99999]$ & $R_{10}[99999]$\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{center}
+\medskip
+\subsection{Finite round ledger}
+Within a round all four evaluations read the exponents available at its start.
+Each output is rounded upward to twelve decimal places before the next round.
+The valid H\"older convex envelope is updated only after the four evaluations.
+Every entry below is an exact terminating decimal; $D$ is the strict
+record criterion, defined by
+\[D=5\Delta_{38}^{(9)}+74\Delta_{40}^{(9)}-11.\]
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{rrrrrr}
+\toprule
+Round & $\Delta_{34}$ & $\Delta_{36}$ & $\Delta_{38}$ & $\Delta_{40}$ & $D$\\
+\midrule
+0 & 0.329202900000 & 0.252047100000 & 0.190186000000 & 0.142056900000 & 0.463140600000\\
+1 & 0.328601499965 & 0.250127455652 & 0.188302970170 & 0.139862453254 & 0.291336391646\\
+2 & 0.328332398257 & 0.249150757590 & 0.186757792931 & 0.138182409445 & 0.159287263585\\
+3 & 0.328211986343 & 0.248661104682 & 0.185852461160 & 0.136951673808 & 0.063686167592\\
+4 & 0.328158106979 & 0.248505402575 & 0.185380158892 & 0.136178518258 & 0.004111145552\\
+5 & 0.328133998186 & 0.248457241158 & 0.185148057878 & 0.135725530085 & -0.030570484320\\
+6 & 0.328123210495 & 0.248435690910 & 0.185097318519 & 0.135472843760 & -0.049522969165\\
+\bottomrule
+\end{tabular}
+\end{center}
+The final exact criterion is
+\[D=-9904593833/200000000000.\]
+The convenient upper pair
+\[(\Delta_{38},\Delta_{40})\le(1851/10000,271/2000)\]
+gives minor-arc saving $19/36000>1/2000$ for 46 variables.
+\subsection{Reproduction and file identities}
+The parameter JSON and checker form a self-contained two-file replay using only
+the Python standard library.  The supplied certificate records every endpoint
+evaluation, backward recurrence, exact fraction, and rounded output.
+Running the command in an otherwise empty directory reproduces its SHA-256.
+\begin{verbatim}
+python exact_height_replay.py --fixed \
+  --source k9_z2_only_fixed_parameters.json \
+  --rounds 6 --out k9_z2_only_exact_certificate.json
+\end{verbatim}
+SHA-256 identities (the split between lines is typographical):
+\begin{quote}\small\ttfamily
+\detokenize{k9_z2_only_fixed_parameters.json}\par
+7f7cf7c3ae465e11cb5ca273f124f71e\par
+736697d5d3bb33c3717723db16e636cb\par\medskip
+\detokenize{k9_z2_only_exact_certificate.json}\par
+6514323a363a937cfad1951bf26c40cf\par
+83b4f54b3df76ad77034a17a3dcb7aa5\par\medskip
+\detokenize{exact_height_replay.py}\par
+1763b32133010b79f3fe1b09c71f6718\par
+b2fa7e21bf33c1e15ee211994a8696c1\par\medskip
+\end{quote}
+The checker validates the finite arithmetic conditional on the analytic rules proved
+in the text.  It does not replace those proofs or the representation argument.
+
+\clearpage
+
+% Source appendix: transfer/appendix_g8_parameters.tex
+\section{Complete finite certificate for G(8)}
+\label{app:g8-parameters}
+This appendix prints the complete fixed recipe corresponding to the file
+\par
+\path{g8_fixed_parameters.json}.
+It uses four policies, 12 finite rounds, and 48 counted updates.
+\subsection{Published input exponents}
+The following decimals are the exact published upper exponents used as seeds.
+The first column of each block is the half-order $s$; the listed value is
+$\mu_{2s}^{(d)}$ in $\int_0^1|g_d|^{2s}\ll P^{\mu_{2s}^{(d)}+\varepsilon}$.
+All three low-order values and all interpolation operations are independent
+of the numerical selection runs: the additional seeds are
+$\mu_0^{(d)}=0$, $\mu_2^{(d)}=1$, and $\mu_4^{(d)}=2$.
+Only H\"older interpolation between known permissible exponents is used.
+\begin{center}
+\small
+\begin{tabular}{rr@{\hspace{2.2cm}}rr}
+\toprule
+$s$ & $\mu_{2s}^{(8)}$ & $s$ & $\mu_{2s}^{(16)}$\\
+\midrule
+3 & 3.0469787 & 3 & 3.0074816\\
+4 & 4.2164889 & 4 & 4.0638321\\
+5 & 5.4915710 & 5 & 5.1787385\\
+6 & 6.8566563 & 6 & 6.3412246\\
+7 & 8.3105992 & 7 & 7.5457229\\
+8 & 9.8428621 & 8 & 8.7902441\\
+9 & 11.4529104 & 9 & 10.0769155\\
+10 & 13.1283069 & 10 & 11.4019639\\
+11 & 14.8664781 & 11 & 12.7671799\\
+12 & 16.6561197 & 12 & 14.1702162\\
+13 & 18.4901012 & 13 & 15.6119303\\
+14 & 20.3623532 & 14 & 17.0906280\\
+15 & 22.2661078 & 15 & 18.6062852\\
+16 & 24.1891161 & 16 & 20.1573791\\
+17 & 26.1294925 & 17 & 21.7431712\\
+18 & 28.0833353 & 18 & 23.3621148\\
+19 & 30.0473193 & 19 & 25.0129891\\
+20 & 32.0186056 & 20 & 26.6941169\\
+ &  & 21 & 28.4039654\\
+ &  & 22 & 30.1407641\\
+ &  & 23 & 31.9028113\\
+ &  & 24 & 33.6883143\\
+ &  & 25 & 35.4955330\\
+ &  & 26 & 37.3227332\\
+ &  & 27 & 39.1682523\\
+ &  & 28 & 41.0304795\\
+ &  & 29 & 42.9078717\\
+ &  & 30 & 44.7989875\\
+\bottomrule
+\end{tabular}
+\end{center}
+Source: Vaughan--Wooley, \emph{Further improvements in Waring's problem, IV}, Sections 10 and 18~\cite{VW00}.
+The stored pointwise metadata are $\sigma_{8}=0.014356$ and $\sigma_{16}=0.005864$; these two values are not queried by the frozen recipes, whose moment orders use the printed tables or the stated elementary low-order values.
+\subsection{The four exact policies}
+The path is $(r_1,\ldots,r_j)$ in the counted recurrence.
+Each size exponent below has eight decimal places and is exact.
+Put $T=\sum_i\phi_i$, $h=k-2-kT$, and $\ell_{\max}=k(1-T)/2$.
+A normalized interval $[a,b]$ in the weight tables means
+$1+a(\ell_{\max}-1)\le\ell\le1+b(\ell_{\max}-1)$.
+\paragraph{Full order $28$.}
+$j=6$, $(r_1,\ldots,r_j)=(13,12,11,10,9,8)$.
+\[ (\phi_1,\ldots,\phi_j)=\bigl(0.11586958,\ 0.11191889,\ 0.10604341,\ 0.09516681,\ 0.07693878,\ 0.03227716\bigr). \]
+$T=0.53821463$, $h=1.69428296$.
+The auxiliary terminal interpolates with smooth full order $v=20$,
+with $(a,c,\gamma)=(\frac{1}{5},\frac{4}{5},\frac{3}{5})$.
+The divisor second-moment prefix conditions are imposed for this policy only:
+$T_i+(k-2)\phi_i<1$ for $2\le i\le j$; their least margin is $0.00000045$.
+\paragraph{Full order $30$.}
+$j=5$, $(r_1,\ldots,r_j)=(14,13,12,11,11)$.
+\[ (\phi_1,\ldots,\phi_j)=\bigl(0.11756478,\ 0.11402685,\ 0.10847441,\ 0.09901555,\ 0.08190194\bigr). \]
+$T=0.52098353$, $h=1.83213176$.
+The terminal uses the direct remaining smooth moment; there is no auxiliary interpolation.
+\paragraph{Full order $32$.}
+$j=5$, $(r_1,\ldots,r_j)=(15,14,13,12,11)$.
+\[ (\phi_1,\ldots,\phi_j)=\bigl(0.11889202,\ 0.11553618,\ 0.11014056,\ 0.10056412,\ 0.08192638\bigr). \]
+$T=0.52705926$, $h=1.78352592$.
+The terminal uses the direct remaining smooth moment; there is no auxiliary interpolation.
+\paragraph{Full order $34$.}
+$j=4$, $(r_1,\ldots,r_j)=(16,15,14,14)$.
+\[ (\phi_1,\ldots,\phi_j)=\bigl(0.11996738,\ 0.11673903,\ 0.11137032,\ 0.10234991\bigr). \]
+$T=0.45042664$, $h=2.39658688$.
+The terminal uses the direct remaining smooth moment; there is no auxiliary interpolation.
+\subsection{Complete rational H\"older allocations}
+An entry $R_p[n]$ means the refined coefficient resource of full order $p$
+with weight $n/10^6$.  The entry $B[n]$ is the published basic second-moment
+resource with the same weight.  The column $L_i$ identifies the coefficient factor
+(so its index is one greater than the zero-based JSON index).
+$Z_2[n]$ denotes the sampled quadratic second-moment resource.
+$C_p[n]$ denotes the published cube-root coefficient resource.
+$Z_4[n]$ denotes the quadratic fourth-moment saving $\min(\ell,2,h)$;
+$Z_4^{+}[n]$ denotes its refined concave branch $\min(2\ell-h,2)$.
+When two entries occur in one cell, both allocations are used and their
+weights are added.  An empty cell has weight zero.  All weights are nonnegative.
+The replay checks total H\"older mass at most one and total moment load at most one
+for each factor.  These printed integer numerators, together with the preceding
+exact size exponents, give the complete policy; no optimizer output is needed.
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\footnotesize
+\setlength{\tabcolsep}{3.3pt}
+\renewcommand{\arraystretch}{1.22}
+\textbf{Full order $28$: fixed weights}\par\smallskip
+\begin{tabular}{cccccccc}
+\toprule
+$[a,b]$ & $Z$ & $L_1$ & $L_2$ & $L_3$ & $L_4$ & $L_5$ & $L_6$\\
+\midrule
+$[0,\frac{1}{8}]$ & $Z_2[499995]$ & $R_{44}[22727]$ & $R_{46}[21738]$ & $R_{48}[20833]$ & \shortstack[c]{$B[414750]$\\$R_{52}[3278]$} & $C_{60}[16666]$ & --\\
+$[\frac{1}{8},\frac{1}{4}]$ & $Z_2[499995]$ & $R_{40}[24999]$ & $R_{42}[23809]$ & $R_{44}[22727]$ & \shortstack[c]{$B[406538]$\\$R_{46}[4063]$} & $R_{56}[17856]$ & --\\
+$[\frac{1}{4},\frac{3}{8}]$ & $Z_2[499995]$ & $R_{38}[26315]$ & $R_{38}[26315]$ & $R_{40}[24999]$ & \shortstack[c]{$B[397482]$\\$R_{42}[4881]$} & $R_{50}[19999]$ & --\\
+$[\frac{3}{8},\frac{1}{2}]$ & $Z_2[499995]$ & $R_{34}[29411]$ & $R_{34}[29411]$ & $R_{36}[27777]$ & \shortstack[c]{$B[384593]$\\$R_{38}[6073]$} & $R_{44}[22727]$ & --\\
+$[\frac{1}{2},\frac{5}{8}]$ & $Z_2[499995]$ & $R_{30}[33332]$ & $R_{32}[31249]$ & $R_{32}[31249]$ & \shortstack[c]{$B[372875]$\\$R_{34}[7477]$} & $R_{42}[23809]$ & --\\
+$[\frac{5}{8},\frac{3}{4}]$ & $Z_2[499995]$ & $R_{28}[35713]$ & $R_{28}[35713]$ & $R_{28}[35713]$ & $R_{32}[31249]$ & \shortstack[c]{$B[354683]$\\$R_{42}[6919]$} & --\\
+$[\frac{3}{4},\frac{7}{8}]$ & $Z_2[499995]$ & $R_{24}[41666]$ & $R_{24}[41666]$ & $R_{26}[38461]$ & $R_{32}[31249]$ & \shortstack[c]{$B[339299]$\\$R_{42}[7652]$} & --\\
+$[\frac{7}{8},1]$ & \shortstack[c]{$Z_2[135579]$\\$Z_4^{+}[182207]$} & $R_{22}[45454]$ & $R_{24}[41666]$ & $R_{26}[38461]$ & \shortstack[c]{$B[27068]$\\$R_{32}[29557]$} & $B[499995]$ & --\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{center}
+\medskip
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\footnotesize
+\setlength{\tabcolsep}{3.3pt}
+\renewcommand{\arraystretch}{1.22}
+\textbf{Full order $30$: fixed weights}\par\smallskip
+\begin{tabular}{ccccccc}
+\toprule
+$[a,b]$ & $Z$ & $L_1$ & $L_2$ & $L_3$ & $L_4$ & $L_5$\\
+\midrule
+$[0,\frac{1}{8}]$ & $Z_2[499995]$ & $R_{44}[22727]$ & $R_{44}[22727]$ & $R_{46}[21738]$ & \shortstack[c]{$B[412042]$\\$R_{50}[3518]$} & $R_{58}[17241]$\\
+$[\frac{1}{8},\frac{1}{4}]$ & $Z_2[499995]$ & $R_{40}[24999]$ & $R_{40}[24999]$ & $R_{42}[23809]$ & \shortstack[c]{$B[402525]$\\$R_{44}[4430]$} & $R_{52}[19230]$\\
+$[\frac{1}{4},\frac{3}{8}]$ & $Z_2[499995]$ & $R_{36}[27777]$ & $R_{38}[26315]$ & $R_{38}[26315]$ & \shortstack[c]{$B[392471]$\\$R_{40}[5376]$} & $R_{46}[21738]$\\
+$[\frac{3}{8},\frac{1}{2}]$ & $Z_2[499995]$ & $R_{32}[31249]$ & $R_{34}[29411]$ & $R_{34}[29411]$ & \shortstack[c]{$B[378153]$\\$R_{36}[6768]$} & $R_{40}[24999]$\\
+$[\frac{1}{2},\frac{5}{8}]$ & $Z_2[499995]$ & $R_{28}[35713]$ & $R_{30}[33332]$ & $R_{30}[33332]$ & \shortstack[c]{$B[361160]$\\$R_{32}[8677]$} & $R_{36}[27777]$\\
+$[\frac{5}{8},\frac{3}{4}]$ & $Z_2[499995]$ & $R_{24}[41666]$ & $R_{26}[38461]$ & $R_{26}[38461]$ & $R_{28}[35713]$ & \shortstack[c]{$B[336615]$\\$R_{36}[9076]$}\\
+$[\frac{3}{4},\frac{7}{8}]$ & $Z_2[499995]$ & $R_{20}[49999]$ & $R_{20}[49999]$ & $R_{22}[45454]$ & $R_{26}[38461]$ & \shortstack[c]{$B[305262]$\\$R_{36}[10818]$}\\
+$[\frac{7}{8},1]$ & \shortstack[c]{$Z_2[105125]$\\$Z_4^{+}[197434]$} & $R_{18}[55554]$ & $R_{20}[49999]$ & $R_{22}[45454]$ & \shortstack[c]{$B[8628]$\\$R_{26}[37797]$} & $B[499994]$\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{center}
+\medskip
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\footnotesize
+\setlength{\tabcolsep}{3.3pt}
+\renewcommand{\arraystretch}{1.22}
+\textbf{Full order $32$: fixed weights}\par\smallskip
+\begin{tabular}{ccccccc}
+\toprule
+$[a,b]$ & $Z$ & $L_1$ & $L_2$ & $L_3$ & $L_4$ & $L_5$\\
+\midrule
+$[0,\frac{1}{8}]$ & $Z_2[499995]$ & $R_{44}[22727]$ & $R_{44}[22727]$ & $R_{46}[21738]$ & \shortstack[c]{$B[411889]$\\$R_{48}[3671]$} & $R_{58}[17241]$\\
+$[\frac{1}{8},\frac{1}{4}]$ & $Z_2[499995]$ & $R_{40}[24999]$ & $R_{40}[24999]$ & $R_{42}[23809]$ & \shortstack[c]{$B[402525]$\\$R_{44}[4430]$} & $R_{52}[19230]$\\
+$[\frac{1}{4},\frac{3}{8}]$ & $Z_2[499995]$ & $R_{36}[27777]$ & $R_{38}[26315]$ & $R_{38}[26315]$ & \shortstack[c]{$B[392471]$\\$R_{40}[5376]$} & $R_{46}[21738]$\\
+$[\frac{3}{8},\frac{1}{2}]$ & $Z_2[499995]$ & $R_{32}[31249]$ & $R_{34}[29411]$ & $R_{34}[29411]$ & \shortstack[c]{$B[379414]$\\$R_{36}[6698]$} & $R_{42}[23809]$\\
+$[\frac{1}{2},\frac{5}{8}]$ & $Z_2[499995]$ & $R_{30}[33332]$ & $R_{30}[33332]$ & $R_{30}[33332]$ & \shortstack[c]{$B[363700]$\\$R_{32}[8518]$} & $R_{36}[27777]$\\
+$[\frac{5}{8},\frac{3}{4}]$ & $Z_2[499995]$ & $R_{26}[38461]$ & $R_{26}[38461]$ & $R_{26}[38461]$ & $R_{28}[35713]$ & \shortstack[c]{$B[340009]$\\$R_{36}[8888]$}\\
+$[\frac{3}{4},\frac{7}{8}]$ & $Z_2[499995]$ & $R_{22}[45454]$ & $R_{22}[45454]$ & $R_{22}[45454]$ & $R_{26}[38461]$ & \shortstack[c]{$B[314887]$\\$R_{36}[10283]$}\\
+$[\frac{7}{8},1]$ & \shortstack[c]{$Z_2[106167]$\\$Z_4^{+}[196913]$} & $R_{20}[49999]$ & $R_{20}[49999]$ & $R_{22}[45454]$ & \shortstack[c]{$B[14082]$\\$R_{26}[37377]$} & $B[499994]$\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{center}
+\medskip
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\footnotesize
+\setlength{\tabcolsep}{3.3pt}
+\renewcommand{\arraystretch}{1.22}
+\textbf{Full order $34$: fixed weights}\par\smallskip
+\begin{tabular}{cccccc}
+\toprule
+$[a,b]$ & $Z$ & $L_1$ & $L_2$ & $L_3$ & $L_4$\\
+\midrule
+$[0,\frac{1}{8}]$ & $Z_2[499995]$ & \shortstack[c]{$B[428305]$\\$R_{42}[3413]$} & $R_{42}[23809]$ & $R_{44}[22727]$ & $R_{46}[21738]$\\
+$[\frac{1}{8},\frac{1}{4}]$ & $Z_2[499995]$ & \shortstack[c]{$B[420696]$\\$R_{38}[4173]$} & $R_{38}[26315]$ & $R_{40}[24999]$ & $R_{42}[23809]$\\
+$[\frac{1}{4},\frac{3}{8}]$ & $Z_2[499995]$ & \shortstack[c]{$B[407621]$\\$R_{32}[5773]$} & $R_{34}[29411]$ & $R_{34}[29411]$ & $R_{36}[27777]$\\
+$[\frac{3}{8},\frac{1}{2}]$ & $Z_2[499995]$ & \shortstack[c]{$B[389739]$\\$R_{28}[7875]$} & $R_{28}[35713]$ & $R_{30}[33332]$ & $R_{30}[33332]$\\
+$[\frac{1}{2},\frac{5}{8}]$ & $Z_2[499995]$ & \shortstack[c]{$B[358329]$\\$R_{22}[12878]$} & $R_{22}[45454]$ & $R_{24}[41666]$ & $R_{24}[41666]$\\
+$[\frac{5}{8},\frac{3}{4}]$ & $Z_2[499995]$ & \shortstack[c]{$B[260414]$\\$R_{14}[34225]$} & $R_{14}[71427]$ & $R_{14}[71427]$ & $R_{16}[62499]$\\
+$[\frac{3}{4},\frac{7}{8}]$ & \shortstack[c]{$Z_2[466782]$\\$Z_4[16606]$} & \shortstack[c]{$R_{6}[66425]$\\$R_{8}[75179]$} & $R_{8}[124998]$ & $R_{8}[124998]$ & $R_{8}[124998]$\\
+$[\frac{7}{8},1]$ & \shortstack[c]{$Z_4[69863]$\\$Z_4^{+}[180133]$} & $R_{4}[249997]$ & $R_{6}[166664]$ & $R_{6}[166664]$ & $R_{6}[166664]$\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{center}
+\medskip
+\subsection{Finite round ledger}
+Within a round all four evaluations read the exponents available at its start.
+Each output is rounded upward to twelve decimal places before the next round.
+The valid H\"older convex envelope is updated only after the four evaluations.
+Every entry below is an exact terminating decimal; $D$ is the strict
+record criterion, defined by
+\[D=\Delta_{32}^{(8)}+7\Delta_{34}^{(8)}-1.\]
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{rrrrrr}
+\toprule
+Round & $\Delta_{28}$ & $\Delta_{30}$ & $\Delta_{32}$ & $\Delta_{34}$ & $D$\\
+\midrule
+0 & 0.362353200000 & 0.266107800000 & 0.189116100000 & 0.129492500000 & 0.095563600000\\
+1 & 0.361191319429 & 0.262218424695 & 0.185605866121 & 0.126167376968 & 0.068777504897\\
+2 & 0.360677692450 & 0.260279164129 & 0.182620068594 & 0.123078256650 & 0.044167865144\\
+3 & 0.360450635832 & 0.259324859400 & 0.180891421884 & 0.120528807443 & 0.024593073985\\
+4 & 0.360350262001 & 0.258860185296 & 0.179928609981 & 0.119040136099 & 0.013209562674\\
+5 & 0.360305890222 & 0.258635880876 & 0.179407280490 & 0.118185010380 & 0.006702353150\\
+6 & 0.360286275002 & 0.258528389904 & 0.179131041086 & 0.117702043622 & 0.003045346440\\
+7 & 0.360277603796 & 0.258477194870 & 0.178987162647 & 0.117433871477 & 0.001024262986\\
+8 & 0.360273770557 & 0.258452940962 & 0.178913267636 & 0.117287113684 & -0.000076936576\\
+9 & 0.360272076016 & 0.258441503338 & 0.178875756814 & 0.117207861261 & -0.000669214359\\
+10 & 0.360271326918 & 0.258436131332 & 0.178856903359 & 0.117165576462 & -0.000984061407\\
+11 & 0.360270995768 & 0.258434347629 & 0.178847626533 & 0.117143260275 & -0.001149551542\\
+12 & 0.360270849378 & 0.258434055411 & 0.178844726003 & 0.117131705619 & -0.001233334664\\
+\bottomrule
+\end{tabular}
+\end{center}
+The final exact criterion is
+\[D=-154166833/125000000000.\]
+The convenient upper pair
+\[(\Delta_{32},\Delta_{34})\le(1789/10000,11721/100000)\]
+gives minor-arc saving $7/100000$ for 38 variables.
+\subsection{Reproduction and file identities}
+The parameter JSON and checker form a self-contained two-file replay using only
+the Python standard library.  The supplied certificate records every endpoint
+evaluation, backward recurrence, exact fraction, and rounded output.
+Running the command in an otherwise empty directory reproduces its SHA-256.
+\begin{verbatim}
+python g8_standalone_replay.py \
+  --source g8_fixed_parameters.json \
+  --rounds 12 --out g8_exact_certificate.json
+\end{verbatim}
+SHA-256 identities (the split between lines is typographical):
+\begin{quote}\small\ttfamily
+\detokenize{g8_fixed_parameters.json}\par
+7af6e60058a3522ab38b71161d365f17\par
+73ce5fd4c36cb654532ae21b858de583\par\medskip
+\detokenize{g8_exact_certificate.json}\par
+be95505ae57e69dc915cc83e7aa99aba\par
+7e91d9d89aa6e63083355f6582ac7983\par\medskip
+\detokenize{g8_standalone_replay.py}\par
+62844204b0d06c1ac142b9fd5cfc1378\par
+ad9cb9f33055b3bf541f9dccf621bcc3\par\medskip
+\end{quote}
+The checker validates the finite arithmetic conditional on the analytic rules proved
+in the text.  It does not replace those proofs or the representation argument.
+
+\clearpage
+
+\clearpage
+\begin{thebibliography}{20}\small
+\bibitem{VW94} R. C. Vaughan and T. D. Wooley,
+\emph{Further improvements in Waring's problem, II: sixth powers},
+Duke Math. J. 76 (1994), 683--710.
+\url{https://doi.org/10.1215/S0012-7094-94-07626-6}.
+\bibitem{VW95} R. C. Vaughan and T. D. Wooley,
+\emph{Further improvements in Waring's problem},
+Acta Math. 174 (1995), 147--240.
+\url{https://www.math.purdue.edu/~twooley/publ/1995%20fiwp.pdf}.
+\bibitem{VW00} R. C. Vaughan and T. D. Wooley,
+\emph{Further improvements in Waring's problem, IV: higher powers},
+Acta Arith. 94 (2000), 203--285.
+\url{https://www.math.purdue.edu/~twooley/publ/2000%20fiwp4.pdf}.
+\bibitem{W93} T. D. Wooley,
+\emph{The application of a new mean value theorem to the fractional parts
+of polynomials}, Acta Arith. 65 (1993), 163--179.
+\url{https://doi.org/10.4064/aa-65-2-163-179}.
+\bibitem{W00QD} T. D. Wooley,
+\emph{Quasi-diagonal behaviour and smooth Weyl sums},
+Monatsh. Math. 130 (2000), 161--170.
+\url{https://www.math.purdue.edu/~twooley/publ/2000SWSQD.pdf}.
+\bibitem{W16} T. D. Wooley,
+\emph{On Waring's problem for intermediate powers},
+Acta Arith. 176 (2016), 241--247.
+\url{https://arxiv.org/abs/1602.03221}.
+\bibitem{BW22PN} J. Br\"udern and T. D. Wooley,
+\emph{Partitio Numerorum: sums of a prime and a number of $k$-th powers},
+2022, arXiv:2211.10387. \url{https://arxiv.org/abs/2211.10387}.
+\bibitem{BW23} J. Br\"udern and T. D. Wooley,
+\emph{On Waring's problem for larger powers},
+J. reine angew. Math. 805 (2023), 115--142.
+\url{https://www.math.purdue.edu/~twooley/publ/20230915wpk.pdf}.
+\bibitem{BW24} J. Br\"udern and T. D. Wooley,
+\emph{Estimates for smooth Weyl sums on major arcs},
+Internat. Math. Res. Notices 2024 (2024), no. 24, 14662--14688.
+\url{https://doi.org/10.1093/imrn/rnae252}.
+\bibitem{Bou16} J. Bourgain, \emph{On the Vinogradov mean value}, 2016,
+Theorem 10 and Section 6. \url{https://arxiv.org/abs/1601.08173}.
+\bibitem{DKW05} J.-M. Deshouillers, K. Kawada and T. D. Wooley,
+\emph{On sums of sixteen biquadrates},
+M\'em. Soc. Math. France, nouvelle s\'erie, 100 (2005), vi+120 pp.
+\url{https://www.numdam.org/item/MSMF_2005_2_100__1_0/}.
+\end{thebibliography}
+\end{document}

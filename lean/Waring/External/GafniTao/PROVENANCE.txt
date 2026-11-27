@@ -1,0 +1,27 @@
+Source: https://github.com/smccolm/Lean
+Commit: bed45b21cb18f26f4d234422ebaa8b17e6624f05
+Original source author: S. McColm
+Lean4.24 compatibility port for classical Waring, with exact count semantics.
+See smccolm_vmvt_port_manifest.json and smccolm_vmvt_port.patch for changes.
+Status: full isolated Lean4.24 replay PASSED; final endpoints have only the standard three axioms.
+Imported modules: all111 Wooley source modules plus minimal VmvtCore.
+Waring.CriticalVMVT assembles the native endpoint and literal degree8/9 counts.
+Only local import paths change at integration; declaration namespaces are preserved.
+
+MIT No Attribution
+
+Copyright 2026 S. McColm
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

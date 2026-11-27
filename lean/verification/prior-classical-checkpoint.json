@@ -1,0 +1,13 @@
+{
+  "archive": "Waring_G8_G9_Lean_Checkpoint.zip",
+  "archive_sha256": "44a7f3dbcf50fab91aaec70d02f7b373fc436ec67966e7fdc1c3c6d2839e6177",
+  "verification_timestamp_utc": "2026-11-23T17:47:26.838148+00:00",
+  "closed_targets": [
+    "Waring.waring_bound_8_38",
+    "Waring.waring_bound_9_46"
+  ],
+  "verified_by_archived_report": true,
+  "source_hashes_checked_against_archived_report": 890,
+  "source_hash_mismatches": [],
+  "archived_report_sha256": "9c19126d391347a22a5bf3848b4e278ef0877918d6e22d20ddd777098998b6e4"
+}

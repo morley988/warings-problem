@@ -1,0 +1,2 @@
+'WaringLinear.critical_value_linear' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.critical_value_quadratic' depends on axioms: [propext, Classical.choice, Quot.sound]

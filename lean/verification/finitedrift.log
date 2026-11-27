@@ -1,0 +1,2 @@
+'WaringEnvelope.IndexedStages.continuous_drift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringEnvelope.IndexedStages.drift_integral_bound' depends on axioms: [propext, Classical.choice, Quot.sound]

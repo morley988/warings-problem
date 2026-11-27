@@ -1,0 +1,13 @@
+Source dependency closure 868 already built and matching source 584 remaining 284
+WaringSiegel.WSL4MajorTarget exit=0
+'WaringSiegel.WSL4.optimized_smoothRootMajorLowerBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringSiegel.WSL4.largeKAnalyticClaim_verified' depends on axioms: [propext, Classical.choice, Quot.sound]
+WaringSiegel.WSL4PolynomialTarget exit=0
+'WaringSiegel.WSL4.remainingLocalPowerClaim_verified' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringSiegel.WSL4.polynomialGlobalClaim_verified' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringSiegel.WSL4.uniform_polynomial_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+WaringSiegel.WSL4ArchOddPrimeTarget exit=0
+'WaringSiegel.WSL4.odd_prime_waringSiegelBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringSiegel.WSL4.oddPrimeGlobalClaim_verified' depends on axioms: [propext, Classical.choice, Quot.sound]
+WaringSiegel.WSL4EightCubesTarget exit=0
+'WaringSiegel.WSL4.eightCubesClaim_verified' depends on axioms: [propext, Classical.choice, Quot.sound]

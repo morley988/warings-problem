@@ -1,0 +1,44 @@
+name = "waring_linear"
+version = "0.1.0"
+defaultTargets = ["WaringLinear"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "f897ebcf72cd16f89ab4577d0c826cd14afaafc7"
+
+[[lean_lib]]
+name = "WaringSiegel"
+
+[[lean_lib]]
+name = "Waring"
+
+[[lean_lib]]
+name = "WaringLinear"
+
+[[lean_lib]]
+name = "WaringEnvelope"
+
+[[lean_lib]]
+name = "WaringDualEnvelope"
+
+[[lean_lib]]
+name = "WaringLimit"
+
+[[lean_lib]]
+name = "WaringSmall"
+
+[[lean_lib]]
+name = "WaringLocal"
+
+[[lean_lib]]
+name = "WaringPrior"
+
+[[lean_lib]]
+name = "WaringSharp"
+
+[[lean_lib]]
+name = "WaringSharpTail"
+
+[[lean_lib]]
+name = "WaringFieldSmall"

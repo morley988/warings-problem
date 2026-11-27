@@ -1,0 +1,2 @@
+'WaringLinear.many_mixed_of_one_mixed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.absorb_several_mixed' depends on axioms: [propext, Classical.choice, Quot.sound]

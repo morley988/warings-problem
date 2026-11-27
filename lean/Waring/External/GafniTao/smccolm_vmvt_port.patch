@@ -1,0 +1,621 @@
+--- /dev/null
++++ b/GafniTao/NativeCriticalVMVT.lean
+@@ -0,0 +1,83 @@
++import GafniTao.WooleySourceCriticalBase
++import GafniTao.WooleySourceToPadic
++import GafniTao.WooleyPadicToCritical
++
++/-!
++Critical VMVT endpoint assembled from S. McColm's MIT-0 native Wooley proof,
++pinned at bed45b21cb18f26f4d234422ebaa8b17e6624f05, ported to Lean4.24.
++The complete dependency closure replays under the pinned compiler. The final
++critical endpoints use only propext, Classical.choice and Quot.sound.
++-/
++open Finset
++open scoped BigOperators
++namespace GafniTao
++noncomputable section
++
++theorem native_critical_endpoint : VinogradovCriticalEndpointTheorem :=
++  vinogradovCriticalEndpoint_of_wooleyPadic
++    (wooleyMonomialPadicConcentration_of_polynomialCorollary32
++      wooleyPolynomialCorollary32_native)
++
++theorem native_critical_count_bound {k : ℕ} (hk : 1 ≤ k)
++    {epsilon : ℝ} (hepsilon : 0 < epsilon) :
++    ∃ C : ℝ, 0 < C ∧ ∀ Q : ℕ, 1 ≤ Q →
++      (fordVinogradovMomentNat (fordVinogradovKappa k) k Q : ℝ) ≤
++        C * (Q : ℝ) ^ ((fordVinogradovKappa k : ℕ) + epsilon) := by
++  obtain ⟨C, hC, h⟩ := native_critical_endpoint k epsilon hk hepsilon
++  refine ⟨C, hC, fun Q hQ => ?_⟩
++  simpa only [fordLambda34_critical] using h Q hQ
++
++theorem native_critical_count_degree8 {epsilon : ℝ}
++    (hepsilon : 0 < epsilon) :
++    ∃ C : ℝ, 0 < C ∧ ∀ Q : ℕ, 1 ≤ Q →
++      (fordVinogradovMomentNat 36 8 Q : ℝ) ≤
++        C * (Q : ℝ) ^ ((36 : ℝ) + epsilon) := by
++  simpa [fordVinogradovKappa] using native_critical_count_bound
++    (k := 8) (by norm_num) hepsilon
++
++theorem native_critical_count_degree9 {epsilon : ℝ}
++    (hepsilon : 0 < epsilon) :
++    ∃ C : ℝ, 0 < C ∧ ∀ Q : ℕ, 1 ≤ Q →
++      (fordVinogradovMomentNat 45 9 Q : ℝ) ≤
++        C * (Q : ℝ) ^ ((45 : ℝ) + epsilon) := by
++  simpa [fordVinogradovKappa] using native_critical_count_bound
++    (k := 9) (by norm_num) hepsilon
++
++/-- The exact literal tuple-pair equations, displaying every degree1..k. -/
++theorem fordVinogradovMomentNat_eq_literal (s k Q : ℕ) :
++    fordVinogradovMomentNat s k Q =
++      ((Finset.univ : Finset ((Fin s → Fin Q) × (Fin s → Fin Q))).filter
++        (fun xy => ∀ j : Fin k,
++          (∑ i : Fin s, ((xy.1 i : ℕ) + 1 : ℤ) ^ ((j : ℕ) + 1)) =
++          (∑ i : Fin s, ((xy.2 i : ℕ) + 1 : ℤ) ^ ((j : ℕ) + 1)))).card := by
++  simp [fordVinogradovMomentNat, fordVinogradovShiftedCountNat,
++    fordRepresentationCount, fordVinogradovPowerVector,
++    sub_eq_zero, funext_iff, Finset.univ_product_univ]
++
++/-- A statement containing only literal finite tuples and integer equations. -/
++theorem native_critical_literal_bound {k : ℕ} (hk : 1 ≤ k)
++    {epsilon : ℝ} (hepsilon : 0 < epsilon) :
++    ∃ C : ℝ, 0 < C ∧ ∀ Q : ℕ, 1 ≤ Q →
++      ((((Finset.univ : Finset
++          ((Fin (k * (k + 1) / 2) → Fin Q) ×
++           (Fin (k * (k + 1) / 2) → Fin Q))).filter
++        (fun xy => ∀ j : Fin k,
++          (∑ i : Fin (k * (k + 1) / 2),
++            ((xy.1 i : ℕ) + 1 : ℤ) ^ ((j : ℕ) + 1)) =
++          (∑ i : Fin (k * (k + 1) / 2),
++            ((xy.2 i : ℕ) + 1 : ℤ) ^ ((j : ℕ) + 1)))).card : ℕ) : ℝ) ≤
++        C * (Q : ℝ) ^ (((k * (k + 1) / 2 : ℕ) : ℝ) + epsilon) := by
++  obtain ⟨C, hC, h⟩ := native_critical_count_bound hk hepsilon
++  refine ⟨C, hC, fun Q hQ => ?_⟩
++  simpa only [fordVinogradovMomentNat_eq_literal, fordVinogradovKappa]
++    using h Q hQ
++
++#print axioms native_critical_endpoint
++#print axioms native_critical_count_bound
++#print axioms native_critical_count_degree8
++#print axioms native_critical_count_degree9
++#print axioms fordVinogradovMomentNat_eq_literal
++#print axioms native_critical_literal_bound
++
++end
++end GafniTao
+--- /dev/null
++++ b/GafniTao/VmvtCore.lean
+@@ -0,0 +1,129 @@
++import Mathlib.Analysis.SpecialFunctions.Pow.Real
++import Mathlib.Analysis.Complex.Basic
++import Mathlib.Algebra.Order.Floor.Div
++import Mathlib.Data.Fintype.BigOperators
++import Mathlib.Data.Fintype.Card
++import Mathlib.Tactic.Linarith
++import Mathlib.Tactic.Ring
++import Mathlib.Tactic.Positivity
++import Mathlib.Tactic.NormNum
++import Mathlib.Tactic.GCongr
++import Mathlib.Tactic.FieldSimp
++import Mathlib.Tactic.Push
++import Mathlib.Tactic.Abel
++import Mathlib.Tactic.FinCases
++import Mathlib.Tactic.FunProp
++
++/-!
++Minimal finite-count core for the MIT-0 smccolm/Lean VMVT port.
++All definitions are identical to the pinned source definitions; the count
++cardinality bridge below has a new elementary proof. The broad source imports
++through classical Ford estimates and the prime number theorem are not used.
++Source commit: bed45b21cb18f26f4d234422ebaa8b17e6624f05.
++-/
++open Finset
++open scoped BigOperators ComplexConjugate
++namespace GafniTao
++noncomputable section
++
++def fordRepresentationCount {β Γ : Type*} [DecidableEq β]
++    [AddCommGroup Γ] [DecidableEq Γ]
++    (B : Finset β) (F : β → Γ) (w : Γ) : ℕ :=
++  ((B ×ˢ B).filter fun xy => F xy.1 - F xy.2 = w).card
++
++abbrev FordVinogradovTuple (s Q : ℕ) := Fin s → Fin Q
++
++/-- The vector `(∑ᵢ xᵢ, ..., ∑ᵢ xᵢ^k)` attached to a source tuple. -/
++def fordVinogradovPowerVector (s k Q : ℕ) (x : FordVinogradovTuple s Q) :
++    Fin k → ℤ :=
++  fun j => ∑ i : Fin s, ((x i : ℕ) + 1 : ℤ) ^ ((j : ℕ) + 1)
++
++/-- Ford's shifted solution count `J_{s,k}(P; h)` with `Q = floor P`. -/
++def fordVinogradovShiftedCountNat
++    (s k Q : ℕ) (h : Fin k → ℤ) : ℕ :=
++  fordRepresentationCount (Finset.univ : Finset (FordVinogradovTuple s Q))
++    (fordVinogradovPowerVector s k Q) h
++
++/-- The combinatorial form (1.4) of Ford's complete Vinogradov mean value. -/
++def fordVinogradovMomentNat (s k Q : ℕ) : ℕ :=
++  fordVinogradovShiftedCountNat s k Q 0
++
++def fordVinogradovKappa (k : ℕ) : ℕ := k * (k + 1) / 2
++
++theorem card_fordVinogradovTuple_univ (s Q : ℕ) :
++    (Finset.univ : Finset (FordVinogradovTuple s Q)).card = Q ^ s := by
++  simp [FordVinogradovTuple]
++
++theorem fordVinogradovPowerVector_bounds
++    {s k Q : ℕ} (x : FordVinogradovTuple s Q) (j : Fin k) :
++    (s : ℤ) ≤ fordVinogradovPowerVector s k Q x j ∧
++      fordVinogradovPowerVector s k Q x j ≤
++        (s : ℤ) * (Q : ℤ) ^ ((j : ℕ) + 1) := by
++  let d : ℕ := (j : ℕ) + 1
++  have htermLower (i : Fin s) :
++      (1 : ℤ) ≤ ((x i : ℕ) + 1 : ℤ) ^ d := by
++    apply one_le_pow₀
++    omega
++  have htermUpper (i : Fin s) :
++      ((x i : ℕ) + 1 : ℤ) ^ d ≤ (Q : ℤ) ^ d := by
++    have hbase : (x i : ℕ) + 1 ≤ Q := Nat.succ_le_iff.mpr (x i).isLt
++    have hpow : ((x i : ℕ) + 1) ^ d ≤ Q ^ d := Nat.pow_le_pow_left hbase d
++    exact_mod_cast hpow
++  constructor
++  · change (s : ℤ) ≤ ∑ i : Fin s, ((x i : ℕ) + 1 : ℤ) ^ d
++    calc
++      (s : ℤ) = ∑ _i : Fin s, (1 : ℤ) := by simp
++      _ ≤ ∑ i : Fin s, ((x i : ℕ) + 1 : ℤ) ^ d :=
++        Finset.sum_le_sum fun i _hi => htermLower i
++  · change (∑ i : Fin s, ((x i : ℕ) + 1 : ℤ) ^ d) ≤
++      (s : ℤ) * (Q : ℤ) ^ d
++    calc
++      (∑ i : Fin s, ((x i : ℕ) + 1 : ℤ) ^ d) ≤
++          ∑ _i : Fin s, (Q : ℤ) ^ d :=
++        Finset.sum_le_sum fun i _hi => htermUpper i
++      _ = (s : ℤ) * (Q : ℤ) ^ d := by simp
++
++abbrev FordPowerSolution (s k Q : ℕ) :=
++  {xy : FordVinogradovTuple s Q × FordVinogradovTuple s Q //
++    fordVinogradovPowerVector s k Q xy.1 = fordVinogradovPowerVector s k Q xy.2}
++
++theorem card_fordPowerSolution (s k Q : ℕ) :
++    Nat.card (FordPowerSolution s k Q) = fordVinogradovMomentNat s k Q := by
++  classical
++  rw [Nat.card_eq_fintype_card]
++  simp [FordPowerSolution, fordVinogradovMomentNat,
++    fordVinogradovShiftedCountNat, fordRepresentationCount, sub_eq_zero,
++    ← Finset.univ_product_univ, Fintype.card_subtype]
++
++def fordLambda34 (s k : ℕ) (delta : ℝ) : ℝ :=
++  2 * (s : ℝ) - ((k : ℝ) * (k + 1)) / 2 + delta
++
++def FordVinogradovMomentBound
++    (s k : ℕ) (C delta : ℝ) : Prop :=
++  ∀ Q : ℕ, 1 ≤ Q →
++    (fordVinogradovMomentNat s k Q : ℝ) ≤
++      C * (Q : ℝ) ^ fordLambda34 s k delta
++
++def VinogradovCriticalEndpointTheorem : Prop :=
++  ∀ (l : ℕ) (epsilon : ℝ), 1 ≤ l → 0 < epsilon →
++    ∃ C : ℝ, 0 < C ∧
++      FordVinogradovMomentBound (fordVinogradovKappa l) l C epsilon
++
++theorem fordVinogradovKappa_cast (l : ℕ) :
++    (fordVinogradovKappa l : ℝ) =
++      (l : ℝ) * ((l : ℝ) + 1) / 2 := by
++  unfold fordVinogradovKappa
++  rw [Nat.cast_div
++    (even_iff_two_dvd.mp (Nat.even_mul_succ_self l))
++    (by norm_num : (2 : ℝ) ≠ 0)]
++  push_cast
++  rfl
++
++
++theorem ford_pow_mul_conj_pow (z : ℂ) (s : ℕ) :
++    z ^ s * conj z ^ s = ((‖z‖ : ℝ) : ℂ) ^ (2 * s) := by
++  rw [← mul_pow, Complex.mul_conj']
++  rw [← pow_mul]
++
++end
++end GafniTao
+--- a/GafniTao/WooleyBinomialMatrix.lean
++++ b/GafniTao/WooleyBinomialMatrix.lean
+@@ -2,6 +2,7 @@
+ import Mathlib.LinearAlgebra.Vandermonde
+ import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+ import Mathlib.Data.Nat.Prime.Factorial
++import Mathlib.Data.ZMod.Coprime
+ 
+ /-!
+ # The binomial/Vandermonde matrix in Wooley Section 7
+--- a/GafniTao/WooleyCoefficientBridge.lean
++++ b/GafniTao/WooleyCoefficientBridge.lean
+@@ -95,10 +95,14 @@
+ /-- The all-one source sequence is admissible. -/
+   theorem wooleyBoxSourceSequence_one_admissible (Q : ℕ) :
+     (wooleyBoxSourceSequence (fun _ : Fin Q => (1 : ℂ))).Admissible := by
++  classical
+   intro n
+-  unfold wooleyBoxSourceSequence
+-  rw [Finsupp.embDomain_apply]
+-  split_ifs <;> norm_num
++  by_cases hn : n ∈ Set.range (wooleyBoxIndexEmbedding Q)
++  · obtain ⟨m, rfl⟩ := hn
++    rw [wooleyBoxSourceSequence_apply_index]
++    norm_num
++  · rw [wooleyBoxSourceSequence, Finsupp.embDomain_notin_range _ _ _ hn]
++    norm_num
+ 
+ 
+ end
+--- a/GafniTao/WooleyCriticalBase.lean
++++ b/GafniTao/WooleyCriticalBase.lean
+@@ -1,4 +1,4 @@
+-import GafniTao.VinogradovCriticalReduction
++import GafniTao.VmvtCore
+ 
+ /-!
+ # The degree-one base of the critical Vinogradov mean value theorem
+--- a/GafniTao/WooleyFiniteMean.lean
++++ b/GafniTao/WooleyFiniteMean.lean
+@@ -276,7 +276,8 @@
+ theorem wooleyModularCount_primePower_eq_padic
+     (s k Q p B : ℕ) :
+     wooleyModularCount s k Q (p ^ B) = wooleyPadicCount s k Q p B := by
+-  rfl
++  simp only [wooleyModularCount, wooleyPadicCount, WooleyModularSolution,
++    WooleyPadicSolution, Nat.cast_pow]
+ 
+ /-- Wooley's normalized coefficient-one mean `U^B_{s,k}` on a grid of
+ modulus `q`. -/
+--- a/GafniTao/WooleyInitialConditioning.lean
++++ b/GafniTao/WooleyInitialConditioning.lean
+@@ -392,7 +392,7 @@
+       have hinner (i : ι) (hi : i ∈ t) :
+           (∑ j ∈ t, ‖z i‖ * ‖z j‖) =
+             ‖z i‖ ^ 2 + ∑ j ∈ t with j ≠ i, ‖z i‖ * ‖z j‖ := by
+-        rw [Finset.sum_eq_add_sum_diff_singleton_of_mem hi]
++        rw [← Finset.add_sum_erase _ _ hi]
+         congr 1
+         · ring
+         · apply Finset.sum_congr
+--- a/GafniTao/WooleyIterationArithmetic.lean
++++ b/GafniTao/WooleyIterationArithmetic.lean
+@@ -1,4 +1,4 @@
+-import Mathlib
++import GafniTao.VmvtCore
+ 
+ /-!
+ # Arithmetic ledger for Wooley Sections 9 and 10
+--- a/GafniTao/WooleyNormalization.lean
++++ b/GafniTao/WooleyNormalization.lean
+@@ -83,10 +83,9 @@
+   rw [Nat.cast_one, one_mul]
+   have hk1 : 1 ≤ k := by omega
+   rw [Nat.cast_sub hk1]
+-  norm_num
++  norm_num only [Nat.cast_one]
+   have hkR : (2 : ℝ) ≤ k := by exact_mod_cast hk
+-  intro hzero
+-  linarith
++  exact div_self (by linarith : (k : ℝ) - 1 ≠ 0)
+ 
+ theorem wooleyNormalizationExponent_pred
+     {k : ℕ} (hk : 2 ≤ k) :
+--- a/GafniTao/WooleyPadicSeparation.lean
++++ b/GafniTao/WooleyPadicSeparation.lean
+@@ -1,5 +1,5 @@
+ import GafniTao.WooleySection7Arithmetic
+-import Mathlib.Data.Nat.MaxPowDiv
++import Mathlib.NumberTheory.Padics.PadicVal.Basic
+ 
+ /-!
+ # The exact p-adic separation used in Wooley Section 7
+@@ -14,6 +14,14 @@
+ 
+ noncomputable section
+ 
++/-- Lean4.24 compatibility: the natural number with its maximal p-power
++factor removed, expressed by the literal valuation quotient. -/
++def wooleyPadicUnitQuotient (n p : ℕ) : ℕ := n / p ^ padicValNat p n
++
++private theorem wooleyPadicUnitQuotient_factorization (n p : ℕ) :
++    p ^ padicValNat p n * wooleyPadicUnitQuotient n p = n :=
++  Nat.mul_div_cancel' pow_padicValNat_dvd
++
+ def wooleyResidueDifference {p a b : ℕ}
+     (xi : ZMod (p ^ a)) (eta : ZMod (p ^ b)) : ℤ :=
+   (xi.val : ℤ) - (eta.val : ℤ)
+@@ -24,7 +32,7 @@
+ 
+ def wooleyResidueUnitNat {p a b : ℕ}
+     (xi : ZMod (p ^ a)) (eta : ZMod (p ^ b)) : ℕ :=
+-  Nat.divMaxPow (wooleyResidueDifference xi eta).natAbs p
++  wooleyPadicUnitQuotient (wooleyResidueDifference xi eta).natAbs p
+ 
+ def wooleyResidueUnit {p a b : ℕ}
+     (xi : ZMod (p ^ a)) (eta : ZMod (p ^ b)) : ℤ :=
+@@ -47,17 +55,17 @@
+         (p : ℤ) ^ wooleyResidueValuation xi eta := by
+   let d := wooleyResidueDifference xi eta
+   have hnat :
+-      p ^ padicValNat p d.natAbs * Nat.divMaxPow d.natAbs p = d.natAbs :=
+-    Nat.pow_padicValNat_mul_divMaxPow p d.natAbs
++      p ^ padicValNat p d.natAbs * wooleyPadicUnitQuotient d.natAbs p = d.natAbs :=
++    wooleyPadicUnitQuotient_factorization d.natAbs p
+   have hsign : (Int.sign d) * (d.natAbs : ℤ) = d :=
+     Int.sign_mul_natAbs d
+   change d =
+-    (Int.sign d * (Nat.divMaxPow d.natAbs p : ℤ)) *
++    (Int.sign d * (wooleyPadicUnitQuotient d.natAbs p : ℤ)) *
+       (p : ℤ) ^ padicValNat p d.natAbs
+   calc
+     d = Int.sign d * (d.natAbs : ℤ) := hsign.symm
+     _ = Int.sign d *
+-        ((Nat.divMaxPow d.natAbs p : ℤ) *
++        ((wooleyPadicUnitQuotient d.natAbs p : ℤ) *
+           (p : ℤ) ^ padicValNat p d.natAbs) := by
+       congr 1
+       exact_mod_cast (by simpa only [Nat.mul_comm] using hnat.symm)
+@@ -68,16 +76,23 @@
+     {xi : ZMod (p ^ a)} {eta : ZMod (p ^ b)}
+     (hsep : wooleyResiduesSeparated nu xi eta) :
+     Nat.Coprime p (wooleyResidueUnitNat xi eta) := by
++  letI : Fact p.Prime := ⟨hp⟩
+   rw [hp.coprime_iff_not_dvd]
+-  exact Nat.not_dvd_divMaxPow hp.one_lt
+-    (Int.natAbs_ne_zero.mpr
+-      (wooleyResidueDifference_ne_zero_of_separated hsep))
++  let n := (wooleyResidueDifference xi eta).natAbs
++  have hn : n ≠ 0 := Int.natAbs_ne_zero.mpr
++    (wooleyResidueDifference_ne_zero_of_separated hsep)
++  change ¬p ∣ wooleyPadicUnitQuotient n p
++  intro hdiv
++  apply pow_succ_padicValNat_not_dvd (p := p) hn
++  have hmul := Nat.mul_dvd_mul_left (p ^ padicValNat p n) hdiv
++  simpa only [← pow_succ,wooleyPadicUnitQuotient_factorization] using hmul
+ 
+ theorem wooleyResidueValuation_lt
+     {p a b nu : ℕ} (hp : p.Prime)
+     {xi : ZMod (p ^ a)} {eta : ZMod (p ^ b)}
+     (hsep : wooleyResiduesSeparated nu xi eta) :
+     wooleyResidueValuation xi eta < nu := by
++  letI : Fact p.Prime := ⟨hp⟩
+   let d := wooleyResidueDifference xi eta
+   have hd : d ≠ 0 := wooleyResidueDifference_ne_zero_of_separated hsep
+   have hn : d.natAbs ≠ 0 := Int.natAbs_ne_zero.mpr hd
+@@ -93,7 +108,7 @@
+     exact hsep hmodeq
+   have hnotle : ¬ nu ≤ padicValNat p d.natAbs := by
+     intro hle
+-    exact hnotdvd ((Nat.pow_dvd_iff_le_padicValNat hp.ne_one hn).2 hle)
++    exact hnotdvd ((padicValNat_dvd_iff_le hn).2 hle)
+   exact Nat.lt_of_not_ge hnotle
+ 
+ theorem wooley_padic_separation
+--- a/GafniTao/WooleyPadicSetup.lean
++++ b/GafniTao/WooleyPadicSetup.lean
+@@ -97,7 +97,7 @@
+     rw [abs_lt]
+     constructor <;> omega
+   have hzero : b - a = 0 :=
+-    Int.eq_zero_of_abs_lt_dvd (z.2 j).dvd habs
++    Int.eq_zero_of_abs_lt_dvd (z.2 j).dvd (by simpa only [Nat.cast_pow] using habs)
+   dsimp [a, b] at hzero
+   exact (sub_eq_zero.mp hzero).symm
+ 
+--- a/GafniTao/WooleyPadicToCritical.lean
++++ b/GafniTao/WooleyPadicToCritical.lean
+@@ -104,11 +104,6 @@
+           (Q : ℝ) ^ fordLambda34 (fordVinogradovKappa k) k epsilon := by
+       rw [hcriticalExponent]
+ 
+-theorem heathBrownVMVTMainConjecture_of_wooleyPadic
+-    (hconc : WooleyMonomialPadicConcentration) :
+-    HeathBrownVMVTMainConjecture :=
+-  heathBrownVMVTMainConjecture_of_critical
+-    (vinogradovCriticalEndpoint_of_wooleyPadic hconc)
+ 
+ 
+ end
+--- a/GafniTao/WooleyPolynomialNormalForm.lean
++++ b/GafniTao/WooleyPolynomialNormalForm.lean
+@@ -30,7 +30,7 @@
+     (d : ℕ) (f : Polynomial ℤ) :
+     wooleyPolynomialLowPart d f +
+         X ^ d * wooleyPolynomialTail d f = f := by
+-  exact modByMonic_add_div f (X ^ d)
++  exact modByMonic_add_div f (monic_X_pow d)
+ 
+ theorem wooleyPolynomialLowPart_natDegree_lt
+     {d : ℕ} (hd : 0 < d) (f : Polynomial ℤ) :
+--- a/GafniTao/WooleySection4Congruence.lean
++++ b/GafniTao/WooleySection4Congruence.lean
+@@ -47,7 +47,7 @@
+         ∑ j : Fin k,
+           wooleyZModMatrixIntLift G i j * (theta j).eval (point x) := by
+     simpa only [eval_mul, eval_C] using
+-      (eval_finsetSum (Finset.univ : Finset (Fin k))
++      (eval_finset_sum (Finset.univ : Finset (Fin k))
+         (fun j => C (wooleyZModMatrixIntLift G i j) * theta j) (point x))
+   simp_rw [heval]
+   rw [wooleyIntegerTupleDisplacement_sum]
+--- a/GafniTao/WooleySection4Lemma42.lean
++++ b/GafniTao/WooleySection4Lemma42.lean
+@@ -15,6 +15,7 @@
+ 
+ noncomputable section
+ 
++set_option maxHeartbeats 1000000 in
+ /-- The source Lemma 4.2 calculation after the two instances of Lemma 4.1
+ have been supplied.  This is the precise terminal estimate used in Section
+ 10, with normalization parameter `Delta = 0`. -/
+@@ -76,8 +77,8 @@
+     omega
+   have hRlt : R < s := by
+     have hrReal : (r : ℝ) < k := by exact_mod_cast hrk
+-    have hpositive : 0 < ((k : ℝ) - r) * ((k : ℝ) + r + 1) := by
+-      positivity
++    have hpositive : 0 < ((k : ℝ) - r) * ((k : ℝ) + r + 1) :=
++      mul_pos (sub_pos.mpr hrReal) (by positivity)
+     have hreal : (R : ℝ) < s := by
+       dsimp [R, s]
+       rw [wooleyTriangular_cast, wooleyTriangular_cast]
+@@ -188,21 +189,25 @@
+   have hpR : (0 : ℝ) < p := by exact_mod_cast (show 0 < p by omega)
+   have hA0 : 0 ≤ A := mul_nonneg (Nat.cast_nonneg _) hLambdaEpsilon
+   have hD0 : 0 ≤ D := mul_nonneg (Nat.cast_nonneg _) hLambdaEpsilon
+-  have hweighted0 : 0 ≤ A * u + D * (1 - u) := by positivity
++  have hweighted0 : 0 ≤ A * u + D * (1 - u) :=
++    add_nonneg (mul_nonneg hA0 hu0) (mul_nonneg hD0 (sub_nonneg.mpr hu1))
+   have hAle : A ≤ (H : ℝ) * (Lambda + epsilon) := by
+     dsimp [A]
+-    rw [Nat.cast_sub haH]
+-    nlinarith
++    exact mul_le_mul_of_nonneg_right (by exact_mod_cast Nat.sub_le H a) hLambdaEpsilon
+   have hDle : D ≤ (H : ℝ) * (Lambda + epsilon) := by
+     dsimp [D]
+-    rw [Nat.cast_sub hbH]
+-    nlinarith
++    exact mul_le_mul_of_nonneg_right (by exact_mod_cast Nat.sub_le H b) hLambdaEpsilon
+   have hweighted :
+       (A * u + D * (1 - u)) * e ≤
+         ((H : ℝ) * (Lambda + epsilon)) * e := by
+     have hblend :
+         A * u + D * (1 - u) ≤ (H : ℝ) * (Lambda + epsilon) := by
+-      nlinarith
++      calc
++        _ ≤ ((H : ℝ) * (Lambda + epsilon)) * u +
++            ((H : ℝ) * (Lambda + epsilon)) * (1 - u) :=
++          add_le_add (mul_le_mul_of_nonneg_right hAle hu0)
++            (mul_le_mul_of_nonneg_right hDle (sub_nonneg.mpr hu1))
++        _ = _ := by ring
+     exact mul_le_mul_of_nonneg_right hblend he0
+   have hrearrange :
+       (C * (p : ℝ) ^ A) ^ (u * e) *
+--- a/GafniTao/WooleySection7Congruence.lean
++++ b/GafniTao/WooleySection7Congruence.lean
+@@ -150,7 +150,7 @@
+         (∑ l : Fin r, C (z l) * qpoly l).eval (point x) =
+           ∑ l : Fin r, z l * (qpoly l).eval (point x) := by
+       simpa only [eval_mul, eval_C] using
+-        (eval_finsetSum (Finset.univ : Finset (Fin r))
++        (eval_finset_sum (Finset.univ : Finset (Fin r))
+           (fun l => C (z l) * qpoly l) (point x))
+     simp_rw [heval]
+     rw [wooleyIntegerTupleDisplacement_sum]
+--- a/GafniTao/WooleySection9Arithmetic.lean
++++ b/GafniTao/WooleySection9Arithmetic.lean
+@@ -191,6 +191,7 @@
+     le_div_iff₀ (mul_pos hd₁ hd₂)]
+   simpa [mul_assoc, mul_left_comm, mul_comm] using hprod
+ 
++set_option maxHeartbeats 1000000 in
+ /-- The strict damping factor in (9.8). -/
+ theorem wooley_twoStep_weight_lt
+     {k r₁ r₂ : ℕ} (hk : 3 ≤ k)
+--- a/GafniTao/WooleySection9Product.lean
++++ b/GafniTao/WooleySection9Product.lean
+@@ -63,7 +63,7 @@
+   have hprodNonneg :
+       ∀ j ∈ wooleyGradeRange (r - 1), 0 ≤ X j :=
+     fun j hj => hX j (hsubset hj)
+-  rw [← Real.finsetProd_rpow
++  rw [← Real.finset_prod_rpow
+     (wooleyGradeRange (r - 1))
+     (fun j => (X j) ^ (wooleyRho k j / ((r - 1 : ℕ) : ℝ)))
+     (fun j hj => Real.rpow_nonneg (hprodNonneg j hj) _)
+--- a/GafniTao/WooleySourceBox.lean
++++ b/GafniTao/WooleySourceBox.lean
+@@ -37,7 +37,7 @@
+ @[simp] theorem wooleyBoxSourceSequence_apply_index {Q : ℕ}
+     (gamma : Fin Q → ℂ) (n : Fin Q) :
+     wooleyBoxSourceSequence gamma (wooleyBoxIndexEmbedding Q n) = gamma n := by
+-  rw [wooleyBoxSourceSequence, Finsupp.embDomain_apply_self]
++  rw [wooleyBoxSourceSequence, Finsupp.embDomain_apply]
+   rfl
+ 
+ theorem wooleyBoxIndexEmbedding_injective (Q : ℕ) :
+@@ -77,12 +77,8 @@
+     wooleyResidueClass
+   rw [wooleyBoxSourceSequence_support]
+   rw [Finset.filter_map, Finset.sum_map]
+-  simp only [Function.comp_apply, wooleyBoxSourceSequence_apply_index]
+-  simp only [wooleyBoxIndexEmbedding_apply]
+-  have hcast (n : Fin Q) :
+-      (((((n : ℕ) + 1 : ℕ) : ℤ) : ZMod q)) =
+-        ((((n : ℕ) + 1 : ℕ) : ZMod q)) := by norm_num
+-  simp_rw [hcast]
++  simp only [wooleyBoxSourceSequence_apply_index]
++  simp only [Function.comp_def, wooleyBoxIndexEmbedding_apply, Int.cast_natCast]
+   change
+     (∑ n ∈ ((Finset.univ : Finset (Fin Q)).filter
+         fun n => gamma n ≠ 0).filter
+@@ -155,13 +151,8 @@
+     wooleyPolynomialWeightedResidueGridSum wooleyResidueClass
+   rw [wooleyBoxSourceSequence_support]
+   rw [Finset.filter_map, Finset.sum_map]
+-  simp only [Function.comp_apply, wooleyBoxSourceSequence_apply_index,
+-    wooleySourcePolynomialPhase_box]
+-  simp only [wooleyBoxIndexEmbedding_apply]
+-  have hcast (n : Fin Q) :
+-      (((((n : ℕ) + 1 : ℕ) : ℤ) : ZMod qH)) =
+-        ((((n : ℕ) + 1 : ℕ) : ZMod qH)) := by norm_num
+-  simp_rw [hcast]
++  simp only [wooleyBoxSourceSequence_apply_index, wooleySourcePolynomialPhase_box]
++  simp only [Function.comp_def, wooleyBoxIndexEmbedding_apply, Int.cast_natCast]
+   change
+     (∑ n ∈ ((Finset.univ : Finset (Fin Q)).filter
+         fun n => gamma n ≠ 0).filter
+@@ -256,13 +247,8 @@
+     wooleyResidueClass
+   rw [wooleyBoxSourceSequence_support]
+   rw [Finset.filter_map, Finset.sum_map]
+-  simp only [Function.comp_apply, wooleyBoxSourceSequence_apply_index,
+-    wooleySourcePolynomialPhase_box_monomial]
+-  simp only [wooleyBoxIndexEmbedding_apply]
+-  have hcast (n : Fin Q) :
+-      (((((n : ℕ) + 1 : ℕ) : ℤ) : ZMod qH)) =
+-        ((((n : ℕ) + 1 : ℕ) : ZMod qH)) := by norm_num
+-  simp_rw [hcast]
++  simp only [wooleyBoxSourceSequence_apply_index, wooleySourcePolynomialPhase_box_monomial]
++  simp only [Function.comp_def, wooleyBoxIndexEmbedding_apply, Int.cast_natCast]
+   change
+     (∑ n ∈ ((Finset.univ : Finset (Fin Q)).filter
+         fun n => gamma n ≠ 0).filter
+--- a/GafniTao/WooleySourceCriticalBase.lean
++++ b/GafniTao/WooleySourceCriticalBase.lean
+@@ -80,7 +80,7 @@
+         simpa only [sub_neg_eq_add] using hprod)
+     exact sub_eq_zero.mp hdiff
+   · intro h
+-    have hmod : Int.ModEq (p ^ B : ℤ) n m :=
++    have hmod : Int.ModEq ((p ^ B : ℕ) : ℤ) n m :=
+       (ZMod.intCast_eq_intCast_iff n m (p ^ B)).mp h
+     exact (ZMod.intCast_eq_intCast_iff _ _ (p ^ B)).mpr
+       (Int.modEq_iff_dvd.mpr
+--- a/GafniTao/WooleyTaylorCoefficient.lean
++++ b/GafniTao/WooleyTaylorCoefficient.lean
+@@ -92,7 +92,6 @@
+         C ((p : ℤ) ^ c) * X ^ (k + 1) * psi =
+           ((p : ℤ) ^ c) • (X ^ (k + 1) * psi) := by
+       rw [mul_assoc, Polynomial.C_mul']
+-      rfl
+     have hderivScalar :
+         hasseDeriv i (((p : ℤ) ^ c) • (X ^ (k + 1) * psi)) =
+           ((p : ℤ) ^ c) • hasseDeriv i (X ^ (k + 1) * psi) :=
+@@ -125,7 +124,6 @@
+       C ((p : ℤ) ^ c) * X ^ (k + 1) * psi =
+         ((p : ℤ) ^ c) • (X ^ (k + 1) * psi) := by
+     rw [mul_assoc, Polynomial.C_mul']
+-    rfl
+   have hderivScalar :
+       hasseDeriv i (((p : ℤ) ^ c) • (X ^ (k + 1) * psi)) =
+         ((p : ℤ) ^ c) • hasseDeriv i (X ^ (k + 1) * psi) :=
+--- a/GafniTao/WooleyWeightedHolder.lean
++++ b/GafniTao/WooleyWeightedHolder.lean
+@@ -1,4 +1,5 @@
+-import Mathlib
++import GafniTao.VmvtCore
++import Mathlib.Analysis.MeanInequalities
+ 
+ /-!
+ # The weighted Hölder inequality used in Wooley (3.9)

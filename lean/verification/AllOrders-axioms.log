@@ -1,0 +1,2 @@
+'WaringSharp.small_degree_prices' does not depend on any axioms
+'WaringSharp.all_orders_with_extra_6873' depends on axioms: [propext, Classical.choice, Quot.sound]

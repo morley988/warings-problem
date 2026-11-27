@@ -1,0 +1,2 @@
+'WaringDualEnvelope.finite_certified_order' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringDualEnvelope.finite_moment_orders_6874' depends on axioms: [propext, Classical.choice, Quot.sound]

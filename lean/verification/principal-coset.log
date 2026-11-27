@@ -1,0 +1,2 @@
+'WaringLinear.affine_principal_fibre_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.card_annihilator_squared_of_kernel_in_image' depends on axioms: [propext, Classical.choice, Quot.sound]

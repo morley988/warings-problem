@@ -1,0 +1,3 @@
+'WaringLocal.FinitePrecision.widths_agree_of_principal_unit_powers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

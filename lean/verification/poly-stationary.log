@@ -1,0 +1,3 @@
+'WaringLinear.weighted_polynomial_stationary_filter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.stationary_single_coset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.norm_stationary_single_coset' depends on axioms: [propext, Classical.choice, Quot.sound]

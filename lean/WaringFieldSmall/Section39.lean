@@ -1,0 +1,2 @@
+import WaringFieldSmall.Section39Part0
+import WaringFieldSmall.Section39Part1

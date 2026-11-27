@@ -1,0 +1,2 @@
+'WaringLinear.subset_moment_of_smooth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.shifted_subset_seed' depends on axioms: [propext, Classical.choice, Quot.sound]

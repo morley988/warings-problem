@@ -1,0 +1,434 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue,linkcolor=blue]{hyperref}
+\setlength{\parskip}{3pt}
+\setlength{\parindent}{1.2em}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}\newtheorem*{remark}{Remark}
+\newcommand{\e}{\mathrm e}
+\newcommand{\T}{\mathbb T}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\M}{\mathfrak M}
+\newcommand{\m}{\mathfrak m}
+\newcommand{\SSS}{\mathfrak S}
+\DeclareMathOperator{\meas}{meas}
+\title{A compact classical proof of \(G(4)=16\)\\
+\large Sparse four-power sets and eight ordinary variables}
+\author{Research draft}
+\date{22 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give a compact reconstruction of the classical density route to
+Davenport's theorem \(G(4)=16\). An elementary diminishing-ranges argument
+of Davenport and Erd\H os supplies sufficiently large sets of sums of four
+fourth powers. Two such sets, combined with eight ordinary variables, are
+handled by Weyl's inequality and the circle method. A smooth ordinary
+cutoff makes the major-arc calculation direct. We include the complete-sum
+tail and all local positivity arguments. Davenport and Erd\H os explicitly
+identified this route in 1939; no new theorem or priority for the strategy
+is claimed. No Vinogradov mean-value theorem or smooth-number mean-value
+estimate is used.
+\end{abstract}
+
+\section{The density input}
+
+Let \(G(k)\) be the least integer \(s\) such that every sufficiently large
+positive integer is a sum of at most \(s\) nonnegative integral \(k\)th powers.
+We shall prove Davenport's classical result \cite{Davenport}.
+\begin{theorem}\label{thm:main}
+One has \(G(4)=16\).
+\end{theorem}
+
+The following is the quartic specialization of Davenport--Erd\H os
+\cite[Theorem~1]{DE}, with parity restrictions added by taking subsets.
+Their final section explicitly states that this density estimate suffices
+for Theorem~\ref{thm:main}. We give the short counting argument.
+
+\begin{lemma}\label{lem:density}
+Put
+\[
+ (\lambda_1,\lambda_2,\lambda_3,\lambda_4)
+ =\left(1,\frac{48}{55},\frac{36}{55},\frac{27}{55}\right),
+ \qquad \Lambda=\sum_i\lambda_i=\frac{166}{55}.
+\]
+For each fixed parity pattern of four variables, the set of distinct integers
+\(x_1^4+\cdots+x_4^4\), with
+\(X^{\lambda_i}<x_i\le2X^{\lambda_i}\) and the prescribed parities,
+has cardinality \(\gg_\eps X^{\Lambda-\eps}\).
+\end{lemma}
+
+\begin{proof}
+Let \(E\) count the unrestricted solutions of
+\(x_1^4+\cdots+x_4^4=y_1^4+\cdots+y_4^4\) in these ranges.
+We prove \(E\ll_\eps X^{\Lambda+\eps}\). First consider solutions
+with \(x_4\ne y_4\). Since
+\[
+ |x_1^4-y_1^4|\ll X^{4\lambda_2},\qquad
+ |x_1^4-y_1^4|\gg X^3|x_1-y_1|,
+ \qquad4\lambda_2-3=\lambda_4,
+\]
+there are \(O(X^{1+\lambda_4})\) choices for \(x_1,y_1\).
+Choose also \(x_2,x_3\). The equation places \(y_2^4\) in an
+interval of length \(O(X^{4\lambda_3})\). Consecutive possible values
+are spaced by \(\gg X^{3\lambda_2}=X^{4\lambda_3}\), so there are
+\(O(1)\) choices for \(y_2\). The same reasoning gives \(O(1)\)
+choices for \(y_3\), since \(3\lambda_3=4\lambda_4\).
+The remaining equation is \(x_4^4-y_4^4=B\ne0\). The factor
+\(x_4-y_4\) divides \(B\), and for a fixed nonzero difference the
+fourth-power difference is strictly monotone in the smaller variable.
+The elementary divisor bound therefore gives \(O_\eps(X^\eps)\)
+pairs. The total is \(O_\eps(X^{\Lambda+\eps})\).
+
+When \(x_4=y_4\), remove that variable and repeat the argument with
+three variables, using \(4\lambda_2-3\le\lambda_3\).
+Its diagonal case reduces to two variables. For the two-variable base,
+the diagonal has \(O(X^{\lambda_1+\lambda_2})\) solutions;
+off the diagonal choose \(x_2,y_2\) and use the nonzero difference
+factorization for \(x_1,y_1\). This costs at most
+\(X^{2\lambda_2+\eps}\le X^{\lambda_1+\lambda_2+\eps}\).
+This proves the asserted energy bound in every case.
+
+The number of tuples with any fixed parity pattern is
+\(\gg X^\Lambda\), while their collision count is at most \(E\).
+Cauchy--Schwarz bounds the number of their distinct sums below by
+\(\gg X^{2\Lambda}/E\), proving the lemma.
+\end{proof}
+
+\section{Sets, arcs, and the minor-arc gain}
+
+Fix a large integer \(n\), put \(P=n^{1/4}\), and apply
+Lemma~\ref{lem:density} with \(X=P/8\). Let \(\mathcal A_0\)
+be the distinct sums obtained with all four variables even, and
+\(\mathcal A_4\) those obtained with all four odd. Then
+\begin{equation}\label{eq:sets}
+ |\mathcal A_h|\gg_\eps P^{3+1/55-\eps},\qquad
+ a\equiv h\pmod{16},\quad0<a\le P^4/64
+ \quad(a\in\mathcal A_h;\ h=0,4).
+\end{equation}
+The last bound follows from \(x_i\le2X=P/4\).
+Choose \(h_1,h_2\in\{0,4\}\) so that the representative of
+\(n-h_1-h_2\pmod{16}\) is in \(\{1,\ldots,8\}\).
+This is possible since the three intervals
+\([1,8]\), \([5,12]\), and \([9,16]\) cover all residues.
+Write \(\mathcal A=\mathcal A_{h_1}\),
+\(\mathcal B=\mathcal A_{h_2}\), and \(K=|\mathcal A||\mathcal B|\).
+For every \(a\in\mathcal A,b\in\mathcal B\), the integer
+\(m=n-a-b\) satisfies
+\begin{equation}\label{eq:mrange}
+ 31P^4/32\le m\le P^4,
+ \qquad m\pmod{16}\in\{1,\ldots,8\}.
+\end{equation}
+
+Write \(\e(t)=\exp(2\pi it)\) and \(\T=\mathbb R/\mathbb Z\).
+Fix the nonnegative smooth function
+\[
+ w(t)=\begin{cases}
+ \exp\!\left(-\dfrac1{1-100(t-3/5)^2}\right),&|t-3/5|<1/10,\\
+ 0,&|t-3/5|\ge1/10.
+ \end{cases}
+\]
+Thus \(w\) is supported in \([1/2,7/10]\) and positive in its interior.
+Put
+\[
+ f(\alpha)=\sum_{x\in\mathbb Z}w(x/P)\e(\alpha x^4),\qquad
+ A(\alpha)=\sum_{a\in\mathcal A}\e(\alpha a),\quad
+ B(\alpha)=\sum_{b\in\mathcal B}\e(\alpha b).
+\]
+The integral
+\begin{equation}\label{eq:count}
+ R(n)=\int_\T f(\alpha)^8A(\alpha)B(\alpha)\e(-n\alpha)\,d\alpha
+\end{equation}
+is a sum of nonnegative weights. If it is positive, expand \(a,b\)
+using their defining four-power representations to obtain sixteen fourth
+powers summing to \(n\).
+
+Take
+\[
+ Q=P^{109/110},\qquad
+ \M=\bigcup_{q\le Q,(c,q)=1}
+ \{\alpha\in\T:|q\alpha-c|\le QP^{-4}\},
+ \qquad\m=\T\setminus\M.
+\]
+The arcs are disjoint for large \(P\), and
+\(\meas\M\ll Q^2P^{-4}\).
+Classical Weyl's inequality \cite[Lemma~2.4]{Vaughan}, whose needed
+specialization is proved in the appendix, gives by partial summation
+\begin{equation}\label{eq:weyl}
+ |f(\alpha)|^8\ll_\eps P^{8+\eps}
+ (q^{-1}+P^{-1}+qP^{-4})
+ \quad\text{when }(c,q)=1, |\alpha-c/q|\le q^{-2}.
+\end{equation}
+For \(\alpha\in\m\), Dirichlet approximation supplies such a fraction
+with \(Q<q\le2P^4/Q\). Hence \(\sup_\m|f|^8\ll P^{8+\eps}/Q\).
+By orthogonality and Cauchy--Schwarz,
+\begin{equation}\label{eq:minor}
+ \left|\int_\m f^8AB\e(-n\alpha)\,d\alpha\right|
+ \ll_\eps \frac{P^{8+\eps}}Q K^{1/2}
+ =o(P^4K).
+\end{equation}
+Indeed, \(K^{1/2}\gg P^{3+1/55-\eps}\), and the quotient of the
+bound by \(P^4K\) is at most
+\(P^{-1/110+2\eps}\). This is the decisive density gain.
+
+\section{Complete sums and eight-variable local densities}
+
+Define
+\[
+ S(q,c)=\sum_{r\pmod q}\e(cr^4/q),\qquad
+ B_8(q)=\sum_{(c,q)=1}|q^{-1}S(q,c)|^8.
+\]
+We require a tail bound slightly stronger than absolute convergence.
+\begin{lemma}\label{lem:tails}
+One has \(\sum_{q\ge1}q^{1/2}B_8(q)<\infty\).
+\end{lemma}
+\begin{proof}
+For odd primes \(p\) and \(p\nmid c\), multiplicative characters
+express \(S(p,c)\) as a sum of at most three nonprincipal Gauss sums.
+Each has modulus \(\sqrt p\), by character orthogonality, so
+\(|S(p,c)|\le3\sqrt p\).
+For \(h\ge2\), summing over shifts by \(p^{h-1}\) cancels the
+terms with \(p\nmid r\). The remaining terms give
+\[
+ S(p^h,c)=p^{h-1}\ (2\le h\le4),\qquad
+ S(p^h,c)=p^3S(p^{h-4},c)\ (h\ge5).
+\]
+Writing \(h=4u+r\), we obtain the following bounds:
+\[
+\begin{array}{c|c|c}
+ r& B_8(p^{4u+r})&p^{(4u+r)/2}B_8(p^{4u+r})\\\hline
+ 0\ (u\ge1)&p^{-4u}&p^{-2u}\\
+ 1\ (u\ge0)&3^8p^{-4u-3}&3^8p^{-2u-5/2}\\
+ 2\ (u\ge0)&p^{-4u-6}&p^{-2u-5}\\
+ 3\ (u\ge0)&p^{-4u-5}&p^{-2u-7/2}
+\end{array}
+\]
+The local weighted sum over \(h\ge1\) is therefore \(O(p^{-2})\).
+
+For \(p=2\) and odd \(c\), shifts by \(2^{h-3}\) cancel odd
+terms when \(h\ge5\), giving
+\(S(2^h,c)=8S(2^{h-4},c)\).
+For \(1\le h\le4\), directly
+\(S(2^h,c)=2^{h-1}(1+\e(c/2^h))\).
+Thus \(B_8(2^{h+4})=B_8(2^h)/16\), and the weighted recurrence
+has ratio \(1/4\). Its local series converges as well.
+Chinese-remainder factorization makes \(B_8\) multiplicative.
+The product of the local weighted sums converges, proving the lemma.
+\end{proof}
+
+For an integer \(m\), put
+\[
+ c_q(m)=q^{-8}\sum_{(c,q)=1}S(q,c)^8\e(-mc/q),\qquad
+ \SSS_8(m)=\sum_{q\ge1}c_q(m).
+\]
+Lemma~\ref{lem:tails} gives absolute convergence uniformly in \(m\).
+\begin{lemma}\label{lem:local}
+There is a fixed \(c_0>0\) such that
+\(\SSS_8(m)\ge c_0\) for every integer
+\(m\pmod{16}\in\{1,\ldots,8\}\).
+\end{lemma}
+\begin{proof}
+Let \(N_h(m;p)\) count solutions of
+\(x_1^4+\cdots+x_8^4\equiv m\pmod{p^h}\).
+Orthogonality grouped by character conductor, and multiplicativity, give
+\[
+ p^{-7h}N_h(m;p)=\sum_{j=0}^h c_{p^j}(m),\qquad
+ \SSS_8(m)=\prod_p\sigma_p(m),\quad
+ \sigma_p(m)=\lim_{h\to\infty}p^{-7h}N_h(m;p).
+\]
+We first produce a solution modulo every odd prime with a nonzero coordinate.
+For \(p=3,5,7\), use between one and \(p\) ones and pad with zeros.
+For \(p\ge19\), the Gauss-sum estimate gives
+\[
+ N_1(m;p)\ge p^7-3^8p^4>1,
+ \qquad19^3>3^8.
+\]
+The zero vector is the only possible solution with all coordinates zero,
+so a nonzero one exists even when \(m\equiv0\pmod p\).
+
+For completeness, the three remaining primes need only a small residue check.
+Let \(C_p=\{x^4\pmod p\}\), including zero.
+For \(p=11\), \(|C_p|=6\), so \(C_p+C_p=\mathbb F_p\) by
+pigeonhole. For \(p=13,17\), respectively,
+\[
+ C_{13}=\{0,1,3,9\},\quad |C_{13}+C_{13}|=10;
+ \qquad C_{17}=\{0,\pm1,\pm4\},\quad |C_{17}+C_{17}|=13.
+\]
+Thus \(3C_p=\mathbb F_p\) in both cases, again by pigeonhole.
+Represent \(m-1\) in these sumsets, add a fourth power~1, and pad to
+eight coordinates. In every odd-prime case, the derivative \(4x_i^3\)
+at a nonzero coordinate is a unit. Hensel lifting gives
+\(\sigma_p(m)\ge p^{-7}>0\).
+
+At the prime~2, every integer congruent to~1 modulo~16 has an odd fourth
+root modulo \(2^h\) for every \(h\ge4\). The induction follows from
+\[
+ (x+2^{h-2})^4\equiv x^4+2^h x^3\pmod{2^{h+1}}
+ \qquad(h\ge4, x\text{ odd}),
+\]
+which toggles the next bit. If \(m\equiv j\pmod{16}\) with
+\(1\le j\le8\), distinguish one coordinate required only to be odd.
+Prescribe \(j-1\) of the other seven coordinates to be~1 modulo~16 and
+the remaining \(8-j\) to be~0. Every choice of these seven coordinates
+with their prescribed residues can be completed by an odd fourth root.
+Consequently \(N_h(m;2)\ge2^{7(h-4)}\), and
+\(\sigma_2(m)\ge2^{-28}\).
+
+Finally, the unweighted prime-power bounds in the preceding lemma give
+\(\sigma_p(m)=1+O(p^{-3})\) for odd \(p\), uniformly in \(m\).
+The product over all sufficiently large primes is uniformly bounded below;
+the finitely many remaining factors have the lower bounds just proved.
+\end{proof}
+
+\section{Major arcs with a smooth ordinary cutoff}
+
+Put
+\[
+ v(\beta)=\int_{\mathbb R}w(x/P)\e(\beta x^4)\,dx,
+ \qquad V(c/q+\beta)=q^{-1}S(q,c)v(\beta)
+ \quad(c/q+\beta\in\M).
+\]
+Since \(w\) is smooth and supported away from zero,
+\begin{equation}\label{eq:vdecay}
+ |v(\beta)|\ll_{L,w}P(1+P^4|\beta|)^{-L}
+ \qquad\text{for every fixed }L>0.
+\end{equation}
+Poisson summation in residue classes modulo~\(q\) gives the uniform
+approximation
+\begin{equation}\label{eq:poisson}
+ f(\alpha)=V(\alpha)+O_{L,w}\bigl(P(Q/P)^L\bigr)
+ \qquad(\alpha\in\M).
+\end{equation}
+Here are the details relevant to its uniformity. The Poisson expansion is
+\[
+ \frac1q\sum_{\ell\in\mathbb Z}S(q,c,\ell)P
+ \int_{\mathbb R}w(t)\e(\beta P^4t^4-\ell Pt/q)\,dt,
+ \quad S(q,c,\ell)=\sum_{r\pmod q}\e((cr^4+\ell r)/q).
+\]
+The zero mode is \(V\). For \(\ell\ne0\), the linear part of the
+phase derivative has size \(|\ell|P/q\); the quartic part is \(O(Q/q)\).
+Since \(Q/P\to0\), their difference has modulus at least
+\(|\ell|P/(2q)\) for large \(P\). Repeated integration by parts,
+with normalized higher derivatives uniformly bounded, and the trivial
+bound \(|S(q,c,\ell)|\le q\), give~\eqref{eq:poisson}.
+
+Take \(L=220\). The pointwise error is \(O_w(P^{-1})\).
+Since \(|f|+|V|\ll_w P\), \(|AB|\le K\), and
+\(\meas\M\ll Q^2P^{-4}\), replacing \(f^8\) by \(V^8\) in
+the major-arc contribution to~\eqref{eq:count} costs at most
+\begin{equation}\label{eq:replace}
+ O_w(KP^2Q^2)=O_w(KP^{4-1/55})=o(KP^4).
+\end{equation}
+
+For \(m=n-a-b\), define
+\[
+ J(m)=\int_{\mathbb R}v(\beta)^8\e(-m\beta)\,d\beta.
+\]
+Expanding \(A,B\) and extending the complete-sum and real-integral
+tails gives
+\begin{equation}\label{eq:major}
+ \int_\M V(\alpha)^8A(\alpha)B(\alpha)\e(-n\alpha)\,d\alpha
+ =\sum_{a\in\mathcal A,b\in\mathcal B}\SSS_8(n-a-b)J(n-a-b)
+   +O_w(KP^4Q^{-1/2}).
+\end{equation}
+This uses no distribution property of the sets \(\mathcal A,\mathcal B\).
+For each fixed \(m\), denominators \(q>Q\) contribute at most
+\(P^4\sum_{q>Q}B_8(q)\ll P^4Q^{-1/2}\).
+For \(q\le Q\), extending the interval
+\(|\beta|\le Q/(qP^4)\) costs, by~\eqref{eq:vdecay}, at most
+\(P^4(Q/q)^{-1/2}B_8(q)\). Lemma~\ref{lem:tails} sums this bound.
+
+Let \(h(u)=\frac14u^{-3/4}w(u^{1/4})\) for \(u>0\), and zero
+otherwise. Fourier inversion and scaling show that
+\[
+ J(m)=P^4 C_w(m/P^4),\qquad C_w(t)=(h*h*\cdots*h)(t)
+ \quad\text{with eight factors}.
+\]
+For each \(t\in[31/32,1]\), the point \((t/8)^{1/4}\) is strictly
+inside \((1/2,7/10)\), where \(w>0\). Choose the first seven
+convolution variables sufficiently near \(t/8\); the eighth is then
+also in the positive range. Thus \(C_w(t)>0\), and continuity and
+compactness give a fixed positive lower bound on this whole interval.
+Combining~\eqref{eq:mrange} with Lemma~\ref{lem:local}, every summand
+in the main term of~\eqref{eq:major} is therefore \(\gg_w P^4\).
+Equations~\eqref{eq:minor}, \eqref{eq:replace}, and~\eqref{eq:major}
+give \(R(n)\gg_w KP^4>0\) for sufficiently large \(n\).
+This proves \(G(4)\le16\).
+
+\section{The obstruction to fifteen variables}
+
+For every integer \(a\ge0\), the number \(31\cdot16^a\) is not a
+sum of at most fifteen nonnegative fourth powers. If \(a\ge1\),
+reduction modulo~16 forces every variable to be even: a fourth power is
+0 or~1 modulo~16, and there are fewer than sixteen variables.
+Divide by~16 and repeat, reaching~31. The only fourth powers at most~31
+are 0, 1, and~16. Without a~16 the sum is at most~15; one~16 needs fifteen
+further ones, hence sixteen terms; two~16s are too large.
+Thus \(G(4)\ge16\), completing Theorem~\ref{thm:main}.
+
+\begin{remark}
+The compactness of this deduction comes from proving existence with
+two sparse four-power sets, rather than deriving the asymptotic formula
+for the unrestricted sixteen-variable representation count. The density
+argument and its application to \(G(4)=16\) are classical. The smooth
+cutoff above is a convenient way of presenting the major arcs; it is
+an ordinary weight and imposes no restriction on prime factors.
+\end{remark}
+
+\section*{Appendix: the quartic Weyl bound}
+
+For an interval \(I\) of at most \(P\) consecutive positive integers,
+write \(T_I=\sum_{x\in I}\e(\alpha x^4)\).
+Expanding \(|T_I|^2\) by differences, then applying Cauchy--Schwarz
+and repeating twice, gives
+\[
+ |T_I|^8\ll P^4\sum_{|h_1|,|h_2|,|h_3|<P}
+ \min\{P,\|24\alpha h_1h_2h_3\|^{-1}\}.
+\]
+Each final inner sum is a geometric progression, since three differences
+of \(\alpha x^4\) have linear coefficient \(24\alpha h_1h_2h_3\).
+Zero differences contribute \(O(P^7)\). Group the others by their
+nonzero product and use the elementary divisor bound to obtain
+\begin{equation}\label{eq:weylappendix}
+ |T_I|^8\ll_\eps P^7+P^{4+\eps}
+ \sum_{1\le r\le P^3}\min\{P,\|24\alpha r\|^{-1}\}.
+\end{equation}
+If \(|\beta-b/d|\le C/d^2\), \((b,d)=1\), then in any block of
+at most \(d/(2C+2)\) consecutive integers the points \(r\beta\)
+are separated modulo~1 by at least \(1/(2d)\). Ordering their distances
+from~0 and summing a harmonic progression shows that, for \(U,V\ge1\),
+\[
+ \sum_{r\le U}\min\{V,\|r\beta\|^{-1}\}
+ \ll_C (U/d+1)\bigl(V+d\log(2d)\bigr).
+\]
+For \(\beta=24\alpha\), reduce \(24c/q=b/d\). Then
+\(q/24\le d\le q\) and \(|\beta-b/d|\le24/d^2\).
+Apply the last bound with \(U=P^3,V=P\) in~\eqref{eq:weylappendix}.
+For \(q\le P^4\), absorbing logarithms into \(P^\eps\) gives
+\[
+ |T_I|^8\ll_\eps P^{8+\eps}
+ (q^{-1}+P^{-1}+qP^{-4});
+\]
+for \(q>P^4\) this is trivial. Finally, summation by parts bounds
+\(|f(\alpha)|\) by \(\|w'\|_1\max_{1\le U\le P}|T_{[1,U]}|\).
+This proves~\eqref{eq:weyl} with a constant depending on the fixed weight.
+
+\begin{thebibliography}{9}
+\bibitem{Davenport}
+H.~Davenport, \emph{On Waring's problem for fourth powers},
+Ann. of Math. (2) \textbf{40} (1939), 731--747.
+\bibitem{DE}
+H.~Davenport and P.~Erd\H os, \emph{On sums of positive integral
+\(k\)-th powers}, Ann. of Math. (2) \textbf{40} (1939), 533--536,
+Theorem~1 and Section~4.
+\url{https://www.renyi.hu/~p_erdos/1939-07.pdf}.
+\bibitem{Vaughan}
+R.~C.~Vaughan, \emph{The Hardy--Littlewood Method}, second edition,
+Cambridge University Press, 1997, Lemma~2.4.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,1 @@
+'WaringLinear.odd_stationary_branch' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,3 @@
+'WaringLinear.unitDeviations' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.kth_unit_coset_correction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.sum_kth_units_coset_correction' depends on axioms: [propext, Classical.choice, Quot.sound]

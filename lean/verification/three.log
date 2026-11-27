@@ -1,0 +1,2 @@
+'WaringLinear.ThreeDirections.diameter_upper' depends on axioms: [propext, Quot.sound]
+'WaringLinear.ThreeDirections.diameter_attained' depends on axioms: [propext, Quot.sound]

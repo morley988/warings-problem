@@ -1,0 +1,1 @@
+'WaringLinear.cutoff_sharp_loss_free' depends on axioms: [propext, Classical.choice, Quot.sound]

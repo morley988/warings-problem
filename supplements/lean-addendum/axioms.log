@@ -1,0 +1,5 @@
+'WaringFieldSmall.field_waring_eleven_of_differencing_and_arcs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'WaringFieldSmall.field_marked_orders_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringFieldSmall.field_loss_free_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]

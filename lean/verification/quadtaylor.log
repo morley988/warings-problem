@@ -1,0 +1,2 @@
+'WaringLinear.evaluate_cubic_nilpotent_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.double_hasse_two' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,2 @@
+'WaringLinear.mixed_target_if_core_dominates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.positive_field_target_of_core' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,2 @@
+'WaringLinear.PrimitiveWidthBound.local_unit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.waring_siegel_max_of_primitive_width' depends on axioms: [propext, Classical.choice, Quot.sound]

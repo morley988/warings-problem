@@ -1,0 +1,1112 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{booktabs,longtable,array,microtype,xcolor,enumitem,fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\definecolor{ink}{HTML}{18384C}
+\definecolor{muted}{HTML}{53636D}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.48em}
+\setlength{\emergencystretch}{2em}
+\setlist{nosep,leftmargin=1.6em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{muted}G(7) investigation}
+\fancyhead[R]{\small\color{muted}22 November 2026}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{theorem}[proposition]{Theorem}
+\theoremstyle{remark}
+\newtheorem*{scope}{Scope}
+\newcommand{\A}{\mathcal A}
+\newcommand{\M}{\mathfrak M}
+\newcommand{\m}{\mathfrak m}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,d\alpha}
+\newcommand{\e}{\mathrm e}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\ReportState}{Completed research record}
+\newcommand{\RunText}{The authorized research run lasted 3 hours, 0 minutes and 17 seconds, from 11:11:18 AM EST to 2:11:35 PM EST on 22 November 2026.}
+\newcommand{\BoundGSeven}{31}
+\newcommand{\CurrentGap}{0.015452339536143}
+\newcommand{\CurrentGapExact}{\frac{108166376753}{7000000000000}}
+\newcommand{\GapReductionPercent}{41.53}
+\newcommand{\CurrentDeltaTwentyEight}{0.093564057962}
+\newcommand{\CurrentDeltaTwentyTwo}{0.423201151219}
+\newcommand{\CurrentDeltaTwenty}{0.605567600000}
+\newcommand{\CurrentDeltaThirty}{0.015452339536143}
+\newcommand{\CurrentDeltaThirtyExact}{\frac{108166376753}{7000000000000}}
+\newcommand{\CurrentDeltaThirtyTwoStar}{-0.025814827130524}
+\newcommand{\CurrentDeltaThirtyTwoStarExact}{\frac{-542111369741}{21000000000000}}
+\newcommand{\CurrentRealZero}{30.748892680758}
+\newcommand{\CurrentRealZeroExact}{\frac{13323656630259}{433305250000}}
+\newcommand{\CoefficientThree}{3.011012515971}
+\newcommand{\CoefficientFour}{4.084400784447}
+\newcommand{\CoefficientFive}{5.219004846379}
+\newcommand{\ConeGapShort}{0.0688099376723}
+\newcommand{\ConeGapShortNine}{0.0768987937077}
+\newcommand{\ConeGapAll}{0.015452339536143}
+\newcommand{\ConeGapAllNine}{0.0191363819577}
+\newcommand{\CertificateName}{\path{moment_refinement/quadratic_height_distribution_exact_certificate.json}}
+\newcommand{\CertificateRounds}{220}
+\newcommand{\GeneratedAt}{2026-11-22 19:11:46 UTC}
+\newcommand{\MomentTableRows}{22 & 0.4242973 & 0.423201151219 \\
+24 & 0.2891303 & 0.283697712880 \\
+26 & 0.1843399 & 0.176197101178 \\
+28 & 0.1053935 & 0.093564057962 \\
+30 & 0.0484598 & 0.015452339537 \\
+32 & 0.0051012 & 0.000000000000 \\}
+\newcommand{\ParameterRows}{22 & $[10,9,8,7,6]$ & \shortstack[l]{0.127866478, 0.120048112 \\ 0.108136229, 0.084376799 \\ 0.026837914} & \shortstack[l]{Quadratic sampling;\\ auxiliary mean} \\
+24 & $[11,10,10,10]$ & \shortstack[l]{0.130838206, 0.124245584 \\ 0.115637814, 0.096791920} & Quadratic sampling \\
+26 & $[12,11,10,10]$ & \shortstack[l]{0.132885530, 0.126603736 \\ 0.115836987, 0.097227991} & Quadratic sampling \\
+28 & $[13,12,12]$ & \shortstack[l]{0.134436321, 0.128133606 \\ 0.118200529} & Quadratic sampling \\
+30 & $[14,13,12]$ & \shortstack[l]{0.135787759, 0.129473310 \\ 0.118256158} & \shortstack[l]{Available policy;\\ final bound recycled} \\}
+
+\begin{document}
+\thispagestyle{empty}
+{\color{muted}\small RESEARCH CONTINUATION\hfill\ReportState}\par
+\vspace{0.7cm}
+{\color{ink}\LARGE\bfseries G(7): a three-hour investigation}\par
+\vspace{0.15cm}
+{\large Exact auxiliary progress and the remaining record barrier}\par
+\vspace{0.35cm}
+\textbf{Record status.} The verified unconditional bound remains
+\[
+                         \boxed{G(7)\le\BoundGSeven.}
+\]
+This investigation does not establish $G(7)\le30$. It improves and certifies several
+auxiliary estimates, identifies precise sufficient inputs for a record improvement,
+and records where the remaining arguments stop.
+
+\RunText
+
+The best recorded deficit in the tested thirty-variable argument is
+\[
+ D=\CurrentGapExact=\CurrentGap\ldots>0.
+\]
+The extension began with deficit $0.0264290504625$. The reduction is
+\GapReductionPercent\%, within this particular analytic calculation. It is not a
+probability of success or a universal measure of the difficulty of Waring's problem.
+The initial best test used seven ordinary and 23 smooth variables; the current
+minimum is attained with four ordinary and 26 smooth variables. The percentage
+compares the best tested deficits at those two stages.
+
+\textbf{Deliverables.} This report is accompanied by its TeX source, exact rational
+certificates, the scripts that verify them, independent analytic audits, and a research
+archive. Numerical searches choose parameters; the certified conclusions use finite
+rational evaluations and explicit analytic inequalities.
+
+\textbf{Scope.} Only unconditional classical $G(7)$ is investigated. Work on $G(4)$,
+GRH or ERH variants, Waring--Siegel variants, and Fekete questions is outside this run.
+No priority or publication novelty claim is made for the auxiliary deductions.
+
+\vfill
+{\small\color{muted}Report data generated: \GeneratedAt.\par
+Current exact seventh-power certificate:\par
+\CertificateName.}
+\newpage
+\tableofcontents
+\newpage
+
+\section{Meaning of the calculation}
+
+For a positive integer $k$, $G(k)$ is the least $s$ such that every sufficiently
+large integer is a sum of at most $s$ positive integral $k$th powers. Wooley's established result
+$G(7)\le31$ is the record used as the stopping threshold in this run \cite{W16}.
+An early stop would require a complete checked proof of $G(7)\le30$ or better.
+An improved mean value, a negative floating-point objective, or a conditional
+representation theorem alone would not meet that condition.
+
+Write
+\[
+ f_P(\alpha)=\sum_{1\le x\le P}\e(\alpha x^7),\qquad
+ g_Q(\alpha)=\sum_{x\in\A(Q,R)}\e(\alpha x^7),\qquad
+ \e(t)=\exp(2\pi i t).
+\]
+Here $\A(Q,R)$ consists of the positive integers at most $Q$ whose prime factors are
+at most $R$. An admissible excess $\Delta_v$ means that, for every $\eps>0$ and a
+sufficiently small positive smoothness exponent,
+\begin{equation}\label{eq:admissible}
+ \int_0^1|g_Q(\alpha)|^v\dd\ll Q^{v-7+\Delta_v+\eps}.
+\end{equation}
+For even order $v=2s$ the traditional notation is
+$\lambda_s=2s-7+\Delta_{2s}$. Degree-fourteen coefficient moments use the analogous
+notation $\lambda_a^{(14)}=2a-14+\Delta_{2a}^{(14)}$.
+
+All uses of $P^\eps$ and small powers of $R$ follow the finite-policy convention:
+first fix the finitely many parameters and inequalities, then choose the smoothness
+exponent small enough for all of them. This is distinct from discarding a fixed
+positive power of $P$.
+
+\subsection{Current certified smooth moments}
+
+The baseline column is the recovered checkpoint, rounded upward as recorded there.
+The current column is also rounded upward; exact rational values are in the certificate.
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+Order $v$ & Recovered excess & Current admissible excess\\
+\midrule
+\MomentTableRows
+\bottomrule
+\end{tabular}
+\end{center}
+The order-$32$ conclusion can be strengthened to a bound without an $\eps$ loss;
+Section~\ref{sec:recycle} gives the argument. The order-$30$ excess is
+$\CurrentDeltaThirtyExact$, or smaller if a later exact certificate improves it.
+
+\subsection{Why the remaining sign matters}
+
+The established ordinary minor-arc mean is
+\begin{equation}\label{eq:f56}
+ \int_{\m_P(P)}|f_P(\alpha)|^{56}\dd\ll P^{48+\eps}.
+\end{equation}
+This is the degree-seven case of the modern Vinogradov mean-value input used in
+\cite[Lemma~3.1]{W16}. For four ordinary and 26 smooth variables, H\"older gives
+\begin{align}
+ \int_{\m_P(P)}|f_P|^4|g_P|^{26}\dd
+ &\le\left(\int_{\m_P(P)}|f_P|^{56}\dd\right)^{1/14}
+       \left(\int_0^1|g_P|^{28}\dd\right)^{13/14}\notag\\
+ &\ll P^{23+(13\Delta_{28}-1)/14+\eps}.\label{eq:gap}
+\end{align}
+The expected representation main term has size $P^{23}$. Thus a positive value
+of $(13\Delta_{28}-1)/14$ does not make the minor arcs smaller than the main term.
+In this allocation a sufficient improvement would be $\Delta_{28}<1/13$.
+The present $\Delta_{28}=\CurrentDeltaTwentyEight$ does not satisfy that inequality.
+
+\section{The coefficient large-sieve refinement}
+
+The auxiliary sums $F_j$ arise from repeated efficient differencing
+\cite[Section~2]{VW00}. Put $d=7-j$, and write
+\[
+ M_i=P^{\phi_i},\quad H_i=P M_i^{-7},\quad T=\sum_{i=1}^j\phi_i,
+ \quad Q=P^{1-T},\quad A=P\widetilde H_j\widetilde M_j.
+\]
+Here $0\le\phi_i\le1/7$, $\widetilde H_j=\prod H_i$, and
+$\widetilde M_j=\prod M_i$.
+The centered differenced polynomial has leading terms proportional to
+\[
+ (\textstyle\prod h_i)
+ \left(z^d+c z^{d-2}\sum_i h_i^2m_i^{14}+\cdots\right).
+\]
+After the prescribed ordinary differences, a coefficient block has the form
+\[
+ E_a(\alpha)=\sum_{h\le H}\sum_{z\le J}
+       \left|\sum_{m\in C(M)}\e(C\alpha z h^3m^{14})\right|^{2a},
+ \qquad C(M)=\A(MR,R)\cap(M,MR],
+\]
+where $C$ is a fixed nonzero integer. Up to fixed factors and powers of $R$,
+$JH^3M^{14}=Q^7$.
+
+\subsection{Stopping the original proof at its internal approximant}
+
+The proof of Vaughan--Wooley's large-sieve lemma first constructs its own reduced
+approximant $b/t$. With $N$ a support bound and $Q_0=H^3JN$, put
+\[
+ L=t+Q_0|t\alpha-b|.
+\]
+Before the final matching to an externally prescribed approximant, the admissible
+cutoff is
+\[
+ Y\ll\min\{N,J,(JN/H^3)^{1/2}\}.
+\]
+The original additional conditions involving $Y^3$ and the external denominator
+cutoff are used in that final matching step. They are unnecessary for a conclusion
+expressed through this internal $L$, or through a lower bound valid for every
+rational approximant. This stopping point was checked directly against the full
+proof of \cite[Lemma~4.5]{VW95} by three readers in this run.
+
+For a divisor $t_0\mid t$, define $\ell$ to be the least positive integer with
+$t_0\mid\ell^3$. A nonempty class has $\ell\le H$ and $t_0\le\ell^3$.
+Writing $\beta=\alpha-b/t$, its reciprocal contribution is at most
+\begin{equation}\label{eq:divisorclass}
+ \frac{t_0}{t}\sum_{z\le H/\ell}
+              (1+JN\ell^3z^3|\beta|)^{-1}.
+\end{equation}
+Trivial summation bounds this by $H^3/t$. When $\beta\ne0$, comparison with
+$\sum z^{-3}$ bounds it by $C/(tJN|\beta|)$. Combining the two bounds gives
+\[
+ \eqref{eq:divisorclass}\ll \frac{H^3}{t+Q_0|t\alpha-b|}.
+\]
+The first bound alone handles $\beta=0$. Summing the divisor classes costs
+$P^\eps$. Retaining the original cube-root estimate as well gives
+\begin{equation}\label{eq:reciprocal}
+ \text{reciprocal contribution}\ll
+ P^\eps\min\{H L^{-1/3},H^3/L\}.
+\end{equation}
+The separate $H/Y$ term of the large-sieve argument remains present. No assumption
+$t\le H$, $t_0\le H$, or $q\le H^3$ has been introduced.
+
+\subsection{A useful direct version}
+
+Applying the original large-sieve lemma separately at each $h$, without the averaging
+corollary, also proves on the auxiliary minor arcs
+\[
+ E_a\ll P^\eps H(Q^7/P+J+M^{14})
+              M^{2a-14+\Delta_{2a}^{(14)}}.
+\]
+Relative to $JHM^{2a}$, the saving is
+\[
+ \min(21\phi-2,14\phi,4-7T+7\phi)
+                         -\Delta_{2a}^{(14)}\phi.
+\]
+This was the first improvement in the extension. The height-dependent refinement
+below subsequently gives the stronger current certificate.
+
+\subsection{Direct grouping of the cubic product}
+
+A further sampling estimate avoids the square-root cutoff in the preceding
+averaging argument. Let $g$ have frequency support in an interval of length $N$,
+let $p\ge1$ be fixed, and put $V=JH^3N$. For a reduced rational approximant write
+$L=q+V|q\alpha-a|$. The reciprocal-sum estimate and its elementary transference
+form give
+\begin{equation}\label{eq:grouped-sampling}
+ \sum_{h\le H}\sum_{z\le J}|g(\alpha h^3z)|^p
+ \ll P^\eps\left(HJ+\frac{V}{L}+H^3N+L\right)
+                      \int_0^1|g(\beta)|^p\,d\beta.
+\end{equation}
+For an intrinsic minimizing approximant, $L\ll\sqrt V$, so the final term is
+absorbed into $V/L$.
+
+Here is a proof that also covers real $p$. First shift the frequency interval,
+which leaves $|g|$ unchanged. The de la Vall\'ee Poussin kernel
+$V_N=2K_{2N}-K_N$ reproduces $g$, has bounded $L^1$ norm, and is dominated in
+absolute value by the positive kernel $2K_{2N}+K_N$. Jensen's inequality reduces
+the assertion to a uniform bound for the sum of translates of that kernel.
+Fourier expansion followed by the sum in $z$ bounds it by
+\[
+ HJ+\sum_{h\le H}\sum_{1\le b\le2N}
+                   \min\{J,\|\alpha h^3b\|^{-1}\}.
+\]
+Group the product $n=h^3b$. Its multiplicity is at most the divisor function,
+hence $P^\eps$. The elementary reciprocal-sum estimate behind
+\cite[Lemma~4.4]{VW95}, at length $O(H^3N)$, gives
+$P^\eps(V/L+H^3N+J+L)$; absorb $J$ into $HJ$.
+This proves \eqref{eq:grouped-sampling} without expanding a fractional power
+or assuming that its Fourier coefficients are nonnegative.
+
+With $N\asymp(M_iR)^{14}$ and
+$J=P^{5-j}\prod_{l\ne i}H_l$, normalization by $H_iJM_i^{2a}$ gives
+the additional saving
+\begin{equation}\label{eq:grouped}
+ b_{i,a}^{\rm group}(\ell)
+ =\min\{14\phi_i,\,2-7T+21\phi_i,\,\ell-2+14\phi_i\}
+                         -\Delta_{2a}^{(14)}\phi_i.
+\end{equation}
+The new middle cap exceeds the old square-root cap by $(3-7T)/2$.
+The other caps still matter, so this is retained as a separate option alongside
+the earlier bounds. Fixed multipliers and the powers of $R$ in the actual
+bandwidth are handled by the same finite-policy smoothness convention.
+
+\section{Coupling both estimates to the same rational height}
+
+Define the intrinsic height
+\begin{equation}\label{eq:height}
+ \HH_Q(\alpha)=\min_{(a,q)=1}\max\{q,Q^7|q\alpha-a|\}.
+\end{equation}
+Its sublevel set is the standard major-arc union $\M_Q(Z)$, and Dirichlet gives
+$\HH_Q\ll Q^{7/2}$. The original efficient-differencing major arcs include powers
+of $R$ in their widths. The needed fact is the inclusion
+$\M_Q(cPR^{-B})\subseteq\M_{\rm auxiliary}$ for a fixed sufficiently large $B$.
+Thus the auxiliary minor region has height at least $P^{1-O(\eta)}$.
+
+The quadratic-difference factor retains its old bound
+$D_j\ll P^\eps Q^7/P$ when $Q^7>P^2$. Its plateau is not replaced by an
+unsupported extra height saving. For coefficient block $i$, put
+\[
+ h_i^{\rm exp}=1-7\phi_i,\qquad
+ y_i=\min\left\{14\phi_i,4-7T+7\phi_i,
+                         \frac{1-7T+42\phi_i}{2}\right\}.
+\]
+On a shell $\HH_Q\asymp P^\ell$, two high-moment savings, in addition to
+\eqref{eq:grouped}, are
+\begin{align}
+ b_{i,a}^{\rm ref}(\ell)
+   &=\min\{y_i,\ell-2h_i^{\rm exp}\}
+                              -\Delta_{2a}^{(14)}\phi_i,\label{eq:ref}\\
+ b_{i,a}^{\rm cube}(\ell)
+   &=\min\{y_i,\ell/3\}
+                              -\Delta_{2a}^{(14)}\phi_i.\label{eq:cube}
+\end{align}
+The first-moment coefficient bounds remain available. For $j\le3$ their saving is
+$\phi_i$; for $j=4,5$ it is
+\[
+ \min\left\{\phi_i,1-7T+28\phi_i,(1-T)/4,
+                          [7(1-T)-27\phi_i]/6\right\}.
+\]
+
+Choose nonnegative H\"older weights $w_{i,a}$ with
+\[
+ \sum_{i,a}w_{i,a}\le1,\qquad
+ \sum_a a w_{i,a}\le1\quad\text{for each }i.
+\]
+Missing powers are bounded by the coefficient-sum lengths, and unused total weight
+is assigned to a constant factor. If $S(\ell)$ is the weighted saving, the auxiliary
+pointwise estimate is
+\begin{equation}\label{eq:pointwise}
+ |F_j(\alpha)|\ll P^\eps A
+     P^{-(1+\min\{1,S(\ell)\})/2^{d-1}}.
+\end{equation}
+The cap at1 explicitly retains the ordinary-differencing diagonal term.
+
+The crucial complementary estimate is the restricted smooth mean
+\cite[Theorem~4.2]{BW23}:
+\begin{equation}\label{eq:restricted}
+ \int_{\M_Q(Z)}|g_Q|^v\dd
+             \ll Q^{v-7+\eps}Z^{2\Delta_v/7},\qquad v\ge2.
+\end{equation}
+Multiplying \eqref{eq:pointwise} and \eqref{eq:restricted}, then summing logarithmically
+many shells, bounds the auxiliary minor integral by
+\begin{equation}\label{eq:terminal}
+ A Q^{v-7}P^{\eps+max_{1\le\ell\le7(1-T)/2}
+ \{2\Delta_v\ell/7-(1+\min(1,S(\ell)))/2^{d-1}\}}.
+\end{equation}
+The lower endpoint differs from1 by $O(\eta)$, which is handled by the stated
+smoothness convention. The final constant-factor top shell uses the full smooth
+moment and has the same exponent. Fixed phase multipliers alter heights only by
+bounded factors and harmless powers of $R$.
+
+The old terminal combined the weakest coefficient estimate with the full smooth
+moment. Formula~\eqref{eq:terminal} keeps their dependence on height together.
+A region with a weaker coefficient saving also has a smaller available smooth mean.
+
+\subsection{Why finitely many exact endpoint checks suffice}
+
+For one fixed recipe using \eqref{eq:ref}, \eqref{eq:cube}, and
+\eqref{eq:grouped} as separate options,
+each saving is concave in $\ell$. Hence $\min(1,S(\ell))$ is concave and the exponent
+in \eqref{eq:terminal} is convex. Its maximum on an interval occurs at an endpoint.
+Different recipes may be frozen on finitely many closed intervals that cover the
+whole height range. The certificate checks both endpoints of every interval.
+
+This shortcut would be invalid for an unchecked optimized envelope that changes
+recipes internally. The actual certificates specify the intervals and recipes,
+including all rational H\"older weights, explicitly.
+
+\subsection{Retaining the quadratic fourth moment}\label{sec:quadratic-fourth}
+
+A further improvement keeps the quadratic and coefficient factors together until
+after the ordinary differences. Put $r=5-j$ and
+$B=\widetilde H_j\widetilde M_j$. The unseparated Weyl inequality is
+\begin{equation}\label{eq:unseparated}
+ |F_j|^{2^r}\ll P^{2^r-1}B^{2^r}
+            +P^{2^r-r-1}B^{2^r-1}|G_r|.
+\end{equation}
+Here $G_r$ still sums over one original tuple of coefficient variables $\mathbf m$.
+For a direct two-difference source example see \cite[(12.17)]{VW95}; the factor
+separation occurs in its next equation. More generally, Cauchy over the existing
+parameter tuple gives
+$|G_u|^2\ll P^{2u+1}B^2+P^uB|G_{u+1}|$, which proves
+\eqref{eq:unseparated} inductively. Precisely $d-2$ differences turn the original
+$z^{d-2}\sum h_i^2m_i^{14}$ term into a constant that remains inside $G_r$.
+
+The resulting quadratic phase is a fixed multiple of
+\[
+ \Gamma\left(3\xi^2+\sum_{i\le j}h_i^2m_i^{14}
+                         +\sum_{\nu\le r}l_\nu^2\right),\qquad
+ \Gamma=\prod_{i\le j}h_i\prod_{\nu\le r}l_\nu.
+\]
+The $l_\nu$ are ordinary shifts. Complete the shift-dependent $\xi$ interval and
+its fixed parity condition by Fourier inversion, using one common frequency $t$.
+The completion kernel has $L^1$ norm $O(\log P)$. It is therefore enough to bound
+\[
+ \sum_{\text{shifts}}|Z_t(C_0\Gamma\alpha)|
+              \prod_{i\le j}|L_i(C_i\Gamma h_i^2\alpha)|,
+ \quad Z_t(\beta)=\sum_{|z|\le CP}\e(\beta z^2+tz),
+\]
+uniformly in $t$. The $L_i$ are the full smooth-interval coefficient sums.
+Taking absolute values of the individual coefficient sums before the ordinary
+differences would lose the information used here.
+
+The product scale of all shifts is
+$H_*=P^{5-j}\widetilde H_j=P^{5-7T}$, and $P^2H_*=Q^7$.
+Quadratic differencing, uniformly in $t$, gives on the auxiliary minor region
+\[
+ \sum_{\text{shifts}}|Z_t(C_0\Gamma\alpha)|^2
+       \ll P^{1+\eps}H_*.
+\]
+For the fourth moment, $Z_t^2$ has bandwidth $O(P^2)$ and
+$\int|Z_t|^4\ll P^{2+\eps}$ uniformly in $t$, by orthogonality and the
+difference-of-squares count. Grouping $\Gamma$ with divisor multiplicity and
+applying the sampling lemma gives
+\[
+ \sum_{\text{shifts}}|Z_t(C_0\Gamma\alpha)|^4
+ \ll P^{2+\eps}(Q^7/L+H_*+P^2+L)
+ \ll H_*P^{4+\eps-z_4(\ell)},
+ \qquad z_4(\ell)=\min\{\ell,2,5-7T\}.
+\]
+Here $L\asymp P^\ell$ and $L^2\ll Q^7$. The normalized quadratic savings are
+thus $z_2=1$ and $z_4(\ell)$.
+
+Choose nonnegative weights $\theta_2,\theta_4,u_{i,a}$ satisfying
+\[
+ 2\theta_2+4\theta_4\le1,\qquad
+ \sum_a2a u_{i,a}\le1\quad(i\le j),\qquad
+ \theta_2+\theta_4+\sum_{i,a}u_{i,a}\le1.
+\]
+H\"older, with missing loads estimated trivially, gives the physical saving
+$\sigma(\ell)=\theta_2+\theta_4z_4(\ell)+\sum u_{i,a}b_{i,a}(\ell)$.
+Substituting into \eqref{eq:unseparated} proves
+\begin{equation}\label{eq:quadratic-pointwise}
+ |F_j|\ll P^\eps A\,
+                  P^{-\min\{1,\sigma(\ell)\}/2^{5-j}}.
+\end{equation}
+The cap retains the ordinary-difference diagonal. At $j=5$ it is a valid weakening
+of the direct factorization. The old bound is recovered by allocating half the
+mass to the quadratic second moment. Each fixed new recipe remains concave in
+$\ell$, so the exact interval-endpoint verification still applies; the auxiliary
+major-arc terminal is unchanged.
+
+The current certificate uses quadratic resources at depths three, four, and five,
+with the auxiliary mean at depth five for order 22. In the depth-three policy,
+at its top heights,
+$\ell\ge2$, $T\le3/7$, and $\phi_i\ge T-2/7$. The grouped fourth coefficient
+moment then has saving $2\phi_i$, since the degree-fourteen fourth moment is
+diagonal-optimal. Taking $\theta_4=u_{i,2}=1/4$ for all three coefficients gives
+\[
+ \sigma=(1+T)/2,\qquad
+                   |F_3|\ll P^\eps A P^{-(1+T)/8}.
+\]
+This avoids the small sixth-moment coefficient excess in the preceding allocation.
+The resulting gain is small and leaves the thirty-variable deficit positive.
+
+\subsection{A stronger quadratic sampling estimate}
+
+A final refinement uses the distribution of short quadratic rational heights.
+Let $H=H_*$, $V=HP^2$, and let $L$ be the intrinsic height of $\alpha$ at
+conductor $V$. For $B(\beta)$ the intrinsic height at conductor $P^2$, one
+quadratic difference and reciprocal transference give, uniformly in the completion
+parameter $t$,
+\[
+ |Z_t(\beta)|^2\ll P^\eps(P+P^2/B(\beta)),\qquad
+ |Z_t(\beta)|^4\ll P^\eps(P^2+P^4/B(\beta)^2).
+\]
+The linear modulation disappears from the absolute reciprocal-sum bound, and
+$B(\beta)\ll P$ by Dirichlet.
+
+Let $N(Y)$ count $h\le H$ with $B(h\alpha)\le Y$, for $1\le Y\ll P$.
+A witnessing denominator $q\le Y$ satisfies $\|hq\alpha\|\ll Y/P^2$.
+Group $n=hq\ll HY$ with divisor multiplicity and apply reciprocal transference
+with $J=P^2/Y$. The conductor $(HY)J=HP^2$ is exactly $V$, and hence
+\[
+ N(Y)\ll P^\eps\left(HY^2/P^2+HY/L+1+LY/P^2\right).
+\]
+Lifting the short approximant to one for $\alpha$ shows $N(Y)=0$ unless
+$Y\gg L/H$. On the nonempty range the constant term is absorbed by $HY/L$;
+$L^2\ll HP^2$ also absorbs the final term. Dyadic summation from
+$Y\asymp\max(1,L/H)$ proves
+\[
+ \sum_{h\le H} B(h\alpha)^{-2}
+ \ll P^\eps\left(H/P^2+\min\{H/L,H^2/L^2\}\right).
+\]
+Consequently
+\begin{equation}\label{eq:quadratic-distribution}
+ \sum_{h\le H}|Z_t(h\alpha)|^4
+ \ll HP^{4+\eps}\left(P^{-2}+\min\{L^{-1},HL^{-2}\}\right).
+\end{equation}
+Product-of-shifts multiplicities cost only $P^\eps$, so this applies to the same
+completed quadratic factors as before.
+
+For $H=P^h$ and $L\asymp P^\ell$, the new normalized saving is
+$\min\{2,\max(\ell,2\ell-h)\}$. Its upper envelope is not globally concave.
+For finite certification one may instead keep the two separately valid resources
+\[
+ z_4^{\rm height}(\ell)=\min\{2,\ell\},\qquad
+ z_4^{\rm refined}(\ell)=\min\{2,2\ell-h\}.
+\]
+Each is concave, so frozen H\"older recipes retain the endpoint proof. The improved
+depth-five supremum can also be combined with the auxiliary second moment in the
+next section. This improves the smooth 22nd moment and propagates to the higher
+orders. The fully certified thirty-variable deficit nevertheless remains positive.
+
+\section{Auxiliary means and fractional coefficient orders}
+
+\subsection{An improved quadratic auxiliary second moment}
+
+Let $N_i$ count the coefficient equation
+$\sum_{l\le i}h_l^2(m_l^{14}-n_l^{14})=0$. The divisor argument underlying
+\cite[Lemma~3.8]{VW95} gives
+\[
+ N_i\ll P^\eps\left(H_iM_i N_{i-1}+
+                              \prod_{l<i}H_lM_l^2\right).
+\]
+Indeed, the zero final difference contributes the first term; for a fixed nonzero
+integer $b$, the equation $h^2(m^{14}-n^{14})=b$ has $P^\eps$ solutions by divisors
+and factorization. This argument needs no ordering of the $\phi_i$.
+
+With $T_i=\sum_{l\le i}\phi_l$, the conditions
+$T_i+5\phi_i\le1$ imply $N_j\ll P^\eps\widetilde H_j\widetilde M_j$.
+At the quadratic terminal $j=5$, the relevant case of \cite[Lemma~3.3]{VW95}
+then yields
+\[
+ \int_0^1|F_5|^2\dd\ll P^{1+\eps}\widetilde H_5\widetilde M_5.
+\]
+Combining this with the height supremum and a restricted smooth 18th moment,
+using outer exponents $a=1/3$, $c=2/3$, $\gamma=1/3$, improves the smooth 22nd
+moment. In general the identities are $a+c=1$, $\gamma+pa=1$, and $cv=2r$.
+They give the shell inequality
+\[
+ \int_E|F_j||g_Q|^{2r}\dd\le
+ (\sup_E|F_j|)^\gamma
+ (\int_0^1|F_j|^p\dd)^a(\int_E|g_Q|^v\dd)^c.
+\]
+
+The broader source theorems contain ordering hypotheses in some cases. Those were
+not silently removed: pointwise coefficient policies are order-free, whereas any
+use of an ordered auxiliary theorem retains or recomputes its conditions. A full
+one-block/two-block divisor recursion, with controlled excess rather than only
+diagonal feasibility, is also recorded and tested in the archive.
+
+\subsection{Real powers in the sampling lemma}
+
+The coefficient large sieve can be extended to a real power $p\ge1$ without claiming
+arbitrary-weight fractional moment estimates. Suppose its L2 sampling constant at
+frequency length $M$ is $L(M)$. Let
+\[
+ K_M(t)=M^{-1}\left|\sum_{n=1}^M\e(nt)\right|^2,
+ \qquad V_N=2K_{2N}-K_N.
+\]
+Applying the L2 inequality to the normalized Dirichlet kernel gives
+$\sum_zK_M(x_z-t)\le L(M)$ uniformly in $t$.
+The kernel $V_N$ reproduces every polynomial with frequencies in $[-N,N]$,
+has $L^1$ norm at most 3, and satisfies $|V_N|\le2K_{2N}+K_N$. Jensen therefore gives
+\[
+ \sum_z|g(x_z)|^p\ll_p L(2N)\int_0^1|g(t)|^p\,dt.
+\]
+The original rational-approximation and reciprocal-sum arguments then apply unchanged.
+
+The actual coefficient supports were checked in the source: they are the complete
+smooth intervals $C(M)$, so the needed real moments follow from
+$g=G_{MR}-G_M$ and the triangle inequality. An arbitrary smooth subset would require
+an additional argument; no such extension is claimed.
+
+Wooley's fractional recursion \cite[Lemma~1]{W00} and the A/B terminal schemes
+of \cite[Theorem~3.4 and Section~4]{VW00} were applied in a joint finite rational
+iteration to the published degree-fourteen starting moments. They give, for example,
+\[
+ \lambda^{(14)}_3\le\CoefficientThree,\quad
+ \lambda^{(14)}_4\le\CoefficientFour,\quad
+ \lambda^{(14)}_5\le\CoefficientFive.
+\]
+The 240 coefficient rounds and the seventh-power propagation are separately certified.
+The A/B terminal uses real unweighted smooth moments only in H\"older's inequality;
+all intermediate counted moments remain integral. The geometric and size hypotheses
+of each auxiliary moment are checked exactly, including the distinct cases of
+Theorem~3.4. No unproved optimal high-order endpoint is appended to the input table.
+These are improvements of the inputs used in this calculation, without a claim
+that their priority has been established in the literature.
+
+\section{Global ordinary-moment recycling}\label{sec:recycle}
+
+An additional improvement follows from using the ordinary 56th mean globally through
+a valid counting comparison. For integers $a,s$ with $1\le a<28$ and
+$u=2s-2a\ge20$, put $\gamma=1-a/28$ and $v=u/\gamma$.
+
+\begin{proposition}
+If $\Delta_v$ is admissible, then
+\[
+ \Delta'_{2s}=\max\{0,\gamma\Delta_v-a/28\}
+\]
+is admissible for the complete smooth mean.
+\end{proposition}
+\begin{proof}
+On the complete circle, inclusion of the smooth set in the ordinary set and
+orthogonality give
+$\int|g_P|^{2s}\le\int|f_P|^{2a}|g_P|^u$.
+This is a comparison of counts with nonnegative coefficients, not a pointwise
+comparison and not a restricted-arc comparison. On the ordinary minor arcs,
+\eqref{eq:f56} and H\"older give
+$P^{2s-7+\gamma\Delta_v-a/28+\eps}$.
+On the ordinary major arcs, $|f_P|^{2a}\le P^{2a}$ and the optimal restricted
+$u$th smooth mean give $P^{2s-7}$.
+For $u\ge20$, the latter follows from \cite[Theorem~1.3]{BW24}, using base order
+$u-2$, height parameters 1, and cutoff 1; the central interval has measure $O(P^{-7})$.
+Combining the two estimates proves the proposition.
+\end{proof}
+
+For $s=15$, $a=2$, the rule reads
+\[
+ \Delta_{30}\le\max\{0,(13\Delta_{28}-1)/14\}.
+\]
+This explains why the improved global 30th moment can have the same positive excess
+as the remaining representation deficit. A positive excess is sufficient for an
+admissible global mean; the representation argument requires an actual minor-arc
+saving.
+
+\subsection{The strong 32nd moment}
+
+Globally $\int|g_P|^{32}\le\int|f_P|^2|g_P|^{30}$.
+The ordinary minor-arc supremum $P^{1-1/42+\eps}$ gives a contribution
+$P^{25+\Delta_{30}-1/21+\eps}$, which is smaller than $P^{25}$ because
+$\Delta_{30}<1/21$. On the major arcs, the second conclusion of
+\cite[Theorem~1.3]{BW24}, with base 28, order 30 and cutoff 1, gives
+$\int_\M|g_P|^{30}\ll P^{23}$ without an $\eps$ loss. Therefore
+\[
+                    \boxed{\int_0^1|g_P|^{32}\dd\ll P^{25}.}
+\]
+One sufficiently small fixed smoothness exponent works for this conclusion.
+
+Annular excesses can be negative even though complete-circle excesses are
+nonnegative. The published annular rule \cite[Section~5]{BW23} permits the following
+bound using the fixed certified choice $\tau_0$:
+\[
+ \Delta_v^*=\min_{0\le u\le v-2}(\Delta_{v-u}-u\tau_0),\qquad
+ \tau_0=\frac{7-2(2.0143820)}{144}.
+\]
+In particular the current bound from order 30 gives
+$\Delta_{32}^*\le\CurrentDeltaThirtyTwoStarExact
+\approx\CurrentDeltaThirtyTwoStar$.
+These annular inputs were also included in the subsequent searches.
+
+\subsection{An optimal real moment below order 31}
+
+There is also a useful passage from the annular estimate to a full real moment.
+For every fixed $v\ge18$ and any finite set of available lower moment inputs, put
+\[
+ d_v=\min_{2\le w\le v}\{\Delta_w-(v-w)\tau_0\}.
+\]
+Then $\max(0,d_v)$ is an admissible global excess. To see this, use
+\cite[Theorem~1.3]{BW24} on $\M_P(P)$, and sum
+\cite[Theorem~5.2]{BW23} over the remaining dyadic annuli. If $d_v\ge0$ the
+largest annular exponent is at the top height and is at most $d_v$; if $d_v<0$
+the lower endpoint controls the sum. The top $R$-dependent annuli omitted from
+the stated range of Theorem~5.2 are covered by its companion supremum estimate
+times the lower global moment, exactly as in the proof of Theorem~5.3.
+
+In particular,
+\[
+ v_0=30+\frac{\Delta_{30}}{\tau_0}
+       =\CurrentRealZeroExact\approx\CurrentRealZero
+\]
+has admissible excess zero. The endpoint permits an $\eps$ loss. At every fixed
+$v>v_0$ the minor arcs have a strict saving and the major estimate has no
+$\eps$ loss. This proves, for example,
+\[
+                     \boxed{\int_0^1|g_P|^{31}\dd\ll P^{24}.}
+\]
+This is a pure smooth moment. Mixed ordinary/smooth moments require their own
+argument, and no minor-arc saving at order 30 follows from this statement.
+
+\section{What the finite certificate establishes}
+
+The current certificate uses \CertificateRounds{} finite rounds, with rational
+parameters, rational H\"older weights, and upward rounding of intermediate moment
+values. It checks the full height cover, each moment load, every size condition,
+the separate auxiliary major terminal, and every efficient-differencing recursion.
+The root independently reproduced the stored outputs of the successive exact
+certificates. The analytic hypotheses were reviewed independently of those numerical
+reruns.
+
+The following are parameter summaries, rounded here only for readability. The exact
+values and all height recipes are in the JSON certificate.
+\begin{center}\small
+\begin{tabular}{r l l l}
+\toprule
+Order & Inner half-moment path & Size exponents $\phi_i$ & Terminal type\\
+\midrule
+\ParameterRows
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two bookkeeping issues were explicitly corrected. An unused appended
+degree-fourteen endpoint claiming $\Delta_{82}=0$ was replaced by the valid trivial
+extension from order 80. The selected earlier certificates used coefficient half-orders
+at most 25, so that endpoint did not affect their conclusions. Also, the legacy field
+name \texttt{two\_ordinary} had denoted the seven-ordinary expression
+$(6\Delta_{26}+\Delta_{28}-1)/8$ in some earlier files. New certificates use the
+correct labels. Neither correction changes the established main deficit.
+
+No floating-point search is treated as proof of optimality. Exact dual checks in the
+archive concern their explicitly frozen H\"older families only. They do not exclude
+stronger estimates, a different representation, or another proof of $G(7)\le30$.
+
+\section{Real mixed products and the finite comparison}
+\label{sec:poisson}
+
+The correlation inputs can be extended to real mixed powers by a positive
+Poisson majorant. Let $H_i$ be polynomials of degrees $N_i$, let $a_i>0$, and put
+\[
+ U(t)=\prod_i|H_i(\e(t))|^{a_i},\qquad D=\sum_i a_iN_i>0.
+\]
+If $\mathcal P_r$ is the circle Poisson kernel, subharmonicity gives
+$U\le\mathcal P_{1/R}*U_R$ on a disk of radius $R>1$.
+Applying the same inequality to the conjugate reversed polynomials gives
+$U_R\le R^D\mathcal P_{1/R}*U$. The semigroup identity and $R=\exp(1/D)$ prove
+\[
+                 U\le e\,\mathcal P_{\exp(-2/D)}*U.
+\]
+This argument needs no nonnegative Fourier expansion of a fractional power.
+
+For $L_P=\sum_{P<x\le2P}\e(\alpha x^7)$, pair spacing gives
+$|x^7-y^7|\ge7P^6|x-y|$. The Poisson convolution of $|L_P|^2$ is consequently
+$O(P+DP^{-5})$. The Robert--Sargos spacing estimate gives the corresponding
+fourth convolution bound $O(P^\eps(P^2+DP^{-3}))$. Fubini therefore proves
+\begin{align*}
+ \int|L_P|^2U&\ll(P+DP^{-5})\int U,\\
+ \int|L_P|^4U&\ll P^\eps(P^2+DP^{-3})\int U.
+\end{align*}
+For a product of fixed real powers of ordinary and smooth sums at scale $Q$,
+one has $D\ll Q^7$. Both comparisons use complete-circle moments on the right.
+
+These inputs were included in a finite comparison with 3,935 columns:
+ordinary moments, current pure and mixed smooth moments, their valid correlations,
+pointwise estimates, and direct ordinary-minor-mean recycling. The variable counts
+were allowed to be real, which enlarges the options beyond integer allocations.
+Exact dual witnesses give the following uniform positive lower bounds for the
+exponent deficit when $Q=P^\theta$:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Allowed counts totaling 30 & Range of $\theta$ & Deficit at least\\
+\midrule
+Nonnegative real counts & $0\le\theta\le6/7$ & $\ConeGapShort$\\
+At least 9 long ordinary & $0\le\theta\le6/7$ & $\ConeGapShortNine$\\
+Nonnegative real counts & $0\le\theta\le1$ & $\ConeGapAll$\\
+At least 9 long ordinary & $0\le\theta\le1$ & $\ConeGapAllNine$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The input costs are affine between $\theta=0,5/7,6/7,1$.
+Feasible exact endpoint duals interpolate over these intervals. An independent
+standard-library verifier checks every rational column inequality, with no
+floating optimizer. This excludes a power saving within the listed finite family;
+it is not an impossibility theorem for other analytic estimates.
+
+The final comparison also allows every H\"older factor to choose its own short
+scale $Q_i=P^{\theta_i}$. For a column with counts $(a,b,c)$, subtract its main-scale
+contribution $a+\theta_i(b+c)$ from its moment exponent. The objective is then
+$7+\sum w_i\,\mathrm{cost}_i$, with total variable count 30 and H\"older mass at
+most one. The union of the four endpoint scales has $4\times3935=15740$ columns.
+One exact dual works simultaneously at all four endpoints, hence at every
+independently selected $\theta_i\in[0,1]$ by affine interpolation. The same lower
+bounds $\ConeGapAll$ and $\ConeGapAllNine$ remain, respectively without a long-count
+restriction and with at least nine long variables. This is an enlarged algebraic
+comparison: additional common-arc and representation requirements can only restrict
+its feasible choices. Its positive result excludes this extension of the specified
+input family as well.
+
+\section{A second route: four long variables correlated with shorter sums}\label{sec:weighted}
+
+Write $L_P(\alpha)=\sum_{P<x\le2P}\e(\alpha x^7)$ and $Q=P^\theta$.
+The Robert--Sargos spacing estimate \cite[Theorem~2]{RS06} gives
+\[
+ N(H)\ll P^\eps(P^2+P^{-3}H)
+\]
+for near coincidences of two sums of two long seventh powers. For even $v$, the
+uniform coefficient bound from a smooth mean yields the following estimate;
+Section~\ref{sec:poisson} supplies its real-power extension:
+\[
+ \int_0^1|L_P|^4|g_Q|^v\dd
+       \ll P^\eps(P^2+P^{-3}Q^7)Q^{v-7+\Delta_v}.
+\]
+The excess $\Delta_v$ in the second term is the unresolved correlation cost.
+
+\subsection{Two half-excess hypotheses}
+
+At $\theta=747/1000$, assume, for $v=20,22$,
+\begin{equation}\label{eq:Hv}
+ \int_0^1|L_P|^4|g_Q|^v\dd\ll P^\eps
+       \left(P^2Q^{v-7+\Delta_v}+P^{-3}Q^{v+\Delta_v/2}\right),
+\end{equation}
+using the published $\Delta_{20}=.6055676$, $\Delta_{22}=.4242973$.
+Then H\"older with weights $9/52$, $31/52$, $12/52$ on the ordinary 56th mean and
+the two mixed means controls $L_P^{13}g_Q^{17}$. The saving below its main scale
+$P^6Q^{17}$ is exactly
+\[
+ \frac{54209403}{32500000000}=.001667981630769\ldots>0.
+\]
+The complete conditional circle-method implication was checked, including the
+ordinary interval minor arcs, pruning, positive arithmetic factor, and the interior
+real point. Here the minor domain is outside the union of the ordinary major sets
+for $f_P$ and $f_{2P}$, or outside a fixed-constant enlargement $\M_P(CP)$.
+Then $L_P=f_{2P}-f_P$ inherits the required 56th minor moment.
+It uses 13 long and 17 short variables, hence 30 in total.
+
+For the real factor choose $P=(n/[13(3/2)^7])^{1/7}$, placing the 13 long real
+coordinates strictly inside $(P,2P)$. The short contribution is $o(P^7)$.
+At narrow arcs the arithmetic singular series still has 30 variables, while the
+limiting real integral has 13 long variables. Confusing these two counts would be an
+error. Ordinary major-arc pruning is available with 13 long variables alone.
+
+\subsection{One explicit 22nd mixed-moment hypothesis}
+
+A simpler sufficient input, at $Q=P^{37/50}$, is
+\begin{equation}\label{eq:H22}
+ \int_0^1|L_P|^4|g_Q|^{22}\dd\ll P^\eps
+       \left(P^2Q^{15.4242973}+P^{-3}Q^{22.19}\right).
+\end{equation}
+H\"older weights $83/616$ for the ordinary 56th mean, $19/22$ for
+\eqref{eq:H22}, and $1/616$ for measure give 11 long and 19 short variables.
+The exact saving is $1501/770000=.001949350649\ldots$.
+Again the major arcs and positivity complete the conditional implication.
+
+Neither \eqref{eq:Hv} nor \eqref{eq:H22} is proved on the complete remaining minor
+region. The following partial regions are proved:
+\begin{itemize}
+\item The two half-excess estimates on $\M_Q(Q^{1.745})$, with a slightly larger
+      outer buffer for the local reproducing kernel.
+\item The single22nd-moment target on $\M_Q(Q^{1.56})$.
+\item For that single target, also the Dirichlet-scale arcs
+      $q\le Q^{.095}$, $|q\alpha-a|\le Q^{-7/2}$.
+\item The long-variable slice $x_1+x_2=x_3+x_4$, whose nontrivial near-coincidence
+      count is $\ll P^{-4+\eps}Q^7$.
+\end{itemize}
+The low-denominator extension uses Bourgain's translated local20th moment
+\cite[Section~6]{Bou16}, valid also for the smooth indicator, and the local
+fourth-moment operator obtained from Robert--Sargos. These proved pieces do not
+cover the unresolved deep region.
+
+\newpage
+\section{Two sufficient pure smooth-moment improvements}\label{sec:pure-targets}
+
+The following are separate sufficient hypotheses. Neither is proved in this
+investigation, and neither assumes the other. They concern only the pure smooth
+sum, not an additional mixed ordinary/smooth estimate:
+\begin{align}
+ \int_0^1|g_P|^{22}\dd&\ll P^{15.31+\eps},\label{eq:pure22-target}\\
+ \int_0^1|g_P|^{20}\dd&\ll P^{13.515+\eps}.\label{eq:pure20-target}
+\end{align}
+As usual each is required for every positive $\eps$ and sufficiently small fixed
+smoothness. The certified unconditional excesses are respectively
+$\Delta_{22}=\CurrentDeltaTwentyTwo$ and $\Delta_{20}=\CurrentDeltaTwenty$;
+the hypotheses would reduce
+them to $.31$ or $.515$.
+
+For each hypothesis separately, an exact 220-round calculation starts with the
+published moment table and changes precisely one entry. It then uses the frozen
+grouped-cubic policies, the existing auxiliary estimates, convexity, and ordinary
+moment recycling. The conditional certificates preserve the original table and
+the single override explicitly. An independently written verifier reproduced
+both calculations. Their conclusions are
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Unproved input & Resulting admissible $\Delta_{28}$ & Four-ordinary deficit\\
+\midrule
+$\Delta_{22}\le31/100$ & $\le.075329303761$ &
+ $-20719051107/14000000000000$\\
+$\Delta_{20}\le103/200$ & $\le.074844741085$ &
+ $\le-.001929883278214$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The second row is rounded in the safe direction. Both excesses are strictly below
+$1/13$, so \eqref{eq:gap} gives a minor-arc power saving. The established major-arc
+asymptotic and positivity then give $G(7)\le30$ under either hypothesis. The
+conditional implications use the earlier grouped certificate; the later quadratic
+fourth-moment refinement is not needed for them.
+
+The distinction is essential: these computations identify sufficient analytic
+targets. They do not prove either target and do not improve the unconditional
+record.
+
+\section{Precise ordinary minor-arc alternatives}\label{sec:ordinary}
+
+The following numerical implications use the frozen enhanced-recycling certificate
+with $\Delta_{26}=.176210893849$ and $\Delta_{28}=.093725806221$; any later smaller
+admissible values preserve them.
+
+\begin{proposition}[Conditional 52nd-moment route]
+If
+\[
+ \int_{\m_P(P^{17/10})}|f_P|^{52}\dd\ll P^{44+\eps},
+\]
+then the certified smooth moments imply $G(7)\le30$.
+\end{proposition}
+\begin{proof}
+Use six ordinary and 24 smooth variables. On the indicated deep set H\"older has
+weights $3/26$ and $23/26$, and effective smooth order $624/23$.
+The saving is
+\[
+ \frac{3-10\Delta_{26}-13\Delta_{28}}{26}
+       =\frac{19455580637}{26000000000000}>0.
+\]
+On $\M_P(P^{17/10})\setminus\M_P(P)$, the ordinary supremum and the restricted
+24th smooth mean save $(1-(17/5)\Delta_{24})/7=.005051275973\ldots>0$.
+Optimal smooth major-arc pruning and the usual positive 30-variable singular factors
+complete the argument.
+\end{proof}
+
+Similarly, the hypothesis
+\[
+ \int_{\m_P(P^{8/5})}|f_P|^{56}\dd\ll P^{48-4/25+\eps}
+\]
+suffices using seven ordinary and 23 smooth variables. The deep saving is
+$1801766137/1600000000000=.001126103835625$, and the intermediate saving is
+$.005027383396\ldots$. More generally this allocation needs an improvement
+$\beta>.150991169315$ in the exponent 48.
+
+These are explicit sufficient targets, not newly proved ordinary estimates. The
+known 56th minor mean and Hua 16th mean interpolate only to a 52nd exponent of 44.4.
+The additional geometric sixth-moment estimate examined in this run does not
+improve that particular interpolation.
+
+\section{Other investigations and their exact limits}
+
+\textbf{Additional quadratic resources.}
+The height-distribution proof also gives real sampled moments between orders two
+and four. A third-moment check at the final frozen parameters gave no gain at the
+controlling endpoint. At the intrinsic top height, the new fourth-moment resource
+has saving two and dominates the third-moment alternative there. Within the same
+separate-coefficient allocation, higher quadratic moments and a quadratic supremum
+are dominated as well: every coefficient saving is at most $h=5-7T$, and the
+additional fourth-moment saving exactly compensates the H\"older mass needed to
+replace those alternatives. This conclusion concerns these resources and allocations.
+
+\textbf{Intermediate fractional differencing.}
+For nonnegative integer $u$, real $h\ge1$, $0\le\theta\le1/2$, and
+$r=\theta u+(1-\theta)h$, the valid shell rule is
+\[
+ \int_E|F_j||g|^{2r}\le(\sup_E|F_j|)^{1-2\theta}
+       \left(\int_0^1|F_j|^2|g|^{2u}\right)^\theta
+       \left(\int_E|g|^{2h}\right)^{1-\theta}.
+\]
+The counted mixed square remains global. The height supremum, restricted smooth
+mean and ordinary next-step recursion can all be retained. Tested policies,
+including annular inputs and multiple auxiliary moments, did not close the gap.
+
+\textbf{The unrestricted linear terminal.}
+At differencing depth six, the centered phase is exactly
+$2^6\cdot7!\,(\prod h_i)z$. A positive Fourier majorant for the Dirichlet kernel,
+followed by a divisor count for each nonzero Fourier frequency, proves
+\[
+ \int_0^1|F_6||g_Q|^{2r}\dd
+ \ll P^\eps\widetilde M\{Q^{2r}+\widetilde H\int_0^1|g_Q|^{2r}\dd\}
+\]
+for integer $r$, without the earlier height restriction. Its wider validity was
+checked against the actual Cartesian summation ranges. The tested larger parameter
+region gave no improvement; a further convexity calculation explains why the
+associated counted-square terminal is dominated by the available pointwise-height
+terminal in the specified interpolation family.
+
+\textbf{Denominator arithmetic.}
+Retaining $\nu_3(q)=q^{-1}\sum_{d\mid q}d/\rho_3(d)$, where
+$\rho_3(d)=\prod_{p^a\parallel d}p^{\lceil a/3\rceil}$, improves the cubic reciprocal
+weight for many denominators. A valid adaptation of the weighted pruning lemma gives
+\[
+ T^\eps X^{2t-7}+X^{-7}T^{t+1+\eps}.
+\]
+Here $t\ge3$, the rational box satisfies $TY\le X^7/4$, and the beta-weight
+exponent is integrable; the exponent-1 endpoint requires a logarithmic treatment.
+Its completion term becomes too large at $T=X^{7/2}$. It cannot be suppressed
+as an $\eps$ loss. The immediate beta decay also requires an additional cost before
+an integrable pruning weight is available.
+
+\textbf{Long translations.}
+Extending the averaging range of translated moment-curve sums does not produce
+a free power saving. An integer unipotent change of the coefficient variables
+identifies each translated block's weighted integral with the original one;
+the number of blocks cancels the longer averaging normalization. A genuine
+collective maximal or restricted-domain estimate is still required.
+
+\textbf{Recent small-cap and inhomogeneous results.}
+The recent slab estimates were checked for the actual coefficient domains needed
+here \cite{JO26,OY25}.
+A bound for a slab is not a bound for an arbitrary union of tilted strips. Fixed
+inhomogeneity results also do not supply uniform control for the growing family of
+inhomogeneities in the transfer. Summing their individual bounds loses more than
+the saving they provide. Announced work without an available complete proof was
+excluded from certified inputs.
+
+\textbf{Geometric low moments.}
+The literature branch derived an ordinary sixth-moment upper exponent
+$12/5+27/(10\sqrt7)=3.4205040771\ldots$ from published geometric inputs
+\cite{Sal05,Sal23,Ver25}, with
+the singular-section branches checked separately. It improves the elementary
+sixth-moment interpolation, but its interpolation with 56th exponent 48 gives
+52nd exponent 44.4336\ldots, weaker than the existing 44.4 line. The complete
+derivation and its source audit are retained as a secondary result, outside the
+core record calculation.
+
+\section{Conclusion and the next mathematical decision}
+
+The established record remains $G(7)\le\BoundGSeven$. The work has produced
+reproducible auxiliary progress: a sharpened coefficient reciprocal estimate,
+height-coupled integration, direct cubic-product grouping, a retained quadratic
+fourth moment, a lower auxiliary moment, real-power coefficient sampling,
+improved degree-fourteen inputs, and stronger global smooth-moment recycling.
+Each must be distinguished from the still missing representation saving.
+
+The most concrete remaining choices are an analytic improvement that pushes
+$\Delta_{28}$ below $1/13$, either sufficient pure-moment improvement in
+Section~\ref{sec:pure-targets}, one of the ordinary deep-minor moment targets in
+Section~\ref{sec:ordinary}, or the four-long/short correlation estimates in
+Section~\ref{sec:weighted}. Additional
+optimization within the families already tested is a narrower prospect: the
+recorded numerical barriers concern those families only, but the repeated small
+gains do not justify announcing a record proof.
+
+\appendix
+\section{Reproduction and audit map}
+
+The archive contains the current certificate and its generating script, the
+degree-fourteen fractional certificate, exact arithmetic for the conditional
+targets, and independent source-level audits. The exact scripts use Python's
+\texttt{Fraction} arithmetic. Search scripts additionally use numerical optimization;
+their outputs are explicitly marked as exploratory.
+
+Run \texttt{python3 verify\_results.py} from the extracted archive to replay the
+degree-fourteen updates, the current seventh-power certificate, both explicitly
+conditional pure-moment implications, and the finite-cone witness. This command
+needs only the Python standard library. The selected seventh-power certificate is
+\CertificateName.
+
+\begin{minipage}{\linewidth}
+The degree-fourteen certificate is\par
+\mbox{\small\path{weighted_correlation/degree14_joint_curve_certificate.json}}.
+The ordinary-target arithmetic is in\par
+\mbox{\small\path{root/ordinary_minor_target_certificate.py}}.
+\end{minipage}
+
+The main analytic notes are under \path{root/}, with independent reviews under
+\path{weighted_correlation/} and \path{literature_routes/}. They retain the hypotheses,
+scope corrections, and negative results needed to avoid repeating invalid transfers.
+The archive manifest records file sizes and SHA256 digests, and the archive was
+checked by reopening it and verifying its contents.
+
+\begin{thebibliography}{20}\small
+\bibitem{W16} T. D. Wooley, \emph{On Waring's problem for intermediate powers},
+Acta Arith. 176 (2016), 241--247.
+\url{https://arxiv.org/abs/1602.03221}.
+\bibitem{VW95} R. C. Vaughan and T. D. Wooley, \emph{Further improvements in
+Waring's problem}, Acta Math. 174 (1995), 147--240.
+\url{https://www.math.purdue.edu/~twooley/publ/1995%20fiwp.pdf}.
+\bibitem{VW00} R. C. Vaughan and T. D. Wooley, \emph{Further improvements in
+Waring's problem, IV: Higher powers}, Acta Arith. 94 (2000), 203--285.
+\url{https://www.math.purdue.edu/~twooley/publ/2000%20fiwp4.pdf}.
+\bibitem{W00} T. D. Wooley, \emph{Quasi-diagonal behaviour and smooth Weyl sums},
+Monatsh. Math. 130 (2000), 161--170.
+\url{https://www.math.purdue.edu/~twooley/publ/2000SWSQD.pdf}.
+\bibitem{BW23} J. Br\"udern and T. D. Wooley, \emph{On Waring's problem for larger
+powers}, J. reine angew. Math. 805 (2023), 115--142.
+\url{https://www.math.purdue.edu/~twooley/publ/20230915wpk.pdf}.
+\bibitem{BW24} J. Br\"udern and T. D. Wooley, \emph{Estimates for smooth Weyl sums
+on major arcs}, 2024.
+\url{https://arxiv.org/abs/2405.18608}.
+\bibitem{RS06} O. Robert and P. Sargos, \emph{Three-dimensional exponential sums
+with monomials}, J. reine angew. Math. 591 (2006), 1--20.
+\url{https://perso.univ-st-etienne.fr/rool6510/robert-2006-crelle.pdf}.
+\bibitem{Bou16} J. Bourgain, \emph{On the Vinogradov mean value}, 2016,
+Theorem 10 and Section 6. \url{https://arxiv.org/abs/1601.08173}.
+\bibitem{Sal05} P. Salberger, \emph{Counting rational points on hypersurfaces
+of low dimension}, Ann. Sci. ENS 38 (2005), 93--115.
+\url{https://www.numdam.org/item/ASENS_2005_4_38_1_93_0.pdf}.
+\bibitem{Sal23} P. Salberger, \emph{Counting rational points on projective
+varieties}, Proc. London Math. Soc. 126 (2023), 1092--1133.
+\url{https://doi.org/10.1112/plms.12508}.
+\bibitem{Ver25} M. Verzobio, \emph{Counting rational points on smooth
+hypersurfaces with high degree}, IMRN (2025), rnaf249.
+\url{https://arxiv.org/abs/2503.19451}.
+\bibitem{JO26} S. Jeong and C. Oh, \emph{Amplitude dependent wave envelope
+type estimates for moment curves and applications}, 2026.
+\url{https://arxiv.org/abs/2611.26581}.
+\bibitem{OY25} C. Oh and K. Yeon, \emph{An extended Vinogradov's mean value
+theorem}, 2025. \url{https://arxiv.org/abs/2506.01751}.
+\end{thebibliography}
+\end{document}

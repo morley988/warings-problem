@@ -1,0 +1,2 @@
+'WaringLinear.loss_free_several_factors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.trace_loss_free_several_factors' depends on axioms: [propext, Classical.choice, Quot.sound]

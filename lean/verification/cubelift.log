@@ -1,0 +1,4 @@
+'WaringLinear.CubicLocalLifting.cube_mod_three_of_mem_span' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.CubicLocalLifting.five_cubes_with_unit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.CubicLocalLifting.exists_adic_fixed_point' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.CubicLocalLifting.unit_cube_coset' depends on axioms: [propext, Classical.choice, Quot.sound]

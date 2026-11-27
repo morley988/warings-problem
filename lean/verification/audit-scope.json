@@ -1,0 +1,9 @@
+{
+  "aggregate_examined_at_release": false,
+  "aggregate_audit_file": "aggregate-axioms.log",
+  "aggregate_audit_theorems": 49595,
+  "explanation": "The aggregate audit covers the stated earlier import set. Later source modules compiled individually. Run the packaged fresh replay to audit the complete release in one run.",
+  "audited_project_module_count": 1935,
+  "audited_root_count": 167,
+  "audited_archive_sha256": "47b1a39b8d7361f16b3ece238c6b3bceebae534724c4a67afb3ee7a370216737"
+}

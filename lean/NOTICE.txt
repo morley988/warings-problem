@@ -1,0 +1,16 @@
+Source attribution
+
+WSL2Packing.lean adapts the separated-ball packing argument in
+Mathlib.MeasureTheory.Covering.BesicovitchVectorSpace by Sébastien Gouëzel
+(2021). The Apache License 2.0 is included in LICENSE-Mathlib-Apache-2.0.txt.
+
+WSL2IdealDivisors.lean adapts the elementary divisor multiplicity estimates
+in Waring/DivisorBound.lean. The modules WSL3UnitFirstDerivative,
+WSL3UnitRealStationary and WSL3UnitRealWeightedStationary adapt the
+reciprocal-derivative argument in Waring/EndgameCompletionSingular.lean.
+
+The Waring.CriticalVMVT dependency includes S. McColm's Lean formalization,
+distributed under the MIT No Attribution license and ported to Lean 4.24.
+The source repository is https://github.com/smccolm/Lean at revision
+bed45b21cb18f26f4d234422ebaa8b17e6624f05. The license and attribution
+are included in Waring/External/GafniTao.

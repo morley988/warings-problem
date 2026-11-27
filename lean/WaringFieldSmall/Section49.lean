@@ -1,0 +1,1 @@
+import WaringFieldSmall.Section49Part0

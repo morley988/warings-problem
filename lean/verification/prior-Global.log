@@ -1,0 +1,5 @@
+'WaringSmallK.Local.unramified_eighth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringSmallK.Local.unramified_quartic_fifteen' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringSmallK.Local.unramified_power_of_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringSmallK.Local.unramified_quartic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringSmallK.Local.split_dyadic_quartic' depends on axioms: [propext, Classical.choice, Quot.sound]

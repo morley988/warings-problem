@@ -1,0 +1,451 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue,linkcolor=blue]{hyperref}
+\setlength{\parskip}{3pt}
+\setlength{\parindent}{1.2em}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}\newtheorem*{remark}{Remark}
+\newcommand{\e}{\mathrm e}
+\newcommand{\T}{\mathbb T}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\M}{\mathfrak M}
+\newcommand{\m}{\mathfrak m}
+\newcommand{\SSS}{\mathfrak S}
+\DeclareMathOperator{\meas}{meas}
+\title{A short modern deduction of \(G(4)=16\)\\
+\large Translation, sampling, and a smooth ordinary cutoff}
+\author{Research draft}
+\date{22 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We deduce Davenport's theorem \(G(4)=16\) from the quartic Vinogradov mean
+value theorem and Hua's eighth-moment estimate. We prove the needed
+minor-arc transfer by translating the summation interval and sampling a
+common dyadic majorant. A fixed smooth cutoff then permits a direct
+Poisson-summation treatment of the same major arcs. We include the uniform
+local-density argument, especially at the prime~2. No new Waring bound or
+mean-value theorem is claimed.
+\end{abstract}
+
+\section{Statement and established inputs}
+
+Let \(G(k)\) be the least integer \(s\) for which every sufficiently large
+positive integer is a sum of at most \(s\) nonnegative integral \(k\)th powers.
+We prove the following classical result of Davenport \cite{Davenport}.
+\begin{theorem}\label{thm:main}
+One has \(G(4)=16\).
+\end{theorem}
+
+The proof uses two established mean-value estimates. Write
+\(\e(t)=\exp(2\pi it)\) and \(\T=\mathbb R/\mathbb Z\). The quartic case of
+the main conjecture in Vinogradov's mean value theorem
+\cite[Theorem~1.1]{BDG} gives
+\begin{equation}\label{eq:vmvt}
+ \int_{\T^4}\left|\sum_{1\le x\le X}
+ \e(\beta_1x+\beta_2x^2+\beta_3x^3+\beta_4x^4)\right|^{20}
+ d\boldsymbol\beta\ll_\eps X^{10+\eps}.
+\end{equation}
+Hua's lemma \cite[Lemma~2.5]{Vaughan} gives
+\begin{equation}\label{eq:hua}
+ \int_\T\left|\sum_{1\le x\le X}\e(\alpha x^4)\right|^8d\alpha
+ \ll_\eps X^{5+\eps}.
+\end{equation}
+The estimate \eqref{eq:vmvt} holds for an interval of \(X\) consecutive
+integers as well: changing the origin of \(x\) induces an invertible
+integral triangular change of the four coefficient variables on \(\T^4\).
+
+The transfer mechanism is the translation principle behind
+Wooley's minor-arc mean-value theorem \cite[Theorem~2.1]{Wooley}; its
+published proof has a corrigendum \cite{Wooleycorr}. We give the required
+specialization directly below. Dyadic maximal majorants, sampling, and
+translation orbits also appear in the recent preprint \cite[Sections~3--5]{Hu};
+no result from that preprint is used here. The present goal is a compact
+deduction with all remaining hypotheses visible, rather than a claim of
+priority for these devices.
+
+Fix a nonnegative \(w\in C_c^\infty((0,1))\), supported in
+\([3/8,5/8]\), and positive near \(1/2\). For example, take
+\[
+ w(t)=
+ \begin{cases}
+ \exp\!\left(-\dfrac1{1-64(t-1/2)^2}\right),&|t-1/2|<1/8,\\
+ 0,&|t-1/2|\ge1/8.
+ \end{cases}
+\]
+For a positive integer \(n\), put \(P=n^{1/4}\) and
+\[
+ f(\alpha)=\sum_{x\in\mathbb Z}w(x/P)\e(\alpha x^4),\qquad
+ R_w(n)=\int_\T f(\alpha)^{16}\e(-n\alpha)d\alpha.
+\]
+Orthogonality expresses \(R_w(n)\) as a sum of nonnegative weights over
+representations of \(n\) by sixteen positive fourth powers. Hence
+\(R_w(n)>0\) suffices for the upper bound in Theorem~\ref{thm:main}.
+Constants below may depend on \(w\) and \(\eps>0\), which are fixed.
+
+\section{An elementary sampling transfer}
+
+We first record the sampling estimate used in the argument.
+\begin{lemma}\label{lem:sampling}
+Suppose that \(T\) is a nonnegative trigonometric polynomial of degree at
+most \(D\ge1\), and that \(t_1,\ldots,t_Y\in\T\) are separated in circular
+distance by at least \(\delta\). Then
+\[
+ \sum_{y=1}^Y T(t_y)\ll (D+\delta^{-1})\int_\T T(t)dt.
+\]
+\end{lemma}
+\begin{proof}
+Take disjoint intervals \(I_y\) of length \(\delta\), centered at \(t_y\).
+For \(t\in I_y\), the fundamental theorem of calculus gives
+\(T(t_y)\le T(t)+\int_{I_y}|T'|\). Integrating and summing yields
+\[
+ \sum_yT(t_y)\le\delta^{-1}\int_\T T+\int_\T|T'|.
+\]
+The elementary bound \(\|T'\|_1\ll D\|T\|_1\) finishes the proof.
+For completeness, let \(K_N(t)=N^{-1}(\sin(\pi Nt)/\sin(\pi t))^2\)
+be the Fej\'er kernel. The kernel \(U_D=2K_{2D}-K_D\) reproduces every
+polynomial of degree at most \(D\). Direct differentiation gives
+\(\|K_N'\|_1\ll N\): use \(|K_N'|\ll N^2\) for \(\|t\|\le N^{-1}\),
+and \(|K_N'|\ll\|t\|^{-2}+N^{-1}\|t\|^{-3}\) elsewhere.
+Thus \(T'=T*U_D'\) has the asserted \(L^1\) bound.
+\end{proof}
+
+For \(P^{1/2}\le Q\le P\), define the disjoint major arcs
+\begin{equation}\label{eq:arcs}
+ \M(Q)=\bigcup_{\substack{q\le Q\\(a,q)=1}}
+ \{\alpha\in\T:|q\alpha-a|\le QP^{-4}\},\qquad
+ \m(Q)=\T\setminus\M(Q).
+\end{equation}
+Distances in this notation are understood on the circle. Disjointness
+follows from \(2Q^2<P^4\) for large \(P\).
+
+\begin{proposition}\label{prop:transfer}
+For every \(\eps>0\),
+\[
+ \int_{\m(Q)}|f(\alpha)|^{20}d\alpha
+ \ll_\eps P^{17+\eps}Q^{-2}.
+\]
+\end{proposition}
+\begin{proof}
+Put
+\[
+ F(\beta_1,\beta_2,\alpha)
+ =\sum_xw(x/P)\e(\beta_1x+\beta_2x^2+\alpha x^4),
+ \qquad I(\alpha)=\int_{\T^2}|F|^{20}d\beta_1d\beta_2.
+\]
+The polynomial \(F^{10}\) has at most \(10P+1\) possible frequencies in
+\(\beta_1\), and at most \(10P^2+1\) in \(\beta_2\). Applying
+Cauchy--Schwarz to the Fourier coefficients in each variable gives
+\begin{equation}\label{eq:evaluate}
+ |f(\alpha)|^{20}\ll P^3 I(\alpha).
+\end{equation}
+
+Choose a power of two \(N\) with \(2P\le N<4P\), and let \(\mathcal D\)
+be all dyadic subintervals of \(\{1,\ldots,N\}\). Put
+\[
+ T_J(\boldsymbol\beta)=\sum_{x\in J}
+ \e(\beta_1x+\beta_2x^2+\beta_3x^3+\beta_4x^4),\qquad
+ H(\boldsymbol\beta)=\sum_{J\in\mathcal D}|T_J(\boldsymbol\beta)|^{20}.
+\]
+Every interval is a disjoint union of at most \(2(1+\log_2N)\) dyadic
+intervals. Consequently
+\begin{equation}\label{eq:dyadic}
+ \max_{J\text{ an interval in }[1,N]}|T_J(\boldsymbol\beta)|^{20}
+ \ll(\log P)^{19}H(\boldsymbol\beta).
+\end{equation}
+By \eqref{eq:vmvt} and its translation invariance,
+\begin{equation}\label{eq:hmean}
+ \int_{\T^4}H\ll_\eps
+ \sum_{j=0}^{\log_2N}\frac{N}{2^j}(2^j)^{10+\eps}
+ \ll_\eps P^{10+\eps}.
+\end{equation}
+
+Let \(Y=\lfloor Q/8\rfloor\). For \(\alpha\in\m(Q)\), the points
+\(-4y\alpha\pmod1\), \(1\le y\le Y\), are \(\delta\)-separated with
+\(\delta=QP^{-4}\). Indeed, otherwise \(h=|y-z|\) satisfies
+\(\|4h\alpha\|\le QP^{-4}\); reducing the nearest rational with
+denominator \(4h\le Q\) contradicts \(\alpha\notin\M(Q)\).
+
+In \(F\), substitute \(x=z-y\). Apart from a constant phase, the new
+coefficients are
+\[
+ \beta_1'=\beta_1-2y\beta_2-4y^3\alpha,
+ \quad\beta_2'=\beta_2+6y^2\alpha,
+ \quad\beta_3'=-4y\alpha,
+ \quad\beta_4'=\alpha.
+\]
+The first two coefficients are related to the old ones by a
+measure-preserving integral shear and a translation on \(\T^2\).
+The translated weight \(w((z-y)/P)\) has bounded total variation,
+uniformly in \(y\). Abel summation bounds its weighted exponential sum
+by \(C_w\) times the largest interval sum in \eqref{eq:dyadic}.
+Writing
+\[
+ H_\alpha(t)=\int_{\T^2}H(\beta_1,\beta_2,t,\alpha)d\beta_1d\beta_2,
+\]
+we obtain, for every \(1\le y\le Y\),
+\(I(\alpha)\ll_w(\log P)^{19}H_\alpha(-4y\alpha)\).
+
+Now \(H_\alpha\) is a nonnegative trigonometric polynomial in \(t\)
+of degree at most \(10N^3\ll P^3\). Average over \(y\), and apply
+Lemma~\ref{lem:sampling}. Since \(Y\asymp Q\) and \(Q\le P\),
+\[
+ I(\alpha)\ll_w
+ \frac{(\log P)^{19}}Q(P^3+P^4/Q)\int_\T H_\alpha(t)dt
+ \ll_w\frac{P^4(\log P)^{19}}{Q^2}\int_\T H_\alpha(t)dt.
+\]
+Combine this with \eqref{eq:evaluate}, integrate in \(\alpha\), enlarge
+the last domain to \(\T^4\) by nonnegativity, and use
+\eqref{eq:hmean}. Absorbing the logarithm into \(P^\eps\) proves the
+proposition.
+\end{proof}
+
+Expanding the weighted eighth moment and using orthogonality shows that
+it is at most \(\|w\|_\infty^8\) times the unweighted moment in
+\eqref{eq:hua}. H\"older's inequality therefore gives
+\begin{equation}\label{eq:minor16}
+ \int_{\m(Q)}|f|^{16}
+ \le\left(\int_{\m(Q)}|f|^{20}\right)^{2/3}
+     \left(\int_\T|f|^8\right)^{1/3}
+ \ll_\eps P^{13+\eps}Q^{-4/3}.
+\end{equation}
+From now on take
+\begin{equation}\label{eq:qchoice}
+ Q=P^{7/8}.
+\end{equation}
+The right side of \eqref{eq:minor16} is \(P^{71/6+\eps}=o(P^{12})\).
+
+\section{The major arcs by Poisson summation}
+
+Define
+\[
+ S(q,a)=\sum_{r\pmod q}\e(ar^4/q),\qquad
+ v(\beta)=\int_{\mathbb R}w(x/P)\e(\beta x^4)dx.
+\]
+We shall use
+\begin{equation}\label{eq:completebound}
+ |S(q,a)|\ll_\eps q^{3/4+\eps}\quad((a,q)=1),
+\end{equation}
+proved in Section~\ref{sec:complete}. Since the support of \(w\) is
+bounded away from zero, repeated integration by parts gives
+\begin{equation}\label{eq:vbound}
+ |v(\beta)|\ll_{A,w}P(1+P^4|\beta|)^{-A}
+ \quad\text{for every fixed }A>0.
+\end{equation}
+
+For \(\alpha=a/q+\beta\in\M(Q)\), Poisson summation in residue classes
+modulo \(q\) yields
+\[
+ f(\alpha)=\frac1q\sum_{m\in\mathbb Z}S(q,a,m)
+ P\int_{\mathbb R}w(t)\e(\beta P^4t^4-mPt/q)dt,
+\]
+where \(S(q,a,m)=\sum_{r\pmod q}\e((ar^4+mr)/q)\), up to a harmless
+sign change of \(m\). The zero mode is \(q^{-1}S(q,a)v(\beta)\).
+For \(m\ne0\), the first derivative of the phase in \(t\) has modulus
+at least \(|m|P/(2q)\) for large \(P\): its quartic contribution is
+\(O(Q/q)\), whereas its linear contribution has size \(|m|P/q\).
+The normalized higher derivatives are bounded uniformly. Repeated
+integration by parts and the trivial bound \(|S(q,a,m)|\le q\) give
+\begin{equation}\label{eq:poisson}
+ f(\alpha)=V(\alpha)+O_{A,w}\bigl(P(Q/P)^A\bigr),
+ \qquad V(\alpha)=q^{-1}S(q,a)v(\beta).
+\end{equation}
+Take \(A=32\). By \eqref{eq:qchoice}, the error is \(O_w(P^{-3})\).
+Also \(|f|+|V|\ll_wP\) and
+\(\meas\M(Q)\ll Q^2P^{-4}\). Thus replacing \(f^{16}\) by
+\(V^{16}\) in the major-arc integral has total error \(O_w(P^{10})\).
+
+Put
+\[
+ A(q,n)=q^{-16}\sum_{\substack{a\pmod q\\(a,q)=1}}
+ S(q,a)^{16}\e(-an/q),\qquad
+ \SSS(n)=\sum_{q\ge1}A(q,n),
+ \quad J(n)=\int_{\mathbb R}v(\beta)^{16}\e(-n\beta)d\beta.
+\]
+The bound \eqref{eq:completebound} gives
+\(|A(q,n)|\ll_\eps q^{-3+\eps}\), uniformly in \(n\). In particular,
+the singular series is absolutely convergent. Equations
+\eqref{eq:vbound} and \eqref{eq:completebound} give
+\begin{equation}\label{eq:majmain}
+ \int_{\M(Q)}V(\alpha)^{16}\e(-n\alpha)d\alpha
+ =\SSS(n)J(n)+O_\eps(P^{12}Q^{-2+\eps}).
+\end{equation}
+For example, the weaker bound
+\(|v(\beta)|\ll P(1+P^4|\beta|)^{-1/4}\) already suffices:
+extending the interval for denominator \(q\le Q\) costs
+\(O(P^{12}(Q/q)^{-3})\). Summing against \(|A(q,n)|\), and then
+adding the tail \(q>Q\), proves \eqref{eq:majmain}.
+
+Let \(h(u)=\tfrac14u^{-3/4}w(u^{1/4})\) for \(u>0\), and zero
+otherwise. Scaling and Fourier inversion give
+\[
+ J(n)=C_wP^{12},\qquad C_w=(h*\cdots*h)(1)>0,
+\]
+with sixteen factors. Positivity holds because \(h\) is positive near
+\(1/16\): choose its first fifteen arguments sufficiently near
+\(1/16\), and the final argument determined by their sum is still in
+that positive neighborhood. Combining \eqref{eq:minor16},
+\eqref{eq:poisson}, and \eqref{eq:majmain}, we obtain
+\begin{equation}\label{eq:weightedcount}
+ R_w(n)=C_w\SSS(n)n^3+O_{w,\eps}(n^{71/24+\eps}).
+\end{equation}
+It remains to establish a lower bound for \(\SSS(n)\) uniform in \(n\).
+
+\section{Complete sums and uniform local positivity}\label{sec:complete}
+
+For an odd prime \(p\), the multiplicative-character expression for the
+quartic sum contains at most three nontrivial Gauss sums; each has
+modulus \(\sqrt p\), by character orthogonality. Thus
+\begin{equation}\label{eq:gauss}
+ |S(p,a)|\le3\sqrt p\qquad(p\nmid a).
+\end{equation}
+For \(h\ge2\), summing first over shifts by \(p^{h-1}\) cancels
+every term with \(p\nmid x\), since its linear coefficient is
+\(4ax^3\not\equiv0\pmod p\). The remaining multiples of \(p\) give
+\begin{equation}\label{eq:oddrec}
+ S(p^h,a)=p^{h-1}\ (2\le h\le4),\qquad
+ S(p^h,a)=p^3S(p^{h-4},a)\ (h\ge5).
+\end{equation}
+Together with \eqref{eq:gauss}, this gives
+\(|S(p^h,a)|\le3p^{3h/4}\).
+
+For \(p=2\) and \(h\ge5\), sum in cosets generated by the shift
+\(2^{h-3}\). At each step the fourth-power phase changes by
+\(2^{h-1}x^3\) modulo \(2^h\), so odd terms cancel. Therefore
+\[
+ S(2^h,a)=8S(2^{h-4},a)\quad(h\ge5).
+\]
+For \(1\le h\le4\), separation into odd and even terms gives
+\(S(2^h,a)=2^{h-1}(1+\e(a/2^h))\), whence
+\(|S(2^h,a)|\le2\cdot2^{3h/4}\). Chinese-remainder factorization
+now proves \eqref{eq:completebound}, since
+\(3^{\omega(q)}\ll_\eps q^\eps\).
+
+Let \(M_h(n;p)\) count the vectors modulo \(p^h\) satisfying
+\(x_1^4+\cdots+x_{16}^4\equiv n\pmod{p^h}\). Orthogonality,
+grouped according to the conductor of the additive character, gives
+\begin{equation}\label{eq:localcount}
+ p^{-15h}M_h(n;p)=\sum_{j=0}^h A(p^j,n).
+\end{equation}
+The Chinese remainder theorem makes \(A(q,n)\) multiplicative in
+\(q\). Absolute convergence therefore gives
+\begin{equation}\label{eq:localprod}
+ \SSS(n)=\prod_p\sigma_p(n),\qquad
+ \sigma_p(n)=\lim_{h\to\infty}p^{-15h}M_h(n;p).
+\end{equation}
+
+For \(p=3,5,7,11\), represent any residue modulo \(p\) by its
+representative in \(\{1,\ldots,p\}\) ones, padding with zeros to
+sixteen terms. This provides a nonzero coordinate. For \(p\ge13\),
+\eqref{eq:gauss} gives
+\[
+ M_1(n;p)\ge p^{15}-3^{16}p^8>1,
+ \qquad 13^7>3^{16}.
+\]
+There is again a nonzero coordinate, even when \(n\equiv0\pmod p\).
+The derivative \(4x_i^3\) at that coordinate is a unit. Ordinary
+Hensel lifting supplies \(p^{15}\) lifts at each step, so
+\begin{equation}\label{eq:oddlocal}
+ \sigma_p(n)\ge p^{-15}>0\qquad(p\text{ odd}).
+\end{equation}
+
+At the prime~2, every integer congruent to~1 modulo~16 has an odd
+fourth root modulo \(2^h\) for every \(h\ge4\). An elementary
+induction uses
+\[
+ (x+2^{h-2})^4\equiv x^4+2^hx^3\pmod{2^{h+1}}
+ \qquad(h\ge4,\ x\text{ odd}),
+\]
+which toggles the next bit. Choose the representative \(r\) of
+\(n\pmod{16}\) in \(\{1,\ldots,16\}\). Require one distinguished
+coordinate only to be odd; prescribe \(r-1\) of the other fifteen
+coordinates to be~1 modulo~16 and the remaining \(16-r\) to be~0.
+Every choice of these fifteen variables with their prescribed residues
+can be completed, because the needed
+fourth power is~1 modulo~16. Hence
+\begin{equation}\label{eq:twolocal}
+ M_h(n;2)\ge2^{15(h-4)},\qquad \sigma_2(n)\ge2^{-60}.
+\end{equation}
+This includes every \(n\) divisible by~16, with no descent issue.
+
+Finally, \eqref{eq:gauss} bounds the \(h=1\) term of an odd local
+factor by \(O(p^{-7})\), and \eqref{eq:oddrec} bounds its terms
+\(h\ge2\) by \(O(p^{-3h})\). Uniformly in \(n\),
+\[
+ \sigma_p(n)=1+O(p^{-6}).
+\]
+The product over all sufficiently large primes is therefore bounded
+below by a fixed positive constant. Equations \eqref{eq:oddlocal}
+and \eqref{eq:twolocal} handle the remaining finite set. Thus
+\(\inf_{n\ge1}\SSS(n)>0\). The asymptotic formula
+\eqref{eq:weightedcount} proves \(G(4)\le16\).
+
+\section{The obstruction to fifteen variables}
+
+For every integer \(a\ge0\), the number \(31\cdot16^a\) is not a
+sum of at most fifteen nonnegative fourth powers. If \(a\ge1\),
+reduction modulo~16 forces every variable to be even: a fourth power
+is~0 or~1 modulo~16, and there are fewer than sixteen variables.
+Divide by~16 and repeat, reaching~31. Its possible fourth-power
+summands are only~0,~1, and~16. Without a~16 the sum is at most~15;
+with one~16 it needs fifteen more ones, hence sixteen terms; two~16s
+are too large. This proves \(G(4)\ge16\) and completes the theorem.
+
+\begin{remark}
+The argument proves a known conclusion from deep established input;
+it is not an elementary proof from first principles. It uses no
+hypothesis concerning zeros of zeta or \(L\)-functions. An alternative
+unsmoothed version gives
+\[
+ R_{16,4}(n)=\frac{\Gamma(5/4)^{16}}{\Gamma(4)}\SSS(n)n^3
+ +O_\eps(n^{83/28+\eps})
+\]
+by choosing \(Q=P^{6/7}\) and balancing the elementary Euler-summation
+error. The weighted version above is shorter when existence is the
+only target. Bourgain \cite[Section~2, Theorem~3]{Bourgain} already
+deduced the stronger known fifteen-variable asymptotic formula from
+modern VMVT and Wooley's framework; that result is not being claimed
+anew here.
+\end{remark}
+
+\begin{thebibliography}{9}
+\bibitem{Davenport}
+H. Davenport, \emph{On Waring's problem for fourth powers},
+Ann. of Math. (2) \textbf{40} (1939), 731--747.
+
+\bibitem{BDG}
+J. Bourgain, C. Demeter, and L. Guth,
+\emph{Proof of the main conjecture in Vinogradov's mean value theorem
+for degrees higher than three}, Ann. of Math. (2) \textbf{184} (2016),
+633--682. \url{https://arxiv.org/abs/1512.01565}.
+
+\bibitem{Vaughan}
+R. C. Vaughan, \emph{The Hardy--Littlewood Method}, second edition,
+Cambridge University Press, 1997, Lemma~2.5.
+
+\bibitem{Wooley}
+T. D. Wooley, \emph{The asymptotic formula in Waring's problem},
+Int. Math. Res. Not. IMRN (2012), no.~7, 1485--1504.
+\url{https://www.math.purdue.edu/~twooley/publ/2012asympwp.pdf}.
+
+\bibitem{Wooleycorr}
+T. D. Wooley, \emph{Corrigendum: The asymptotic formula in Waring's
+problem}, Int. Math. Res. Not. IMRN (2015), no.~20, 10702.
+\url{https://www.math.purdue.edu/~twooley/publ/2012asympwpcorr.pdf}.
+
+\bibitem{Bourgain}
+J. Bourgain, \emph{On the Vinogradov mean value}, 2016,
+Section~2, Theorem~3. \url{https://arxiv.org/abs/1601.08173}.
+
+\bibitem{Hu}
+X. Hu, \emph{Improved Weyl bounds on short intervals},
+arXiv preprint, 2026, Sections~3--5.
+\url{https://arxiv.org/abs/2609.02478}.
+\end{thebibliography}
+\end{document}

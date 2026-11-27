@@ -1,0 +1,1 @@
+'WaringLinear.sharp_waring_siegel_of_analytic_inputs' depends on axioms: [propext, Classical.choice, Quot.sound]

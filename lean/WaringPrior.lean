@@ -1,0 +1,1 @@
+import WaringPrior.Global

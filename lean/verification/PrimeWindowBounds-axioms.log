@@ -1,0 +1,2 @@
+'WaringLinear.PrimeWindow.estimates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.PrimeWindow.power_window_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,9 @@
+import WaringLocal.AdicPowerBalls
+import WaringLocal.FinitePrecision
+import WaringLocal.InertQuartic
+import WaringLocal.PrincipalUnitWidths
+import WaringLocal.QuadraticEisensteinOrder
+import WaringLocal.SqrtTwoLifting
+import WaringLocal.SqrtTwoRational
+import WaringLocal.SqrtTwoSmallWidths
+import WaringLocal.SqrtTwoWidths

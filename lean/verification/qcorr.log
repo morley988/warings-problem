@@ -1,0 +1,3 @@
+'WaringLinear.quotient_layer_squareZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.sum_deviations_one_power' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.linear_combination_deviations_one_power' depends on axioms: [propext, Classical.choice, Quot.sound]

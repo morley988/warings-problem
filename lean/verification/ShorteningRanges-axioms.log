@@ -1,0 +1,2 @@
+'WaringEnvelope.guarded_seed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringEnvelope.IndexedStages.guarded_row' depends on axioms: [propext, Classical.choice, Quot.sound]

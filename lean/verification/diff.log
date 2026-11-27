@@ -1,0 +1,5 @@
+'WaringLinear.edStep_eq_poly' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.edDefect_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.edDefect_antitone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.edDefect_potential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WaringLinear.edDefect_le_exp' depends on axioms: [propext, Classical.choice, Quot.sound]
